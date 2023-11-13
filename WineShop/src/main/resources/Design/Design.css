@@ -1,0 +1,72 @@
+.white-bg{
+    -fx-background-color: white;
+}
+
+.btn{
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: linear-gradient(to bottom right, #e90000, #600101);
+    -fx-border-radius: 20px;
+    -fx-cursor: hand;
+    -fx-text-fill: linear-gradient(to bottom right, #e90000, #600101);
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}
+
+.btn:hover{
+    -fx-background-color: #dbdbdb;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: linear-gradient(to bottom right, #e90000, #600101);
+}
+
+.btn:pressed{
+    -fx-background-color: linear-gradient(to bottom right, #e90000, #600101);
+    -fx-text-fill: white;
+}
+
+.textfield{
+    -fx-border-color: #000;
+    -fx-border-width: .5px;
+}
+
+.textfield:focused{
+    -fx-border-color: linear-gradient(to bottom right, #e90000, #600101);
+    -fx-border-width: .8px;
+}
+
+.label{
+    -fx-text-fill: linear-gradient(to bottom right, #e90000, #600101);
+}
+
+.link{
+    -fx-text-fill: linear-gradient(to bottom right, #600101, #2d0000);
+}
+
+.combo-box{
+    -fx-border-color: #818181;
+    -fx-border-width: .8px;
+    -fx-border-radius: 3px;
+}
+
+.background-color{
+    -fx-background-color: linear-gradient(to bottom right, #e90000, #600101);
+}
+
+.btn-home-tendina{
+    -fx-background-color: trasparent;
+}
+
+.btn-home-tendina:hover{
+    -fx-background-color: #440101;
+}
+
+.btn-home{
+    -fx-background-color: trasparent;
+    -fx-border-radius: 0;
+}
+
+.btn-home:hover{
+    -fx-background-color: #9f9d9d;
+    -fx-text-fill: white;
+}

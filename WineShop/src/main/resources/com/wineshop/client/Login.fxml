@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wineshop.client.LoginController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="white-bg" stylesheets="@../../../Design/Design.css">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="15.0" prefHeight="569.0" prefWidth="320.0">
+               <children>
+                  <Label layoutX="101.0" layoutY="101.0" stylesheets="@../../../Design/Design.css" text="Sign In Account" textFill="#e90000">
+                     <font>
+                        <Font name="Gill Sans MT" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="Login_Username" layoutX="56.0" layoutY="166.0" prefHeight="31.0" prefWidth="217.0" promptText="Username" stylesheets="@../../../Design/Design.css" />
+                  <PasswordField fx:id="Login_Password" layoutX="56.0" layoutY="215.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Login_MostraPassword" layoutX="56.0" layoutY="215.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" visible="false" />
+                  <CheckBox fx:id="Login_Mostra" layoutX="57.0" layoutY="267.0" mnemonicParsing="false" onAction="#OnLogin_MostraClick" styleClass="label" stylesheets="@../../../Design/Design.css" text="Mostra Password" textFill="#2a827b" />
+                  <Button fx:id="Login_BtnLogin" layoutX="56.0" layoutY="302.0" mnemonicParsing="false" onAction="#OnLogin_Login_BtnLogin" prefHeight="31.0" prefWidth="217.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Login" textFill="#dbdbdb" />
+                  <Hyperlink fx:id="Login_Link" layoutX="171.0" layoutY="340.0" onAction="#OnLogin_LinkClick" styleClass="link" stylesheets="@../../../Design/Design.css" text="Cambia password" textFill="#2d0000" underline="true">
+                     <font>
+                        <Font name="Gill Sans MT" size="10.0" />
+                     </font>
+                  </Hyperlink>
+                  <Button fx:id="Login_BtnReg" layoutX="56.0" layoutY="367.0" mnemonicParsing="false" onAction="#OnLogin_BtnRegClick" prefHeight="31.0" prefWidth="217.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Registrati" textFill="#2a827b" />
+                  <Label layoutX="71.0" layoutY="341.0" prefHeight="17.0" prefWidth="100.0" stylesheets="@../../../Design/Design.css" text="Password domenticata?" textFill="#2a8078">
+                     <font>
+                        <Font name="Gill Sans MT" size="10.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="66.0" layoutY="458.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/Logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="53.0" layoutY="60.0" stylesheets="@../../../Design/Design.css" text="Welcome to WineShop" textFill="#e90000">
+                     <font>
+                        <Font name="Gill Sans MT Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblLogin" layoutX="96.0" layoutY="413.0" prefHeight="17.0" prefWidth="127.0" stylesheets="@../../../Design/Design.css" textFill="#2a8078">
+                     <font>
+                        <Font name="Gill Sans MT" size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
