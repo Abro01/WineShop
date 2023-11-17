@@ -36,6 +36,12 @@ public class SQLTranslator {
                          "WHERE Username = '" + ((Utente) model).getUsername() + "' AND Password = '" + ((Utente) model).getPassword() + "'; " +
                          "UPDATE utenti SET Online = 1 WHERE Username = '" + ((Utente) model).getUsername() + "';";
             }
+            case Costanti.Registrazione ->
+            {
+                Insertable Nuovo_Utente = (Insertable) model;
+                query += "INSER INTO utenti (ID,CF,Nome,Cognome,Username,Password,Email,Telefono,Indirizzo,Tipo) " +
+                         "VALUES (" + ((Utente) model).getId() + "," + ((Utente) model).getCf()+ "," + ((Utente) model).getNome() + "," + ((Utente) model).getCognome() + "," + ((Utente) model).getUsername() + "," + ((Utente) model).getPassword() + "," + ((Utente) model).getEmail() + "," + ((Utente) model).getTelefono() + "," + ((Utente) model).getIndirizzo() + "," + ((Utente) model).getTipo() + ");";
+            }
             default -> throw new RequestToSQLException();
         }
         return query;
@@ -54,9 +60,12 @@ public class SQLTranslator {
                 }
                 Map<String, String> uRes = queryResult.get(0);
                 Utente utente = new Utente(Integer.parseInt(uRes.get("ID")), uRes.get("Username"), uRes.get("Password"), uRes.get("Tipo"));
-                System.out.println("id: " + utente.getId());
+                //System.out.println("id: " + utente.getId());
                 response = new Response(Costanti.Successo, utente);
                 this.UtenteLoggato = utente;
+                break;
+            case Costanti.Registrazione:
+                response = new Response(Costanti.Successo, new EmptyPayload());
                 break;
             default:
                 throw new SQLToResponseException();

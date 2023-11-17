@@ -68,7 +68,7 @@ public class Client extends Application {
             controller.setRequestController(requestController);
             Scene scene = new Scene(root, 346, 600);
 
-            String logoPath = "C:\\Users\\Ale\\Documents\\GitHub\\ProgettoAPDef\\WineShop\\WineShop\\src\\main\\resources\\Design\\Loghi\\Logo_Calice.png";
+            String logoPath = "C:/Users/andre/OneDrive/Documenti/GitHub/WineShop/WineShop/src/main/resources/Design/Loghi/Logo_Calice.png";
 
             stage.getIcons().add(new Image(logoPath));
 

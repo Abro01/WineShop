@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 public class Server {
     static Connection conn;
     public static void main(String[] args){
-        ServerConfiguration conf = new ServerConfiguration("C:\\Users\\Ale\\Documents\\GitHub\\ProgettoAPDef\\WineShop\\WineShop\\src\\main\\java\\server\\ServerConfig.json");
+        ServerConfiguration conf = new ServerConfiguration("C:/Users/andre/OneDrive/Documenti/GitHub/WineShop/WineShop/src/main/java/server/ServerConfig.json");
 
         System.out.println(conf + "\n");
 

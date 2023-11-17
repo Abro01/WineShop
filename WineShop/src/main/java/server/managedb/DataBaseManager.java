@@ -44,7 +44,7 @@ public class DataBaseManager {
     public List<Map<String, String>> executeSQLStatement(String query) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = null;
-        ServerConfiguration conf = new ServerConfiguration("C:/Users/Ale/Documents/GitHub/ProgettoAPDef/WineShop/WineShop/src/main/java/server/ServerConfig.json");
+        ServerConfiguration conf = new ServerConfiguration("C:/Users/andre/OneDrive/Documenti/GitHub/WineShop/WineShop/src/main/java/server/ServerConfig.json");
         String url = "jdbc:mysql://" + conf.getDbHost() + ":" + conf.getDbPort() + "/" + conf.getDbName() + "?allowMultiQueries=true";
         String user = conf.getDbUser();
         String password = conf.getDbPassword();

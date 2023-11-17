@@ -127,7 +127,7 @@ public class Utente implements Insertable, Serializable, Removable {
     //Ottiene gli attributi della classe
     @Override
     public String[] getAttributes() {
-        return new String[]{"cf", "nome", "cognome", "username", "password", "email", "telefono", "indirizzo", "tipo"};
+        return new String[]{"ID", "CF", "Nome", "Cognome", "Username", "Password", "Email", "Telefono", "Indirizzo", "Tipo"};
     }
 
     //Ottiene il nome della tabella

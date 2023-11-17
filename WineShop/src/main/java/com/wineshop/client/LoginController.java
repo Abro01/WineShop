@@ -24,6 +24,7 @@ import java.util.Objects;
 public class LoginController {
     private RequestController requestController;
     private Utente UtenteLoggato;
+
     @FXML
     private Button Login_BtnLogin;
 
