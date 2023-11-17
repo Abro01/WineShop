@@ -4,7 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /*
-    Classe utilizzata per le richieste e le risposte che non uno specifico payload
+    Classe utilizzata per le richieste e le risposte che non hanno uno specifico payload
 */
 public class EmptyPayload implements Serializable {
     @Serial

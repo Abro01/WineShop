@@ -53,7 +53,7 @@ public class SQLTranslator {
                     break;
                 }
                 Map<String, String> uRes = queryResult.get(0);
-                Utente utente = new Utente(Integer.parseInt(uRes.get("id")), uRes.get("username"), uRes.get("password"), uRes.get("tipo"));
+                Utente utente = new Utente(Integer.parseInt(uRes.get("ID")), uRes.get("Username"), uRes.get("Password"), uRes.get("Tipo"));
                 System.out.println("id: " + utente.getId());
                 response = new Response(Costanti.Successo, utente);
                 this.UtenteLoggato = utente;

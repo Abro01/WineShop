@@ -58,8 +58,8 @@ public class LoginController {
 
     @FXML
     void OnLogin_Login_BtnLogin(ActionEvent event) throws Exception {
-        String username = this.Login_Username.getText();
-        String password = this.Login_Password.getText();
+        String username = this.Login_Username.getText(); //ok
+        String password = this.Login_Password.getText();//ok
         this.lblLogin.setText("");
 
         Response r = this.requestController.makeRequest(Costanti.Login, new Utente(username, password));

@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
+//questa classe gestisce le richieste client
 public class ClientHandler implements Runnable {
     //è l'intestazione di ogni client
     private final Socket socket;
@@ -21,6 +22,7 @@ public class ClientHandler implements Runnable {
         this.dbManager = new DataBaseManager(conf.getDbUser(), conf.getDbPassword());
     }
 
+    //Esegue run durante la gestione dei client
     public void  run() {
         ObjectInputStream in;
         ObjectOutputStream out;
@@ -51,15 +53,20 @@ public class ClientHandler implements Runnable {
 
                     if(request.getValue() == Costanti.Close_Connection)
                     {
-                        break;          //se la richiesta è di chiedere la connessione
+                        break;          //se la richiesta è di chiudere la connessione
                     }
 
                     String query = this.translator.requestToSQL(request);
 
                     System.out.println("Prova ad eseguire:\n" + query);
 
-                    List<Map<String, String>> queryResult = this.dbManager.executeSQLStatement(query);       //esegue la query
+                    List<Map<String, String>> queryResult = this.dbManager.executeSQLStatement(query);       //esegue la query (sembra giusto)
+                    for (Map<String, String> mappa : queryResult) {
+                        // Stampa tutte le chiavi e i valori della mappa
+                        System.out.println(mappa);
+                    }
                     response = this.translator.sqlToResponse(queryResult);              //traduce il risultato della query in un oggetto di tipo response
+
                 } catch (RequestToSQLException rtse)
                 {
                     rtse.printStackTrace();

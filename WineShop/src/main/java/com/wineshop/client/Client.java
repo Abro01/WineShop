@@ -21,7 +21,7 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            Socket server = null;
+            Socket socket = null;
             int port = 8520;        //server port
             String ip = "localhost";
 
@@ -36,7 +36,7 @@ public class Client extends Application {
             do {
                 try {
                     System.out.print("\n1 - Cercando di connettersi al server...");
-                    server = new Socket(ip, port);
+                    socket = new Socket(ip, port);
                 } catch (Exception e) {
                     ButtonType btn = new ButtonType("Riprova");
                     Alert alert = new Alert(AlertType.ERROR, "Controlla la connessione su (" + ip + ":" + port + ") e riprova.\n" +
@@ -53,12 +53,12 @@ public class Client extends Application {
                         System.exit(0);
                     }
                 }
-            } while (server == null);
+            } while (socket == null);
 
             System.out.println("\n2 - Connesso!");
 
-            ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(server.getInputStream());
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
 
@@ -68,9 +68,11 @@ public class Client extends Application {
             controller.setRequestController(requestController);
             Scene scene = new Scene(root, 346, 600);
 
-            stage.getIcons().add(new Image("C:/Users/andre/OneDrive/Documenti/GitHub/WineShop/WineShop/src/main/resources/Design/Loghi/Logo_Calice.png"));
+            String logoPath = "C:\\Users\\Ale\\Documents\\GitHub\\ProgettoAPDef\\WineShop\\WineShop\\src\\main\\resources\\Design\\Loghi\\Logo_Calice.png";
 
-            final Socket fSock = server;
+            stage.getIcons().add(new Image(logoPath));
+
+            final Socket fSock = socket;
 
             stage.setOnCloseRequest(event -> {          //gestisce la chiusura della finestra
                 try {
