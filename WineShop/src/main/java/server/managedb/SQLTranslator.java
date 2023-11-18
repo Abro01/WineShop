@@ -39,8 +39,14 @@ public class SQLTranslator {
             case Costanti.Registrazione ->
             {
                 Insertable Nuovo_Utente = (Insertable) model;
-                query += "INSER INTO utenti (ID,CF,Nome,Cognome,Username,Password,Email,Telefono,Indirizzo,Tipo) " +
-                         "VALUES (" + ((Utente) model).getId() + "," + ((Utente) model).getCf()+ "," + ((Utente) model).getNome() + "," + ((Utente) model).getCognome() + "," + ((Utente) model).getUsername() + "," + ((Utente) model).getPassword() + "," + ((Utente) model).getEmail() + "," + ((Utente) model).getTelefono() + "," + ((Utente) model).getIndirizzo() + "," + ((Utente) model).getTipo() + ");";
+                query += "INSERT INTO utenti (ID,CF,Nome,Cognome,Username,Password,Email,Telefono,Indirizzo,Tipo) " +
+                         "VALUES (" + ((Utente) model).getId() + ",'" + ((Utente) model).getCf()+ "','" + ((Utente) model).getNome() + "','" + ((Utente) model).getCognome() + "','" + ((Utente) model).getUsername() + "','" + ((Utente) model).getPassword() + "','" + ((Utente) model).getEmail() + "','" + ((Utente) model).getTelefono() + "','" + ((Utente) model).getIndirizzo() + "','" + ((Utente) model).getTipo() + "');";
+            }
+            case Costanti.Cambio_Pswd ->
+            {
+                query += "UPDATE utenti " +
+                         "SET Password = '" + ((Utente) model).getPassword() + "' " +
+                         "WHERE Username = '" + ((Utente) model).getUsername() + "';";
             }
             default -> throw new RequestToSQLException();
         }
@@ -58,13 +64,13 @@ public class SQLTranslator {
                     response = new Response(Costanti.Bad_Request, new EmptyPayload("Login errato!"));
                     break;
                 }
-                Map<String, String> uRes = queryResult.get(0);
-                Utente utente = new Utente(Integer.parseInt(uRes.get("ID")), uRes.get("Username"), uRes.get("Password"), uRes.get("Tipo"));
+                Map<String, String> uLog = queryResult.get(0);
+                Utente LogUtente = new Utente(Integer.parseInt(uLog.get("ID")), uLog.get("Username"), uLog.get("Password"), uLog.get("Tipo"));
                 //System.out.println("id: " + utente.getId());
-                response = new Response(Costanti.Successo, utente);
-                this.UtenteLoggato = utente;
+                response = new Response(Costanti.Successo, LogUtente);
+                this.UtenteLoggato = LogUtente;
                 break;
-            case Costanti.Registrazione:
+            case Costanti.Registrazione, Costanti.Cambio_Pswd:
                 response = new Response(Costanti.Successo, new EmptyPayload());
                 break;
             default:

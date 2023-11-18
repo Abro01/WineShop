@@ -166,11 +166,17 @@ public class RegistrazioneController implements Initializable {
             if(r.getStatusCode() == Costanti.Successo)
             {
                 System.out.println("Registrazione avvenuta con successo");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Registrazione eseguita");
+                alert.setHeaderText("Registrazione avvenuta con successo");
+                alert.setContentText("Registrazione avvenuta con successo");
+                alert.showAndWait();
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
                 Parent LogGui = loader.load();
                 Object controller = loader.getController();
                 Scene scene = new Scene(LogGui, 346, 600);
-                ((RegistrazioneController) controller).setRequestController(this.requestController);
+                ((LoginController) controller).setRequestController(this.requestController);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
                 stage.centerOnScreen();

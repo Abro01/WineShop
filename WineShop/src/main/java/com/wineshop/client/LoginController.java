@@ -85,13 +85,13 @@ public class LoginController {
             UtenteLoggato = (Utente) r.getPayload();
 
             // check which gui to show
-            if (Objects.equals(UtenteLoggato.getTipo(), "cliente"))
+            if (Objects.equals(UtenteLoggato.getTipo(), "Cliente"))
             {
                 gui = "HomeCliente.fxml";
-            } else if (Objects.equals(UtenteLoggato.getTipo(), "amministratore"))
+            } else if (Objects.equals(UtenteLoggato.getTipo(), "Amministratore"))
             {
                 gui = "HomeAmministratore.fxml";
-            } else if (Objects.equals(UtenteLoggato.getTipo(), "impiegato"))
+            } else if (Objects.equals(UtenteLoggato.getTipo(), "Impiegato"))
             {
                 gui = "HomeImpiegato.fxml";
             }
@@ -99,7 +99,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(gui));
             Parent guiToShow = loader.load();
             Object controller = loader.getController();
-            Scene scene = new Scene(guiToShow);
+            Scene scene = new Scene(guiToShow, 700, 400);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             // set the request controller and the logged user
@@ -121,14 +121,14 @@ public class LoginController {
             stage.centerOnScreen();
             stage.show();
 
-            if (UtenteLoggato.getTipo().equals("cliente"))
+            if (UtenteLoggato.getTipo().equals("Cliente"))
             {
                 ((HomeClienteController) controller).initialize();
-            } else if (UtenteLoggato.getTipo().equals("amministratore"))
+            } else if (UtenteLoggato.getTipo().equals("Amministratore"))
             {
                 ((HomeAmministratoreController) controller).initialize();
             }
-            else if (UtenteLoggato.getTipo().equals("impiegato"))
+            else if (UtenteLoggato.getTipo().equals("Impiegato"))
             {
                 ((HomeImpiegatoController) controller).initialize();
             }

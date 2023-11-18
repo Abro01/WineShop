@@ -31,6 +31,7 @@ public class Costanti {
     public static final int Show_Ordini_Clienti = 27;
     public static final int Get_All_Wines_Names = 28;
     public static final int Add_Favourite_Wine = 29;
+    public static final int Cambio_Pswd = 30;
     public static final int Successo = 200;
     public static final int Fallimento = 201;
     public static final int Bad_Request = 400;
