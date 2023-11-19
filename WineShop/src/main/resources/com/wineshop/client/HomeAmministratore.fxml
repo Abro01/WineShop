@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.wineshop.client.HomeAmministratoreController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="white-bg" stylesheets="@../../../Design/Design.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wineshop.client.HomeAmministratoreController">
+   <children>
+      <VBox layoutY="66.0" prefHeight="334.0" prefWidth="169.0" styleClass="background-color" stylesheets="@../../../Design/Design.css">
+         <children>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Home" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/casa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Home" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/ricerca.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Home" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/carrello.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Home" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/ordini.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Preferiti" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/preferiti.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Info" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/info.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <StackPane prefHeight="67.0" prefWidth="700.0" />
+   </children>
 </AnchorPane>
