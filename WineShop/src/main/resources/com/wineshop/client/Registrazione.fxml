@@ -23,18 +23,18 @@
                         <Font name="Gill Sans MT" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Reg_Nome" layoutX="51.0" layoutY="58.0" prefHeight="31.0" prefWidth="217.0" promptText="Nome" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_Cog" layoutX="51.0" layoutY="98.0" prefHeight="31.0" prefWidth="217.0" promptText="Cognome" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_Ind" layoutX="51.0" layoutY="139.0" prefHeight="31.0" prefWidth="217.0" promptText="Indirizzo " stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_Tel" layoutX="51.0" layoutY="178.0" prefHeight="31.0" prefWidth="217.0" promptText="Telefono" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_CF" layoutX="51.0" layoutY="218.0" prefHeight="31.0" prefWidth="217.0" promptText="Codice fiscale" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_Email" layoutX="51.0" layoutY="256.0" prefHeight="31.0" prefWidth="217.0" promptText="Email" stylesheets="@../../../Design/Design.css" />
-                  <ComboBox fx:id="Reg_SceltaTipo" layoutX="51.0" layoutY="293.0" opacity="0.47" prefHeight="31.0" prefWidth="217.0" promptText="Tipologia Account" styleClass="combo-box" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_Username" layoutX="51.0" layoutY="331.0" prefHeight="31.0" prefWidth="217.0" promptText="Username" stylesheets="@../../../Design/Design.css" />
-                  <PasswordField fx:id="Reg_Password" layoutX="51.0" layoutY="370.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_MostraPass" layoutX="51.0" layoutY="370.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" visible="false" />
-                  <PasswordField fx:id="Reg_ConfPass" layoutX="51.0" layoutY="408.0" prefHeight="31.0" prefWidth="217.0" promptText="Conferma password" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Reg_MostraConfPass" layoutX="51.0" layoutY="408.0" prefHeight="31.0" prefWidth="217.0" promptText="Conferma password" visible="false" />
+                  <TextField fx:id="Reg_Nome" layoutX="51.0" layoutY="58.0" prefHeight="31.0" prefWidth="217.0" promptText="Nome" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_Cog" layoutX="51.0" layoutY="98.0" prefHeight="31.0" prefWidth="217.0" promptText="Cognome" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_Ind" layoutX="51.0" layoutY="139.0" prefHeight="31.0" prefWidth="217.0" promptText="Indirizzo " styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_Tel" layoutX="51.0" layoutY="178.0" prefHeight="31.0" prefWidth="217.0" promptText="Telefono" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_CF" layoutX="51.0" layoutY="218.0" prefHeight="31.0" prefWidth="217.0" promptText="Codice fiscale" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_Email" layoutX="51.0" layoutY="256.0" prefHeight="31.0" prefWidth="217.0" promptText="Email" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <ComboBox fx:id="Reg_SceltaTipo" layoutX="51.0" layoutY="293.0" opacity="0.6" prefHeight="31.0" prefWidth="217.0" promptText="Tipologia Account" styleClass="combo-box" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_Username" layoutX="51.0" layoutY="331.0" prefHeight="31.0" prefWidth="217.0" promptText="Username" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <PasswordField fx:id="Reg_Password" layoutX="51.0" layoutY="370.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_MostraPass" layoutX="51.0" layoutY="370.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" styleClass="textfield" stylesheets="@../../../Design/Design.css" visible="false" />
+                  <PasswordField fx:id="Reg_ConfPass" layoutX="51.0" layoutY="408.0" prefHeight="31.0" prefWidth="217.0" promptText="Conferma password" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Reg_MostraConfPass" layoutX="51.0" layoutY="408.0" prefHeight="31.0" prefWidth="217.0" promptText="Conferma password" styleClass="textfield" stylesheets="@../../../Design/Design.css" visible="false" />
                   <CheckBox fx:id="Reg_Mostra" layoutX="51.0" layoutY="451.0" mnemonicParsing="false" onAction="#OnReg_MostraClick" styleClass="label" stylesheets="@../../../Design/Design.css" text="Mostra Password" textFill="#2a827b" />
                   <Button fx:id="Reg_BtnReg" layoutX="51.0" layoutY="480.0" mnemonicParsing="false" onAction="#OnReg_BtnRegClick" prefHeight="31.0" prefWidth="217.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Registrati" textFill="#dbdbdb" />
                   <Button fx:id="Reg_BtnLogin" layoutX="51.0" layoutY="517.0" mnemonicParsing="false" onAction="#OnReg_BtnLoginClick" prefHeight="31.0" prefWidth="217.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Login" textFill="#2a827b" />

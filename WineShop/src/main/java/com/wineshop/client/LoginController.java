@@ -99,19 +99,19 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(gui));
             Parent guiToShow = loader.load();
             Object controller = loader.getController();
-            Scene scene = new Scene(guiToShow, 700, 400);
+            Scene scene = new Scene(guiToShow, 850, 500);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             // set the request controller and the logged user
-            if (Objects.equals(UtenteLoggato.getTipo(), "cliente")) {
+            if (Objects.equals(UtenteLoggato.getTipo(), "Cliente")) {
                 // customer case
                 ((HomeClienteController) controller).setRequestController(this.requestController);
                 ((HomeClienteController) controller).setLoggedUser(UtenteLoggato);
-            } else if (Objects.equals(UtenteLoggato.getTipo(), "amministratore")) {
+            } else if (Objects.equals(UtenteLoggato.getTipo(), "Amministratore")) {
                 // vendor case
                 ((HomeAmministratoreController) controller).setRequestController(this.requestController);
                 ((HomeAmministratoreController) controller).setLoggedUser(UtenteLoggato);
-            } else if (Objects.equals(UtenteLoggato.getTipo(), "impiegato")) {
+            } else if (Objects.equals(UtenteLoggato.getTipo(), "Impiegato")) {
                 // vendor case
                 ((HomeImpiegatoController) controller).setRequestController(this.requestController);
                 ((HomeImpiegatoController) controller).setLoggedUser(UtenteLoggato);

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,17 +16,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wineshop.client.HomeClienteController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="170.0" styleClass="background-color" stylesheets="@../../../Design/Design.css">
+      <VBox prefHeight="500.0" prefWidth="170.0" styleClass="background-color" stylesheets="@../../../Design/Design.css">
          <children>
             <Label alignment="CENTER" prefHeight="65.0" prefWidth="170.0" style="-fx-text-fill: white;" text="Menù" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans MT" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="btnHome_Cliente" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Home" textFill="WHITE">
+            <Button fx:id="btnHome_Cliente" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#OnBtnHomeCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Home" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +40,7 @@
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnRicerca_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Ricerca" textFill="WHITE">
+            <Button fx:id="btnRicerca_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnBtnRicercaCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Ricerca" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -53,7 +55,7 @@
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnCarrello_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Carrello" textFill="WHITE">
+            <Button fx:id="btnCarrello_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#OnBtnCarrelloCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Carrello" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -68,7 +70,7 @@
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnOrdini_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Ordini" textFill="WHITE">
+            <Button fx:id="btnOrdini_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#OnBtnOrdiniCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Ordini" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -83,7 +85,7 @@
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnPreferiti_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Preferiti" textFill="WHITE">
+            <Button fx:id="btnPreferiti_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnBtnPreferitiCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Preferiti" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -98,7 +100,22 @@
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnProfilo_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Profilo" textFill="WHITE">
+            <Button fx:id="btnRecensioni_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="257.0" mnemonicParsing="false" onAction="#OnBtnRecensioniCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Recensioni" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/Recensione.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProfilo_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#OnBtnProfiloCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Profilo" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -113,7 +130,7 @@
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnLogout_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Logout" textFill="WHITE">
+            <Button fx:id="btnLogout_Cliente" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#OnBtnLogoutCliente_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Logout" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -130,28 +147,377 @@
             </Button>
          </children>
       </VBox>
-      <StackPane layoutX="170.0" prefHeight="65.0" prefWidth="530.0" style="-fx-background-color: white;">
+      <StackPane layoutX="170.0" prefHeight="65.0" prefWidth="680.0" style="-fx-background-color: white;">
          <children>
-            <ImageView fitHeight="65.0" fitWidth="222.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="65.0" fitWidth="222.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                <image>
                   <Image url="@../../../Design/Loghi/Logo.png" />
                </image>
             </ImageView>
          </children>
       </StackPane>
-      <AnchorPane fx:id="AnchorPane_Ricerca" layoutX="173.0" layoutY="64.0" prefHeight="335.0" prefWidth="530.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="AnchorPane_Home" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css" visible="false">
          <children>
-            <TextField fx:id="txtRicerca_Ricerca" layoutX="40.0" layoutY="14.0" prefHeight="29.0" prefWidth="321.0" />
-            <Button fx:id="btnRicerca_Ricerca" layoutX="405.0" layoutY="14.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Cerca" />
-            <TableView layoutX="165.0" layoutY="87.0" prefHeight="261.0" prefWidth="510.0" styleClass="column-header" stylesheets="@../../../Design/Design.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <Label layoutX="55.0" layoutY="32.0" prefHeight="65.0" prefWidth="570.0" style="-fx-text-fill: black;" text="Esplora il mondo del vino come mai prima d'ora su WineShop, la tua destinazione online per vini pregiati e un'esperienza di shopping unica. Grazie alla tua registrazione hai ottenuto l'accesso esclusivo all'account &quot;Cliente&quot; e goditi una serie di vantaggi eccezionali." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="97.0" prefHeight="45.0" prefWidth="570.0" style="-fx-text-fill: black;" text="Acquista Vini Straordinari: Scegli tra una vasta selezione di vini pregiati e aggiungili al carrello con un semplice clic." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="142.0" prefHeight="45.0" prefWidth="570.0" style="-fx-text-fill: black;" text="Lascia Recensioni Autentiche: Condividi le tue esperienze e scopri nuovi vini attraverso le recensioni della community." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="125.0" layoutY="187.0" prefHeight="45.0" prefWidth="429.0" style="-fx-text-fill: black;" text="Aggiungi ai Preferiti: Salva i tuoi vini preferiti per un accesso rapido e facile." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="125.0" layoutY="232.0" prefHeight="45.0" prefWidth="429.0" style="-fx-text-fill: black;" text="Offerte Esclusive: Ricevi notifiche su offerte speciali, sconti e promozioni riservate ai clienti." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="125.0" layoutY="277.0" prefHeight="45.0" prefWidth="429.0" style="-fx-text-fill: black;" text="Storico degli Ordini: Tieni traccia dei tuoi acquisti passati per una facile gestione delle scorte." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="107.0" layoutY="322.0" prefHeight="45.0" prefWidth="466.0" style="-fx-text-fill: black;" text="Ricerca Intuitiva: Trova il vino perfetto con la nostra funzione di ricerca avanzata." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="45.0" fitWidth="41.0" layoutX="328.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Design/Loghi/Logo_Calice.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Ricerca" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <TextField fx:id="txtRicerca_Ricerca" layoutX="102.0" layoutY="28.0" prefHeight="29.0" prefWidth="321.0" promptText="Inserire il nome del vino da cercare" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <Button fx:id="btnRicerca_Ricerca" layoutX="471.0" layoutY="28.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Cerca" />
+            <TableView fx:id="TV_Ricerca" layoutX="6.0" layoutY="68.0" prefHeight="338.0" prefWidth="660.0" styleClass="table-row-cell" stylesheets="@../../../Design/Design2.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nome" />
-                <TableColumn prefWidth="75.0" text="Provenienza" />
-                  <TableColumn prefWidth="75.0" text="Anno" />
-                  <TableColumn prefWidth="75.0" text="Vitigno" />
-                  <TableColumn prefWidth="75.0" text="Prezzo" />
+                <TableColumn prefWidth="110.0" text="Nome" />
+                  <TableColumn prefWidth="110.0" text="Provenienza" />
+                  <TableColumn prefWidth="110.0" text="Anno" />
+                  <TableColumn prefWidth="110.0" text="Vitigno" />
+                  <TableColumn prefWidth="110.0" text="Prezzo" />
+                  <TableColumn prefWidth="110.0" text="Info" />
               </columns>
             </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Vino" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <ImageView fitHeight="287.0" fitWidth="58.0" layoutX="496.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Design/Loghi/Barolo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="41.0" layoutY="50.0" prefHeight="29.0" prefWidth="58.0" text="Nome:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNome_Vino" layoutX="167.0" layoutY="50.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="79.0" prefHeight="29.0" prefWidth="109.0" text="Provenienza:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="108.0" prefHeight="29.0" prefWidth="58.0" text="Anno:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="137.0" prefHeight="29.0" prefWidth="81.0" text="Vitigno:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="166.0" prefHeight="29.0" prefWidth="81.0" text="Prezzo:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblProvenienza_Vino" layoutX="167.0" layoutY="79.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblAnno_Vino" layoutX="167.0" layoutY="108.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblVitigno_Vino" layoutX="167.0" layoutY="137.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPrezzo_Vino" layoutX="167.0" layoutY="166.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="194.0" prefHeight="29.0" prefWidth="81.0" text="Soglia:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="223.0" prefHeight="29.0" prefWidth="81.0" text="Quantità:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="252.0" prefHeight="29.0" prefWidth="101.0" text="Descrizione:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSoglia_Vino" layoutX="167.0" layoutY="194.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblQuantita_Vino" layoutX="167.0" layoutY="223.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAddCart_Vino" layoutX="393.0" layoutY="347.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Aggiungi al carrello" />
+            <Label layoutX="393.0" layoutY="296.0" prefHeight="29.0" prefWidth="151.0" text="Seleziona quantità:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="CBQuantita_Vino" layoutX="560.0" layoutY="297.0" opacity="0.65" prefHeight="25.0" prefWidth="68.0" styleClass="combo-box" stylesheets="@../../../Design/Design.css" />
+            <Label fx:id="lblDescrizione_Vino" alignment="TOP_LEFT" layoutX="41.0" layoutY="281.0" prefHeight="140.0" prefWidth="305.0" text="label" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="288.0" layoutY="17.0" text="Scheda Vino" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAddPreferiti_Vino" layoutX="393.0" layoutY="384.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Aggiungi ai preferiti" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Carrello" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <TableView fx:id="TV_Carrello" layoutX="10.0" layoutY="49.0" prefHeight="375.0" prefWidth="450.0" stylesheets="@../../../Design/Design2.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+               <columns>
+                  <TableColumn fx:id="Vino_Carrello" prefWidth="150.0" text="Vino" />
+                  <TableColumn fx:id="Quantita_Carrello" prefWidth="150.0" text="Quntità" />
+                  <TableColumn fx:id="Prezzo_Carrello" prefWidth="150.0" text="Prezzo" />
+               </columns>
+               <styleClass>
+                  <String fx:value="table-row-cell" />
+                  <String fx:value="label2" />
+               </styleClass>
+            </TableView>
+            <Label layoutX="265.0" layoutY="14.0" text="Resoconto ordine" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAcquisto_Carrello" layoutX="472.0" layoutY="287.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="197.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Procedere all'acquisto" />
+            <Label layoutX="472.0" layoutY="116.0" text="Totale ordine:" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotale_Carrello" layoutX="579.0" layoutY="116.0" text="es.100" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="472.0" layoutY="150.0" text="Indirizzo di spedizione:" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtIndirizzo_Carrello" layoutX="472.0" layoutY="173.0" prefHeight="21.0" prefWidth="197.0" promptText="Inserire l'insirizzo" styleClass="textfield" stylesheets="@../../../Design/Design.css">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <Label layoutX="472.0" layoutY="218.0" text="Metodo pagamento:" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbMetodo_Carrello" layoutX="472.0" layoutY="245.0" opacity="0.65" prefHeight="27.0" prefWidth="197.0" promptText="Metodo pagamento" styleClass="combo-box" stylesheets="@../../../Design/Design.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Ordini" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="271.0" layoutY="14.0" text="Ordini effettuati" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="TV_Ordini" layoutX="40.0" layoutY="55.0" prefHeight="359.0" prefWidth="600.0" stylesheets="@../../../Design/Design2.css">
+               <columns>
+                  <TableColumn fx:id="ID_Ordini" prefWidth="150.0" text="ID" />
+                  <TableColumn fx:id="Totale_Ordini" prefWidth="150.0" text="Totale" />
+                  <TableColumn fx:id="Indirizzo_Ordini" prefWidth="150.0" text="Indirizzo" />
+                  <TableColumn fx:id="MP_Ordini" prefWidth="150.0" text="Metodo Pagamento" />
+               </columns>
+               <styleClass>
+                  <String fx:value="table-row-cell" />
+                  <String fx:value="label2" />
+               </styleClass>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Preferiti" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="286.0" layoutY="14.0" text="Vini preferiti" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="TV_Preferiti" layoutX="40.0" layoutY="52.0" prefHeight="359.0" prefWidth="600.0" stylesheets="@../../../Design/Design2.css">
+               <columns>
+                  <TableColumn fx:id="ID_Preferiti" prefWidth="120.0" text="ID" />
+                  <TableColumn fx:id="Nome_Preferiti" prefWidth="120.0" text="Nome" />
+                  <TableColumn fx:id="Anno_Preferiti" prefWidth="120.0" text="Anno" />
+                  <TableColumn fx:id="Provenienza_Preferiti" prefWidth="120.0" text="Provenienza" />
+                  <TableColumn fx:id="Vitigno_Preferiti" prefWidth="120.0" text="Vitigno" />
+               </columns>
+               <styleClass>
+                  <String fx:value="table-row-cell" />
+                  <String fx:value="label2" />
+               </styleClass>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Recensioni" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="277.0" layoutY="21.0" text="Recensioni vini" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="83.0" layoutY="49.0" prefHeight="109.0" prefWidth="513.0" text=" Utilizza questa sezione per scrivere una recensione sui vini provati, in modo da lasciarci un feedback che ci faccia capire se il servizio offerto è all'altezza. Grazie da WineShop." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="44.0" layoutY="158.0" prefHeight="29.0" prefWidth="133.0" text="Seleziona il vino:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="CBVoto_Recensioni" layoutX="197.0" layoutY="204.0" opacity="0.65" prefHeight="27.0" prefWidth="160.0" promptText="Da 1 a 5" styleClass="combo-box" stylesheets="@../../../Design/Design.css" />
+            <Label layoutX="44.0" layoutY="245.0" prefHeight="29.0" prefWidth="151.0" text="Scrivi il tuo parere:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtTesto_Recensioni" layoutX="44.0" layoutY="286.0" prefHeight="125.0" prefWidth="289.0" promptText="Recensione...." styleClass="text-area" stylesheets="@../../../Design/Design.css" wrapText="true" />
+            <Button fx:id="btnAdd_Recensioni" layoutX="446.0" layoutY="334.0" mnemonicParsing="false" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Aggiungi recensione" />
+            <ComboBox fx:id="CBVino_Recensioni" layoutX="197.0" layoutY="159.0" opacity="0.65" prefHeight="27.0" prefWidth="160.0" promptText="Nome" styleClass="combo-box" stylesheets="@../../../Design/Design.css" />
+            <Label layoutX="44.0" layoutY="203.0" prefHeight="29.0" prefWidth="133.0" text="Seleziona voto:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Profilo" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="288.0" layoutY="21.0" text="Il tuo profilo" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="95.0" prefHeight="29.0" prefWidth="58.0" text="Nome:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTelefono_Profilo" layoutX="367.0" layoutY="273.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="236.0" prefHeight="29.0" prefWidth="109.0" text="Email:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="310.0" prefHeight="29.0" prefWidth="81.0" text="Indirizzo:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="273.0" prefHeight="29.0" prefWidth="81.0" text="Telefono:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblEmail_Profilo" layoutX="367.0" layoutY="236.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCF_Profilo" layoutX="367.0" layoutY="201.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCognome_Profilo" layoutX="367.0" layoutY="132.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblIndirizzo_Profilo" layoutX="367.0" layoutY="310.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="201.0" prefHeight="29.0" prefWidth="133.0" text="Codice fiscale:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="165.0" prefHeight="29.0" prefWidth="101.0" text="Username:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="132.0" prefHeight="29.0" prefWidth="101.0" text="Cognome:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUsername_Profilo" layoutX="367.0" layoutY="165.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNome_Profilo" layoutX="367.0" layoutY="95.0" prefHeight="29.0" prefWidth="189.0" text="label">
+               <font>
+                  <Font name="Gill Sans MT" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

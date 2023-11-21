@@ -1,0 +1,14 @@
+.label{
+    -fx-text-fill: #000000;
+}
+
+.table-view .column-header {
+    -fx-background-color: white; /* Sostituisci con il colore desiderato */
+    -fx-text-fill: #000000; /* Colore del testo nell'header */
+}
+
+.table-view .column-header, .table-row-cell {
+    -fx-border-width: 0.3px; /* Sostituisci con lo spessore desiderato */
+    -fx-border-color: #9f9d9d; /* Sostituisci con il colore desiderato */
+    -fx-text-fill: #000000;
+}

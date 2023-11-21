@@ -4,6 +4,7 @@ import utilities.*;
 import utilities.models.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,15 @@ public class SQLTranslator {
                          "SET Password = '" + ((Utente) model).getPassword() + "' " +
                          "WHERE Username = '" + ((Utente) model).getUsername() + "';";
             }
+            case Costanti.Logout ->
+            {
+                query += "UPDATE utenti " +
+                         "SET LastLogin = '" + LocalDateTime.now().format(dateTimeFormatter) + "' " +
+                         "WHERE Username = '" + ((Utente) model).getUsername() + "'; " +
+                         "UPDATE utenti " +
+                         "SET Online = 0 " +
+                         "WHERE Username = '" + ((Utente) model).getUsername() + "'; ";
+            }
             default -> throw new RequestToSQLException();
         }
         return query;
@@ -72,6 +82,10 @@ public class SQLTranslator {
                 break;
             case Costanti.Registrazione, Costanti.Cambio_Pswd:
                 response = new Response(Costanti.Successo, new EmptyPayload());
+                break;
+            case Costanti.Logout:
+                response = new Response(Costanti.Successo, new EmptyPayload("Logout effettuato con successo"));
+                this.UtenteLoggato = null;
                 break;
             default:
                 throw new SQLToResponseException();

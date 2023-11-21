@@ -23,9 +23,9 @@
                         <Font name="Gill Sans MT" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Login_Username" layoutX="56.0" layoutY="166.0" prefHeight="31.0" prefWidth="217.0" promptText="Username" stylesheets="@../../../Design/Design.css" />
-                  <PasswordField fx:id="Login_Password" layoutX="56.0" layoutY="215.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" stylesheets="@../../../Design/Design.css" />
-                  <TextField fx:id="Login_MostraPassword" layoutX="56.0" layoutY="215.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" visible="false" />
+                  <TextField fx:id="Login_Username" layoutX="56.0" layoutY="166.0" prefHeight="31.0" prefWidth="217.0" promptText="Username" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <PasswordField fx:id="Login_Password" layoutX="56.0" layoutY="215.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+                  <TextField fx:id="Login_MostraPassword" layoutX="56.0" layoutY="215.0" prefHeight="31.0" prefWidth="217.0" promptText="Password" styleClass="textfield" stylesheets="@../../../Design/Design.css" visible="false" />
                   <CheckBox fx:id="Login_Mostra" layoutX="57.0" layoutY="267.0" mnemonicParsing="false" onAction="#OnLogin_MostraClick" styleClass="label" stylesheets="@../../../Design/Design.css" text="Mostra Password" textFill="#2a827b" />
                   <Button fx:id="Login_BtnLogin" layoutX="56.0" layoutY="302.0" mnemonicParsing="false" onAction="#OnLogin_Login_BtnLogin" prefHeight="31.0" prefWidth="217.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Login" textFill="#dbdbdb" />
                   <Hyperlink fx:id="Login_Link" layoutX="171.0" layoutY="340.0" onAction="#OnLogin_LinkClick" styleClass="link" stylesheets="@../../../Design/Design.css" text="Cambia password" textFill="#2d0000" underline="true">
