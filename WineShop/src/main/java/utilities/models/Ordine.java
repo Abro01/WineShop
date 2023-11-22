@@ -5,19 +5,21 @@ import utilities.Removable;
 
 import java.io.Serializable;
 public class Ordine implements Serializable, Removable, Insertable {
+    private static final long serialVersionUID = 1L;
     private int ID;
     private double totale;
-    private String CODUtente, Metodo_Pagamento;
+    private String CODCliente, Metodo_Pagamento, Indirizzo;
     private boolean pagato;
     private boolean spedito;
 
-    public Ordine(int ID, double totale, String CODUtente, String metodo_Pagamento, boolean pagato, boolean spedito) {
+    public Ordine(int ID, double totale, String CODCliente, String metodo_Pagamento, boolean pagato, boolean spedito, String indirizzo) {
         this.ID = ID;
         this.totale = totale;
-        this.CODUtente = CODUtente;
-        Metodo_Pagamento = metodo_Pagamento;
+        this.CODCliente = CODCliente;
+        this.Metodo_Pagamento = metodo_Pagamento;
         this.pagato = pagato;
         this.spedito = spedito;
+        this.Indirizzo = indirizzo;
     }
 
     public int getID() {
@@ -36,12 +38,12 @@ public class Ordine implements Serializable, Removable, Insertable {
         this.totale = totale;
     }
 
-    public String getCODUtente() {
-        return CODUtente;
+    public String getCODCliente() {
+        return CODCliente;
     }
 
-    public void setCODUtente(String CODUtente) {
-        this.CODUtente = CODUtente;
+    public void setCODCliente(String CODCliente) {
+        this.CODCliente = CODCliente;
     }
 
     public String getMetodo_Pagamento() {
@@ -49,7 +51,7 @@ public class Ordine implements Serializable, Removable, Insertable {
     }
 
     public void setMetodo_Pagamento(String metodo_Pagamento) {
-        Metodo_Pagamento = metodo_Pagamento;
+        this.Metodo_Pagamento = metodo_Pagamento;
     }
 
     public boolean isPagato() {
@@ -68,10 +70,18 @@ public class Ordine implements Serializable, Removable, Insertable {
         this.spedito = spedito;
     }
 
+    public String getIndirizzo() {
+        return Indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        Indirizzo = indirizzo;
+    }
+
     //ritorna gli attributi degli ordini
     @Override
     public String[] getAttributes() {
-        return new String[]{"ID", "totale", "Metodo_Pagamento", "CODUtente"};
+        return new String[]{"ID", "Totale", "Indirizzo", "Metodo_Pagamento", "CODCliente"};
     }
 
     //Ottiene il nome della tabella
@@ -84,7 +94,7 @@ public class Ordine implements Serializable, Removable, Insertable {
     @Override
     public String[] getValues() {
         int ValorePagato = this.pagato ? 1 : 0;
-        return new String[]{"'" + this.ID + "'", "'" + this.totale + "'", "'" + this.Metodo_Pagamento + "'", "'" + this.CODUtente + "'", "'" + ValorePagato + "'"};
+        return new String[]{"'" + this.ID + "'", "'" + this.totale + "'", "'" + this.Indirizzo + "'", "'" + this.Metodo_Pagamento + "'", "'" + this.CODCliente + "'", "'" + ValorePagato + "'"};
     }
 
     //Ottiene la chiave unica della tabella
@@ -100,6 +110,6 @@ public class Ordine implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Ordine.\nCodice" + this.ID + ", totale: " + this.totale + ", tipo di pagamento: " + this.Metodo_Pagamento + ", codice utente: " + this.CODUtente;
+        return "Ordine.\nCodice" + this.ID + ", totale: " + this.totale + ", tipo di pagamento: " + this.Metodo_Pagamento + ", codice utente: " + this.CODCliente;
     }
 }

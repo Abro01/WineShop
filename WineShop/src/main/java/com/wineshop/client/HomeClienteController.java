@@ -1,11 +1,14 @@
 package com.wineshop.client;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.EmptyPayload;
 import utilities.models.Utente;
 import utilities.Costanti;
 import utilities.Response;
@@ -21,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+
 
 public class HomeClienteController {
     private RequestController requestController;
@@ -290,6 +294,18 @@ public class HomeClienteController {
         AnchorPane_Preferiti.setVisible(false);
         AnchorPane_Recensioni.setVisible(false);
         AnchorPane_Profilo.setVisible(true);
+
+        /*Response r = this.requestController.makeRequest(Costanti.Successo, new EmptyPayload());
+        ArrayList<Utente> info = (ArrayList<Utente>) r.getPayload();
+        ObservableList<Utente> observableListInfo = FXCollections.observableArrayList(info);*/
+
+        lblNome_Profilo.setText(UtenteLoggato.getNome());
+        lblCognome_Profilo.setText(UtenteLoggato.getCognome());
+        lblUsername_Profilo.setText(UtenteLoggato.getUsername());
+        lblCF_Profilo.setText(UtenteLoggato.getCf());
+        lblEmail_Profilo.setText(UtenteLoggato.getEmail());
+        lblTelefono_Profilo.setText(UtenteLoggato.getTelefono());
+        lblIndirizzo_Profilo.setText(UtenteLoggato.getIndirizzo());
     }
 
     @FXML
@@ -320,5 +336,4 @@ public class HomeClienteController {
     }
     public void initialize() {
     }
-
 }

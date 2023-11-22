@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wineshop.client.HomeAmministratoreController">
    <children>
       <VBox prefHeight="500.0" prefWidth="170.0" styleClass="background-color" stylesheets="@../../../Design/Design.css">
          <children>
@@ -126,7 +125,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <AnchorPane fx:id="AnchorPane_Home" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css" visible="false">
+      <AnchorPane fx:id="AnchorPane_Home" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css">
          <children>
             <Label layoutX="55.0" layoutY="32.0" prefHeight="65.0" prefWidth="570.0" style="-fx-text-fill: black;" text="WineShop è il tuo portale online dedicato all'universo dei vini, dove la passione enologica si fonde con l'efficienza dello shopping digitale. dopo esserti registrato come amministratore, scopri tutte le funzionalità progettate per semplificare la gestione e l'esperienza del vostro negozio virtuale di vini." textAlignment="CENTER" wrapText="true">
                <font>
@@ -170,11 +169,11 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane_Ricerca" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="AnchorPane_Ricerca" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
          <children>
             <TextField fx:id="txtRicerca_Ricerca" layoutX="102.0" layoutY="28.0" prefHeight="29.0" prefWidth="321.0" promptText="Inserire il nome del vino da cercare" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
             <Button fx:id="btnRicerca_Ricerca" layoutX="471.0" layoutY="28.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Cerca" />
-            <TableView fx:id="TV_Ricerca" layoutX="15.0" layoutY="88.0" prefHeight="338.0" prefWidth="660.0" styleClass="table-row-cell" stylesheets="@../../../Design/Design2.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="5.0">
+            <TableView fx:id="TV_Ricerca" layoutX="14.0" layoutY="97.0" prefHeight="338.0" prefWidth="660.0" styleClass="table-row-cell" stylesheets="@../../../Design/Design2.css" AnchorPane.bottomAnchor="0.3333333333333144" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="6.0">
                <columns>
                   <TableColumn prefWidth="110.0" text="Nome" />
                   <TableColumn prefWidth="110.0" text="Provenienza" />
@@ -186,7 +185,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane_Vino" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+      <AnchorPane layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
          <children>
             <ImageView fitHeight="287.0" fitWidth="58.0" layoutX="496.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
                <image>

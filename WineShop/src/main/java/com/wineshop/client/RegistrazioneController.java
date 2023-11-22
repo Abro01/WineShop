@@ -220,7 +220,7 @@ public class RegistrazioneController implements Initializable {
     //posizione utilizzata per risolvere percorsi relativi per l'oggetto radice.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> options = FXCollections.observableArrayList("Amministratore", "Cliente", "Impiegato");
+        ObservableList<String> options = FXCollections.observableArrayList("Amministratore", "Cliente", "Impiegato", "Produttore");
         Reg_SceltaTipo.setItems(options);
     }
 

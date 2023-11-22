@@ -94,6 +94,9 @@ public class LoginController {
             } else if (Objects.equals(UtenteLoggato.getTipo(), "Impiegato"))
             {
                 gui = "HomeImpiegato.fxml";
+            } else if (Objects.equals(UtenteLoggato.getTipo(), "Produttore"))
+            {
+                gui = "HomeProduttore.fxml";
             }
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(gui));
@@ -103,18 +106,23 @@ public class LoginController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             // set the request controller and the logged user
-            if (Objects.equals(UtenteLoggato.getTipo(), "Cliente")) {
-                // customer case
+            if (Objects.equals(UtenteLoggato.getTipo(), "Cliente"))
+            {
+                // caso cliente
                 ((HomeClienteController) controller).setRequestController(this.requestController);
                 ((HomeClienteController) controller).setLoggedUser(UtenteLoggato);
             } else if (Objects.equals(UtenteLoggato.getTipo(), "Amministratore")) {
-                // vendor case
+                // caso amministratore
                 ((HomeAmministratoreController) controller).setRequestController(this.requestController);
                 ((HomeAmministratoreController) controller).setLoggedUser(UtenteLoggato);
             } else if (Objects.equals(UtenteLoggato.getTipo(), "Impiegato")) {
-                // vendor case
+                // caso impiegato
                 ((HomeImpiegatoController) controller).setRequestController(this.requestController);
                 ((HomeImpiegatoController) controller).setLoggedUser(UtenteLoggato);
+            } else if (Objects.equals(UtenteLoggato.getTipo(), "Produttore")) {
+                // caso produttore
+                ((HomeProduttoreController) controller).setRequestController(this.requestController);
+                ((HomeProduttoreController) controller).setLoggedUser(UtenteLoggato);
             }
             stage.setTitle(UtenteLoggato.getUsername().toUpperCase() + " - " + UtenteLoggato.getTipo().toUpperCase() + " - WineDemo");
             stage.setScene(scene);
@@ -131,6 +139,10 @@ public class LoginController {
             else if (UtenteLoggato.getTipo().equals("Impiegato"))
             {
                 ((HomeImpiegatoController) controller).initialize();
+            }
+            else if (UtenteLoggato.getTipo().equals("Produttore"))
+            {
+                ((HomeProduttoreController) controller).initialize();
             }
         } else if (r.getStatusCode() == Costanti.Bad_Request) {
             this.lblLogin.setText("Username o password errati!");

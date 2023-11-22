@@ -156,7 +156,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <AnchorPane fx:id="AnchorPane_Home" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css" visible="false">
+      <AnchorPane fx:id="AnchorPane_Home" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css">
          <children>
             <Label layoutX="55.0" layoutY="32.0" prefHeight="65.0" prefWidth="570.0" style="-fx-text-fill: black;" text="Esplora il mondo del vino come mai prima d'ora su WineShop, la tua destinazione online per vini pregiati e un'esperienza di shopping unica. Grazie alla tua registrazione hai ottenuto l'accesso esclusivo all'account &quot;Cliente&quot; e goditi una serie di vantaggi eccezionali." textAlignment="CENTER" wrapText="true">
                <font>

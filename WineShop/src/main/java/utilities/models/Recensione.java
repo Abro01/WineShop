@@ -5,14 +5,15 @@ import utilities.Removable;
 
 import java.io.Serializable;
 public class Recensione implements Serializable, Removable, Insertable {
+    private static final long serialVersionUID = 1L;
     private int ID, voto, CODVino;
-    private String CODUtente, commento;
+    private String CODCliente, commento;
 
-    public Recensione(int ID, int voto, int CODVino, String CODUtente, String commento) {
+    public Recensione(int ID, int voto, int CODVino, String CODCliente, String commento) {
         this.ID = ID;
         this.voto = voto;
         this.CODVino = CODVino;
-        this.CODUtente = CODUtente;
+        this.CODCliente = CODCliente;
         this.commento = commento;
     }
 
@@ -40,12 +41,12 @@ public class Recensione implements Serializable, Removable, Insertable {
         this.CODVino = CODVino;
     }
 
-    public String getCODUtente() {
-        return CODUtente;
+    public String getCODCliente() {
+        return CODCliente;
     }
 
-    public void setCODUtente(String CODUtente) {
-        this.CODUtente = CODUtente;
+    public void setCODCliente(String CODCliente) {
+        this.CODCliente = CODCliente;
     }
 
     public String getCommento() {
@@ -59,7 +60,7 @@ public class Recensione implements Serializable, Removable, Insertable {
     //ritorna gli attributi delle recensioni
     @Override
     public String[] getAttributes() {
-        return new String[]{"ID", "voto", "commento", "CODVino", "CODUtente"};
+        return new String[]{"ID", "Voto", "Commento", "CODVino", "CODCliente"};
     }
 
     //Ottiene il nome della tabella
@@ -71,7 +72,7 @@ public class Recensione implements Serializable, Removable, Insertable {
     //ritorna il valore delle recensioni
     @Override
     public String[] getValues() {
-        return new String[]{"'" + this.ID + "'", "'" + this.voto + "'", "'" + this.commento + "'", "'" + this.CODVino + "'", "'" + this.CODUtente + "'"};
+        return new String[]{"'" + this.ID + "'", "'" + this.voto + "'", "'" + this.commento + "'", "'" + this.CODVino + "'", "'" + this.CODCliente + "'"};
     }
 
     //Ottiene la chiave unica della tabella
@@ -87,6 +88,6 @@ public class Recensione implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Recensione: " + this.commento + ", voto: " + this.voto + ", codice vino: " + this.CODVino + ", codice utente: " + this.CODUtente;
+        return "Recensione: " + this.commento + ", voto: " + this.voto + ", codice vino: " + this.CODVino + ", codice cliente: " + this.CODCliente;
     }
 }

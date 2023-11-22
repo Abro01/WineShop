@@ -27,6 +27,19 @@ public class Utente implements Insertable, Serializable, Removable {
         this.id = id;
     }
 
+    public Utente(String nome, String cognome, String cf, String email, String telefono, String indirizzo, String password, String tipo, String username, int id) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.cf = cf;
+        this.email = email;
+        this.telefono = telefono;
+        this.indirizzo = indirizzo;
+        this.password = password;
+        this.tipo = tipo;
+        this.username = username;
+        this.id = id;
+    }
+
     public Utente(String nome, String cognome, String cf, String email, String telefono, String indirizzo, String password, String tipo, String username) {
         this.nome = nome;
         this.cognome = cognome;
@@ -145,7 +158,7 @@ public class Utente implements Insertable, Serializable, Removable {
     //Ottiene la chiave unica della tabella
     @Override
     public String getPk() {
-        return "username";
+        return "Username";
     }
 
     //Ottiene il valore della chiave unica

@@ -5,13 +5,14 @@ import utilities.Removable;
 
 import java.io.Serializable;
 public class Preferito implements Serializable, Removable, Insertable {
+    private static final long serialVersionUID = 1L;
     private int ID, CODVino;
-    private String CODUtente;
+    private String CODCliente;
 
-    public Preferito(int ID, int CODVino, String CODUtente) {
+    public Preferito(int ID, int CODVino, String CODCliente) {
         this.ID = ID;
         this.CODVino = CODVino;
-        this.CODUtente = CODUtente;
+        this.CODCliente = CODCliente;
     }
 
     public int getID() {
@@ -30,18 +31,18 @@ public class Preferito implements Serializable, Removable, Insertable {
         this.CODVino = CODVino;
     }
 
-    public String getCODUtente() {
-        return CODUtente;
+    public String getCODCliente() {
+        return CODCliente;
     }
 
-    public void setCODUtente(String CODUtente) {
-        this.CODUtente = CODUtente;
+    public void setCODCliente(String CODCliente) {
+        this.CODCliente = CODCliente;
     }
 
     //ritorna gli attributi dei preferiti
     @Override
     public String[] getAttributes() {
-        return new String[]{"ID", "CODVino", "CODUtente"};
+        return new String[]{"ID", "CODVino", "CODCliente"};
     }
 
     //Ottiene il nome della tabella
@@ -53,7 +54,7 @@ public class Preferito implements Serializable, Removable, Insertable {
     //ritorna il valore dei produttori
     @Override
     public String[] getValues() {
-        return new String[]{"'" + this.ID + "'", "'" + this.CODVino + "'", "'" + this.CODUtente + "'"};
+        return new String[]{"'" + this.ID + "'", "'" + this.CODVino + "'", "'" + this.CODCliente + "'"};
     }
 
     //Ottiene la chiave unica della tabella
@@ -69,6 +70,6 @@ public class Preferito implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Preferiti.\nId preferito" + this.ID + ", codice vino: " + this.CODVino + ", codice utente: " + this.CODUtente;
+        return "Preferiti.\nId preferito" + this.ID + ", codice vino: " + this.CODVino + ", codice cliente: " + this.CODCliente;
     }
 }

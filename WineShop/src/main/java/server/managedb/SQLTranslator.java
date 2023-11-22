@@ -6,6 +6,7 @@ import utilities.models.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,7 +76,7 @@ public class SQLTranslator {
                     break;
                 }
                 Map<String, String> uLog = queryResult.get(0);
-                Utente LogUtente = new Utente(Integer.parseInt(uLog.get("ID")), uLog.get("Username"), uLog.get("Password"), uLog.get("Tipo"));
+                Utente LogUtente = new Utente(uLog.get("Nome"), uLog.get("Cognome"), uLog.get("CF"), uLog.get("Email"), uLog.get("Telefono"), uLog.get("Indirizzo"), uLog.get("Password"), uLog.get("Tipo"), uLog.get("Username"), Integer.parseInt(uLog.get("ID")));
                 //System.out.println("id: " + utente.getId());
                 response = new Response(Costanti.Successo, LogUtente);
                 this.UtenteLoggato = LogUtente;

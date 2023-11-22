@@ -5,11 +5,12 @@ import utilities.Removable;
 
 import java.io.Serializable;
 public class Vino implements Serializable, Removable, Insertable {
+    private static final long serialVersionUID = 1L;
     private String nome, CODProduttore, provenienza, descrizione, vitigno, immagine;
     private double prezzo;
     private int ID, soglia, quantita, anno;
 
-    public Vino(String nome, String provenienza, String vitigno, double prezzo, int ID, int quantita) {
+    /*public Vino(String nome, String provenienza, String vitigno, double prezzo, int ID, int quantita) {
         setNome(nome);
         setProvenienza(provenienza);
         setVitigno(vitigno);
@@ -26,6 +27,39 @@ public class Vino implements Serializable, Removable, Insertable {
     public Vino(String nome, int ID) {
         setNome(nome);
         setID(ID);
+    }*/
+
+    public Vino(String nome, String CODProduttore, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int ID, int soglia, int quantita, int anno) {
+        this.nome = nome;
+        this.CODProduttore = CODProduttore;
+        this.provenienza = provenienza;
+        this.descrizione = descrizione;
+        this.vitigno = vitigno;
+        this.immagine = immagine;
+        this.prezzo = prezzo;
+        this.ID = ID;
+        this.soglia = soglia;
+        this.quantita = quantita;
+        this.anno = anno;
+    }
+
+    public Vino(String nome, String provenienza, String vitigno, double prezzo, int ID, int quantita) {
+        this.nome = nome;
+        this.provenienza = provenienza;
+        this.vitigno = vitigno;
+        this.prezzo = prezzo;
+        this.ID = ID;
+        this.quantita = quantita;
+    }
+
+    public Vino(int ID, int quantita) {
+        this.ID = ID;
+        this.quantita = quantita;
+    }
+
+    public Vino(String nome, int ID) {
+        this.nome = nome;
+        this.ID = ID;
     }
 
     public String getNome() {
@@ -116,10 +150,14 @@ public class Vino implements Serializable, Removable, Insertable {
         this.anno = anno;
     }
 
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
+    }
+
     //ritorna gli attributi del vino
     @Override
     public String[] getAttributes() {
-        return new String[]{"ID", "nome", "provenienza", "anno", "descrizione", "vitigno", "prezzo", "soglia", "quantita", "immagine", "CODProduttore"};
+        return new String[]{"ID", "Nome", "Provenienza", "Anno", "Descrizione", "Vitigno", "Prezzo", "Soglia", "Quantita", "Immagine", "CODProduttore"};
     }
 
     //Ottiene il nome della tabella

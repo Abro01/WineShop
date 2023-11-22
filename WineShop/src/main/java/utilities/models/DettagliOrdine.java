@@ -5,6 +5,7 @@ import utilities.Removable;
 
 import java.io.Serializable;
 public class DettagliOrdine implements Serializable, Removable, Insertable {
+    private static final long serialVersionUID = 1L;
     private int ID, quantita, CODOrdine, CODVino;
 
     public DettagliOrdine(int ID, int quantita, int CODOrdine, int CODVino) {
@@ -49,7 +50,7 @@ public class DettagliOrdine implements Serializable, Removable, Insertable {
     //ritorna gli attributi dei dettagli di un ordine
     @Override
     public String[] getAttributes() {
-        return new String[]{"ID", "quantita", "CODOrdine", "CODVino"};
+        return new String[]{"ID", "Quantita", "CODVino", "CODOrdine"};
     }
 
     //Ottiene il nome della tabella

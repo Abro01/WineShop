@@ -1,7 +1,11 @@
 package utilities.models;
 
+import utilities.Insertable;
+import utilities.Removable;
+
 import java.io.Serializable;
-public class Offerta implements Serializable {
+public class Offerta implements Insertable, Serializable, Removable {
+    private static final long serialVersionUID = 1L;
     private int ID, CODVino, Sconto;
     private final String Descrizione;
 
@@ -42,6 +46,31 @@ public class Offerta implements Serializable {
 
     @Override
     public String toString() {
-        return "Offerta numero " + ID + ", con sconto del " + Sconto + ", che consiste in '" + Descrizione;
+        return "Offerta numero " + this.ID + ", con sconto del " + this.Sconto + ", che consiste in '" + this.Descrizione;
+    }
+
+    @Override
+    public String[] getAttributes() {
+        return new String[]{"ID", "Descrizione", "Sconto", "CODVino"};
+    }
+
+    @Override
+    public String getInstanceName() {
+        return "offerte";
+    }
+
+    @Override
+    public String[] getValues() {
+        return new String[]{"'" + this.ID + "'", "'" + this.Descrizione + "'", "'" + this.Sconto + "'", "'" + this.CODVino + "'"};
+    }
+
+    @Override
+    public String getPk() {
+        return "ID";
+    }
+
+    @Override
+    public String getPkValue() {
+        return "'" + this.getID() + "'";
     }
 }
