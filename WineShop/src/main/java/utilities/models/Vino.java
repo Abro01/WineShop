@@ -6,9 +6,9 @@ import utilities.Removable;
 import java.io.Serializable;
 public class Vino implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
-    private String nome, CODProduttore, provenienza, descrizione, vitigno, immagine;
+    private String nome, provenienza, descrizione, vitigno, immagine;
     private double prezzo;
-    private int ID, soglia, quantita, anno;
+    private int ID, soglia, quantita, anno, CODProduttore;
 
     /*public Vino(String nome, String provenienza, String vitigno, double prezzo, int ID, int quantita) {
         setNome(nome);
@@ -29,7 +29,7 @@ public class Vino implements Serializable, Removable, Insertable {
         setID(ID);
     }*/
 
-    public Vino(String nome, String CODProduttore, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int ID, int soglia, int quantita, int anno) {
+    public Vino(String nome, int CODProduttore, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int ID, int soglia, int quantita, int anno) {
         this.nome = nome;
         this.CODProduttore = CODProduttore;
         this.provenienza = provenienza;
@@ -43,13 +43,25 @@ public class Vino implements Serializable, Removable, Insertable {
         this.anno = anno;
     }
 
-    public Vino(String nome, String provenienza, String vitigno, double prezzo, int ID, int quantita) {
+    public Vino(String nome, int CODProduttore, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int soglia, int quantita, int anno) {
+        this.nome = nome;
+        this.CODProduttore = CODProduttore;
+        this.provenienza = provenienza;
+        this.descrizione = descrizione;
+        this.vitigno = vitigno;
+        this.immagine = immagine;
+        this.prezzo = prezzo;
+        this.soglia = soglia;
+        this.quantita = quantita;
+        this.anno = anno;
+    }
+
+    public Vino(String nome, String provenienza, double prezzo, int quantita, int anno) {
         this.nome = nome;
         this.provenienza = provenienza;
-        this.vitigno = vitigno;
         this.prezzo = prezzo;
-        this.ID = ID;
         this.quantita = quantita;
+        this.anno = anno;
     }
 
     public Vino(int ID, int quantita) {
@@ -70,11 +82,11 @@ public class Vino implements Serializable, Removable, Insertable {
         this.nome = nome;
     }
 
-    public String getCODProduttore() {
+    public int getCODProduttore() {
         return CODProduttore;
     }
 
-    public void setCODProduttore(String CODProduttore) {
+    public void setCODProduttore(int CODProduttore) {
         this.CODProduttore = CODProduttore;
     }
 
@@ -106,9 +118,9 @@ public class Vino implements Serializable, Removable, Insertable {
         return null;
     }
 
-    /*public void setImmagine(String immagine) {
+    public void setImmagine(String immagine) {
         this.immagine = immagine;
-    }*/
+    }
 
     public double getPrezzo() {
         return prezzo;
@@ -150,10 +162,6 @@ public class Vino implements Serializable, Removable, Insertable {
         this.anno = anno;
     }
 
-    public void setImmagine(String immagine) {
-        this.immagine = immagine;
-    }
-
     //ritorna gli attributi del vino
     @Override
     public String[] getAttributes() {
@@ -185,6 +193,6 @@ public class Vino implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Vino: " + this.nome + ", provenienza: " + this.provenienza + ", anno: " + this.anno + ", descrizione: " + this.descrizione + ", vitigno: " + this.vitigno + ", prezzo: " + this.prezzo + ", soglia: " + this.soglia + ", quantita: " + this.quantita;
+        return "Vino: " + this.nome + ", provenienza: " + this.provenienza + ", anno: " + this.anno + ", descrizione: " + this.descrizione + ", vitigno: " + this.vitigno + ", prezzo: " + this.prezzo + ", soglia: " + this.soglia + ", quantita: " + this.quantita + ", immagine: " + this.immagine + ", prodotto da: " + this.CODProduttore;
     }
 }

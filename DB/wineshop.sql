@@ -23,7 +23,7 @@ CREATE TABLE vini(
     Prezzo double,
     Soglia int,
     Quantita int,
-    Immagine varchar(100),
+    Immagine varchar(255),
     CODProduttore int,
     FOREIGN KEY(CODProduttore) REFERENCES utenti(ID)
 );

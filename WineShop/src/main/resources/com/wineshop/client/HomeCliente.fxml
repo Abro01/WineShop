@@ -441,7 +441,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane_Profilo" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="AnchorPane_Profilo" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
          <children>
             <Label layoutX="288.0" layoutY="21.0" text="Il tuo profilo" textAlignment="CENTER">
                <font>

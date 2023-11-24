@@ -59,6 +59,19 @@ public class SQLTranslator {
                          "SET Online = 0 " +
                          "WHERE Username = '" + ((Utente) model).getUsername() + "'; ";
             }
+            case Costanti.Add_Vino ->
+            {
+                Insertable Nuovo_Vino = (Insertable) model;
+                query += "INSERT INTO vini (ID,Nome,Provenienza,Anno,Descrizione,Vitigno,Prezzo,Soglia,Quantita,Immagine,CODProduttore) " +
+                         "VALUES (" + ((Vino) model).getID() + ",'" + ((Vino) model).getNome() + "','" + ((Vino) model).getProvenienza() + "'," + ((Vino) model).getAnno() + ",'" + ((Vino) model).getDescrizione() + "','" + ((Vino) model).getVitigno() + "'," + ((Vino) model).getPrezzo() + "," + ((Vino) model).getSoglia() + "," + ((Vino) model).getQuantita() + ",'" + ((Vino) model).getImmagine() + "'," + ((Vino) model).getCODProduttore() + ");";
+            }
+            case Costanti.Mostra_Vini_Produttore ->
+            {
+                query += "SELECT v.Nome, v.Provenienza, v.Anno, v.Quantita, v.Vitigno, v.Prezzo " +
+                         "FROM vini v, utenti u " +
+                         "WHERE u.ID = v.CODProduttore " +
+                         "AND u.ID = " + UtenteLoggato.getId() + ";";
+            }
             default -> throw new RequestToSQLException();
         }
         return query;
@@ -70,6 +83,7 @@ public class SQLTranslator {
 
         switch (this.lastRequest){
             case Costanti.Login:
+            {
                 if(queryResult.isEmpty())
                 {
                     response = new Response(Costanti.Bad_Request, new EmptyPayload("Login errato!"));
@@ -81,13 +95,37 @@ public class SQLTranslator {
                 response = new Response(Costanti.Successo, LogUtente);
                 this.UtenteLoggato = LogUtente;
                 break;
-            case Costanti.Registrazione, Costanti.Cambio_Pswd:
+            }
+            case Costanti.Registrazione, Costanti.Cambio_Pswd, Costanti.Add_Vino:
+            {
                 response = new Response(Costanti.Successo, new EmptyPayload());
                 break;
+            }
             case Costanti.Logout:
+            {
                 response = new Response(Costanti.Successo, new EmptyPayload("Logout effettuato con successo"));
                 this.UtenteLoggato = null;
                 break;
+            }
+            case Costanti.Mostra_Vini_Produttore:
+            {
+                ArrayList<Vino> ViniProduttore = new ArrayList<>();
+
+                for (Map<String, String> res : queryResult)
+                {
+                    Vino vino;
+                    vino = new Vino(res.get("Nome"), res.get("Provenienza"), Double.parseDouble(res.get("Prezzo")), Integer.parseInt(res.get("Quantita")), Integer.parseInt(res.get("Anno")));
+                    System.out.println(vino);
+                    ViniProduttore.add(vino);
+                }
+                if (ViniProduttore.isEmpty())
+                {
+                    response = new Response(Costanti.No_Righe, new EmptyPayload());
+                } else {
+                    response = new Response(Costanti.Successo, ViniProduttore);
+                }
+                break;
+            }
             default:
                 throw new SQLToResponseException();
         }

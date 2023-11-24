@@ -103,6 +103,8 @@ public class LoginController {
             Parent guiToShow = loader.load();
             Object controller = loader.getController();
             Scene scene = new Scene(guiToShow, 850, 500);
+            // Collega il file CSS alla scena
+            //scene.getStylesheets().add(getClass().getResource("C:/Users/andre/OneDrive/Documenti/GitHub/WineShop/WineShop/src/main/resources/Design/Design.css").toExternalForm());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             // set the request controller and the logged user

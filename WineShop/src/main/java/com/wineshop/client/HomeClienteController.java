@@ -24,8 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-
-
 public class HomeClienteController {
     private RequestController requestController;
     private Utente UtenteLoggato;
@@ -295,10 +293,6 @@ public class HomeClienteController {
         AnchorPane_Recensioni.setVisible(false);
         AnchorPane_Profilo.setVisible(true);
 
-        /*Response r = this.requestController.makeRequest(Costanti.Successo, new EmptyPayload());
-        ArrayList<Utente> info = (ArrayList<Utente>) r.getPayload();
-        ObservableList<Utente> observableListInfo = FXCollections.observableArrayList(info);*/
-
         lblNome_Profilo.setText(UtenteLoggato.getNome());
         lblCognome_Profilo.setText(UtenteLoggato.getCognome());
         lblUsername_Profilo.setText(UtenteLoggato.getUsername());
@@ -331,7 +325,6 @@ public class HomeClienteController {
             stage.setScene(scene);
             stage.centerOnScreen();
             stage.show();
-
         }
     }
     public void initialize() {
