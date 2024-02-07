@@ -6,15 +6,43 @@ import utilities.Removable;
 import java.io.Serializable;
 public class Recensione implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
-    private int ID, voto, CODVino;
-    private String CODCliente, commento;
+    private int ID, CODVino, CODCliente;
+    private String Commento , Voto;
 
-    public Recensione(int ID, int voto, int CODVino, String CODCliente, String commento) {
+    public Recensione(int ID, String Voto, int CODVino, int CODCliente, String Commento) {
         this.ID = ID;
-        this.voto = voto;
+        this.Voto = Voto;
         this.CODVino = CODVino;
         this.CODCliente = CODCliente;
-        this.commento = commento;
+        this.Commento = Commento;
+    }
+
+    public Recensione(int CODVino, String Commento, int ID, String Voto) {
+        this.CODVino = CODVino;
+        this.Commento = Commento;
+        this.ID = ID;
+        this.Voto = Voto;
+    }
+
+    public Recensione(int CODVino, int CODCliente, String commento, String voto) {
+        this.CODVino = CODVino;
+        this.CODCliente = CODCliente;
+        this.Commento = commento;
+        this.Voto = voto;
+    }
+
+    public Recensione(int CODCliente) {
+        this.CODCliente = CODCliente;
+    }
+
+    public Recensione(int ID, int CODVino) {
+        this.ID = ID;
+        this.CODVino = CODVino;
+    }
+
+    public Recensione(int CODCliente, String Voto) {
+        this.CODCliente = CODCliente;
+        this.Voto = Voto;
     }
 
     public int getID() {
@@ -25,12 +53,12 @@ public class Recensione implements Serializable, Removable, Insertable {
         this.ID = ID;
     }
 
-    public int getVoto() {
-        return voto;
+    public String getVoto() {
+        return Voto;
     }
 
-    public void setVoto(int voto) {
-        this.voto = voto;
+    public void setVoto(String voto) {
+        this.Voto = voto;
     }
 
     public int getCODVino() {
@@ -41,20 +69,20 @@ public class Recensione implements Serializable, Removable, Insertable {
         this.CODVino = CODVino;
     }
 
-    public String getCODCliente() {
+    public int getCODCliente() {
         return CODCliente;
     }
 
-    public void setCODCliente(String CODCliente) {
+    public void setCODCliente(int CODCliente) {
         this.CODCliente = CODCliente;
     }
 
     public String getCommento() {
-        return commento;
+        return Commento;
     }
 
     public void setCommento(String commento) {
-        this.commento = commento;
+        this.Commento = commento;
     }
 
     //ritorna gli attributi delle recensioni
@@ -72,7 +100,7 @@ public class Recensione implements Serializable, Removable, Insertable {
     //ritorna il valore delle recensioni
     @Override
     public String[] getValues() {
-        return new String[]{"'" + this.ID + "'", "'" + this.voto + "'", "'" + this.commento + "'", "'" + this.CODVino + "'", "'" + this.CODCliente + "'"};
+        return new String[]{"'" + this.ID + "'", "'" + this.Voto + "'", "'" + this.Commento + "'", "'" + this.CODVino + "'", "'" + this.CODCliente + "'"};
     }
 
     //Ottiene la chiave unica della tabella
@@ -88,6 +116,6 @@ public class Recensione implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Recensione: " + this.commento + ", voto: " + this.voto + ", codice vino: " + this.CODVino + ", codice cliente: " + this.CODCliente;
+        return "Recensione: " + this.Commento + ", voto: " + this.Voto + ", codice vino: " + this.CODVino + ", codice cliente: " + this.CODCliente;
     }
 }

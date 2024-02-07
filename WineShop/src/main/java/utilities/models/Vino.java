@@ -1,5 +1,6 @@
 package utilities.models;
 
+import javafx.beans.property.StringProperty;
 import utilities.Insertable;
 import utilities.Removable;
 
@@ -10,28 +11,8 @@ public class Vino implements Serializable, Removable, Insertable {
     private double prezzo;
     private int ID, soglia, quantita, anno, CODProduttore;
 
-    /*public Vino(String nome, String provenienza, String vitigno, double prezzo, int ID, int quantita) {
-        setNome(nome);
-        setProvenienza(provenienza);
-        setVitigno(vitigno);
-        setPrezzo(prezzo);
-        setID(ID);
-        setQuantita(quantita);
-    }
-
-    public Vino(int ID, int quantita) {
-        setID(ID);
-        setQuantita(quantita);
-    }
-
-    public Vino(String nome, int ID) {
-        setNome(nome);
-        setID(ID);
-    }*/
-
-    public Vino(String nome, int CODProduttore, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int ID, int soglia, int quantita, int anno) {
+    public Vino(String nome, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int ID, int soglia, int quantita, int anno, int CODProduttore) {
         this.nome = nome;
-        this.CODProduttore = CODProduttore;
         this.provenienza = provenienza;
         this.descrizione = descrizione;
         this.vitigno = vitigno;
@@ -41,37 +22,56 @@ public class Vino implements Serializable, Removable, Insertable {
         this.soglia = soglia;
         this.quantita = quantita;
         this.anno = anno;
-    }
-
-    public Vino(String nome, int CODProduttore, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int soglia, int quantita, int anno) {
-        this.nome = nome;
         this.CODProduttore = CODProduttore;
+    }
+    public Vino(String nome, String provenienza, String descrizione, String vitigno, String immagine, double prezzo, int ID, int soglia, int quantita, int CODProduttore) {
+        this.nome = nome;
         this.provenienza = provenienza;
         this.descrizione = descrizione;
         this.vitigno = vitigno;
         this.immagine = immagine;
         this.prezzo = prezzo;
+        this.ID = ID;
+        this.soglia = soglia;
+        this.quantita = quantita;
+        this.CODProduttore = CODProduttore;
+    }
+
+    public Vino(String nome, String provenienza, String descrizione, String vitigno, String immagine, int ID, int soglia, int quantita, int anno, int CODProduttore) {
+        this.nome = nome;
+        this.provenienza = provenienza;
+        this.descrizione = descrizione;
+        this.vitigno = vitigno;
+        this.immagine = immagine;
+        this.ID = ID;
         this.soglia = soglia;
         this.quantita = quantita;
         this.anno = anno;
+        this.CODProduttore = CODProduttore;
     }
 
-    public Vino(String nome, String provenienza, double prezzo, int quantita, int anno) {
+    public Vino(String nome, String provenienza, String descrizione, String vitigno, String immagine, int ID, int CODProduttore) {
         this.nome = nome;
         this.provenienza = provenienza;
-        this.prezzo = prezzo;
-        this.quantita = quantita;
-        this.anno = anno;
-    }
-
-    public Vino(int ID, int quantita) {
+        this.descrizione = descrizione;
+        this.vitigno = vitigno;
+        this.immagine = immagine;
         this.ID = ID;
-        this.quantita = quantita;
+        this.CODProduttore = CODProduttore;
     }
 
-    public Vino(String nome, int ID) {
+    public Vino(int ID, double quantita) {
+        this.ID = ID;
+        this.quantita = (int) quantita;
+    }
+
+    public Vino(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Vino(String nome) {
         this.nome = nome;
-        this.ID = ID;
     }
 
     public String getNome() {
@@ -115,7 +115,7 @@ public class Vino implements Serializable, Removable, Insertable {
     }
 
     public String getImmagine() {
-        return null;
+        return immagine;
     }
 
     public void setImmagine(String immagine) {
@@ -193,6 +193,6 @@ public class Vino implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Vino: " + this.nome + ", provenienza: " + this.provenienza + ", anno: " + this.anno + ", descrizione: " + this.descrizione + ", vitigno: " + this.vitigno + ", prezzo: " + this.prezzo + ", soglia: " + this.soglia + ", quantita: " + this.quantita + ", immagine: " + this.immagine + ", prodotto da: " + this.CODProduttore;
+        return "Vino: " + this.nome + ", provenienza: " + this.provenienza + ", anno: " + this.anno + ", descrizione: " + this.descrizione + ", vitigno: " + this.vitigno + ", prezzo: " + this.prezzo + ", soglia: " + this.soglia + ", quantita: " + this.quantita + ", immagine: " + this.immagine + ", prodotto da: " + this.CODProduttore + ", ID: " + this.ID;
     }
 }

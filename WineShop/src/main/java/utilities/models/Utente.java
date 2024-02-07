@@ -52,8 +52,26 @@ public class Utente implements Insertable, Serializable, Removable {
         this.username = username;
     }
 
+    public Utente(String nome, String cognome, String cf, String email, String telefono, String indirizzo, String password, String username) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.cf = cf;
+        this.email = email;
+        this.telefono = telefono;
+        this.indirizzo = indirizzo;
+        this.password = password;
+        this.username = username;
+    }
+
+    public Utente(int id) {
+        this.id = id;
+    }
+
     public Utente(String username) {
         this.username = username;
+    }
+    public Utente(String cognome, boolean flag) {
+        this.cognome = cognome;
     }
 
     public String getNome() {

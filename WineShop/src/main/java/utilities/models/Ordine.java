@@ -6,20 +6,59 @@ import utilities.Removable;
 import java.io.Serializable;
 public class Ordine implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
-    private int ID;
+    private int ID, CODCliente;
     private double totale;
-    private String CODCliente, Metodo_Pagamento, Indirizzo;
-    private boolean pagato;
-    private boolean spedito;
+    private String Metodo_Pagamento, Indirizzo, Stato;
 
-    public Ordine(int ID, double totale, String CODCliente, String metodo_Pagamento, boolean pagato, boolean spedito, String indirizzo) {
+
+    public Ordine(int ID, double totale, int CODCliente, String metodo_Pagamento, String stato, String indirizzo) {
         this.ID = ID;
         this.totale = totale;
         this.CODCliente = CODCliente;
         this.Metodo_Pagamento = metodo_Pagamento;
-        this.pagato = pagato;
-        this.spedito = spedito;
+        this.Stato = stato;
         this.Indirizzo = indirizzo;
+    }
+
+    public Ordine(int CODCliente, double totale, String metodo_Pagamento, String indirizzo) {
+        this.CODCliente = CODCliente;
+        this.totale = totale;
+        this.Metodo_Pagamento = metodo_Pagamento;
+        this.Indirizzo = indirizzo;
+    }
+
+    public Ordine(int CODCliente, String metodo_Pagamento, String indirizzo) {
+        this.CODCliente = CODCliente;
+        this.Metodo_Pagamento = metodo_Pagamento;
+        this.Indirizzo = indirizzo;
+    }
+
+
+    public Ordine(String stato) {
+        this.Stato = stato;
+    }
+
+    public Ordine(int ID, String stato) {
+        this.ID = ID;
+        this.Stato = stato;
+    }
+
+    public Ordine(int ID) {
+        this.ID = ID;
+    }
+
+    public Ordine(double CODCliente) {
+        this.CODCliente = (int) CODCliente;
+    }
+
+    public Ordine(String stato, int CODCliente){
+        this.Stato = stato;
+        this.CODCliente = CODCliente;
+    }
+
+    public Ordine(double CODCliente, String Indirizzo){
+        this.Indirizzo = Indirizzo;
+        this.CODCliente = (int) CODCliente;
     }
 
     public int getID() {
@@ -38,11 +77,11 @@ public class Ordine implements Serializable, Removable, Insertable {
         this.totale = totale;
     }
 
-    public String getCODCliente() {
+    public int getCODCliente() {
         return CODCliente;
     }
 
-    public void setCODCliente(String CODCliente) {
+    public void setCODCliente(int CODCliente) {
         this.CODCliente = CODCliente;
     }
 
@@ -54,34 +93,26 @@ public class Ordine implements Serializable, Removable, Insertable {
         this.Metodo_Pagamento = metodo_Pagamento;
     }
 
-    public boolean isPagato() {
-        return pagato;
-    }
-
-    public void setPagato(boolean pagato) {
-        this.pagato = pagato;
-    }
-
-    public boolean isSpedito() {
-        return spedito;
-    }
-
-    public void setSpedito(boolean spedito) {
-        this.spedito = spedito;
-    }
-
     public String getIndirizzo() {
         return Indirizzo;
     }
 
     public void setIndirizzo(String indirizzo) {
-        Indirizzo = indirizzo;
+        this.Indirizzo = indirizzo;
+    }
+
+    public String getStato() {
+        return Stato;
+    }
+
+    public void setStato(String stato) {
+        this.Stato = stato;
     }
 
     //ritorna gli attributi degli ordini
     @Override
     public String[] getAttributes() {
-        return new String[]{"ID", "Totale", "Indirizzo", "Metodo_Pagamento", "CODCliente"};
+        return new String[]{"ID", "Totale", "Indirizzo", "Metodo_Pagamento", "Stato", "CODCliente"};
     }
 
     //Ottiene il nome della tabella
@@ -93,10 +124,8 @@ public class Ordine implements Serializable, Removable, Insertable {
     //ritorna il valore dei produttori
     @Override
     public String[] getValues() {
-        int ValorePagato = this.pagato ? 1 : 0;
-        return new String[]{"'" + this.ID + "'", "'" + this.totale + "'", "'" + this.Indirizzo + "'", "'" + this.Metodo_Pagamento + "'", "'" + this.CODCliente + "'", "'" + ValorePagato + "'"};
+        return new String[]{"'" + this.ID + "'", "'" + this.totale + "'", "'" + this.Indirizzo + "'", "'" + this.Metodo_Pagamento + "'", "'" + this.Stato + "'", "'" + this.CODCliente + "'"};
     }
-
     //Ottiene la chiave unica della tabella
     @Override
     public String getPk() {
@@ -110,6 +139,6 @@ public class Ordine implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Ordine.\nCodice" + this.ID + ", totale: " + this.totale + ", tipo di pagamento: " + this.Metodo_Pagamento + ", codice utente: " + this.CODCliente;
+        return "Ordine.\nCodice" + this.ID + ", totale: " + this.totale + ", tipo di pagamento: " + this.Metodo_Pagamento + ", stato dell'ordine: " + this.Stato + ", codice utente: " + this.CODCliente;
     }
 }

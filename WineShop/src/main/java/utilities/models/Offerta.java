@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Offerta implements Insertable, Serializable, Removable {
     private static final long serialVersionUID = 1L;
     private int ID, CODVino, Sconto;
-    private final String Descrizione;
+    private String Descrizione;
 
     public Offerta(int ID, int CODVino, int sconto, String descrizione) {
         this.ID = ID;
@@ -15,6 +15,25 @@ public class Offerta implements Insertable, Serializable, Removable {
         this.Sconto = sconto;
         this.Descrizione = descrizione;
     }
+    public Offerta(int ID) {
+        this.ID = ID;
+    }
+
+    public Offerta(double CODVino) {
+        this.CODVino = (int) CODVino;
+    }
+
+    public Offerta(int CODVino, int sconto) {
+        this.CODVino = CODVino;
+        this.Sconto = sconto;
+    }
+
+    public Offerta(int ID, int CODVino, String descrizione) {
+        this.ID = ID;
+        this.CODVino = CODVino;
+        this.Descrizione = descrizione;
+    }
+
 
     public int getID() {
         return ID;
@@ -37,16 +56,20 @@ public class Offerta implements Insertable, Serializable, Removable {
     }
 
     public void setSconto(int sconto) {
-        Sconto = sconto;
+        this.Sconto = sconto;
     }
 
     public String getDescrizione() {
         return Descrizione;
     }
 
+    public void setDescrizione(String descrizione) {
+        this.Descrizione = descrizione;
+    }
+
     @Override
     public String toString() {
-        return "Offerta numero " + this.ID + ", con sconto del " + this.Sconto + ", che consiste in '" + this.Descrizione;
+        return "Offerta numero " + this.ID + ", con sconto del " + this.Sconto + "%, che consiste in uno " + this.Descrizione;
     }
 
     @Override

@@ -74,6 +74,16 @@ public class RegistrazioneController implements Initializable {
         alert.setHeaderText("Si è verificato un'errore.");
         alert.setContentText("Tutti i campi devono essere compilati! " + s);
         alert.showAndWait();
+
+        Reg_Nome.clear();
+        Reg_Cog.clear();
+        Reg_Ind.clear();
+        Reg_Tel.clear();
+        Reg_CF.clear();
+        Reg_Email.clear();
+        Reg_Username.clear();
+        Reg_Password.clear();
+        Reg_ConfPass.clear();
     }
 
     //funzione che verifica la corretta forma della mail
@@ -83,6 +93,8 @@ public class RegistrazioneController implements Initializable {
         alert.setHeaderText("Si è verificato un'errore.");
         alert.setContentText("La mail deve contenere una @ e non può essere vuota.");
         alert.showAndWait();
+
+        Reg_Email.clear();
     }
 
     //fuzione che controlla la password
@@ -92,6 +104,9 @@ public class RegistrazioneController implements Initializable {
         alert.setHeaderText("Si è verificato un'errore.");
         alert.setContentText("Le password non coincidono");
         alert.showAndWait();
+
+        Reg_Password.clear();
+        Reg_ConfPass.clear();
     }
 
     @FXML
@@ -124,22 +139,12 @@ public class RegistrazioneController implements Initializable {
         {
             String s = "Il campo non può essere vuoto";
             Errore_Campi_Vuoti(s);
-            Reg_Nome.clear();
-            Reg_Cog.clear();
-            Reg_Ind.clear();
-            Reg_Tel.clear();
-            Reg_CF.clear();
-            Reg_Email.clear();
-            Reg_Username.clear();
-            Reg_Password.clear();
-            Reg_ConfPass.clear();
             return;
         }
 
         if(!Reg_Email.getText().contains("@") || email.isEmpty())
         {
             Errore_Email();
-            Reg_Email.clear();
             return;
         }
 
@@ -154,8 +159,6 @@ public class RegistrazioneController implements Initializable {
         if(!password.equals(cof_password))
         {
             Errore_Password();
-            Reg_Password.clear();
-            Reg_ConfPass.clear();
             return;
         }
 
@@ -220,7 +223,7 @@ public class RegistrazioneController implements Initializable {
     //posizione utilizzata per risolvere percorsi relativi per l'oggetto radice.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> options = FXCollections.observableArrayList("Amministratore", "Cliente", "Impiegato", "Produttore");
+        ObservableList<String> options = FXCollections.observableArrayList("Amministratore", "Cliente", "Produttore");
         Reg_SceltaTipo.setItems(options);
     }
 

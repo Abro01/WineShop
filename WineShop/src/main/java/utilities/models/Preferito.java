@@ -6,12 +6,20 @@ import utilities.Removable;
 import java.io.Serializable;
 public class Preferito implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
-    private int ID, CODVino;
-    private String CODCliente;
+    private int ID, CODVino, CODCliente;
 
-    public Preferito(int ID, int CODVino, String CODCliente) {
+    public Preferito(int ID, int CODVino, int CODCliente) {
         this.ID = ID;
         this.CODVino = CODVino;
+        this.CODCliente = CODCliente;
+    }
+
+    public Preferito(int CODVino, int CODCliente) {
+        this.CODVino = CODVino;
+        this.CODCliente = CODCliente;
+    }
+
+    public Preferito(int CODCliente) {
         this.CODCliente = CODCliente;
     }
 
@@ -31,11 +39,11 @@ public class Preferito implements Serializable, Removable, Insertable {
         this.CODVino = CODVino;
     }
 
-    public String getCODCliente() {
+    public int getCODCliente() {
         return CODCliente;
     }
 
-    public void setCODCliente(String CODCliente) {
+    public void setCODCliente(int CODCliente) {
         this.CODCliente = CODCliente;
     }
 

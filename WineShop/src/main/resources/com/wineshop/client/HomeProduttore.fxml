@@ -110,7 +110,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <AnchorPane fx:id="AnchorPane_Home" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" visible="false">
+      <AnchorPane fx:id="AnchorPane_Home" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;">
          <children>
             <Label alignment="CENTER" layoutX="64.0" layoutY="51.0" prefHeight="65.0" prefWidth="570.0" style="-fx-text-fill: black;" text="Se sei un produttore di vini, WineShop offre un'esperienza dedicata attraverso il tuo account &quot;Produttore&quot;. Ecco alcune delle potenti funzionalità di cui puoi approfittare:" textAlignment="CENTER" wrapText="true">
                <font>
@@ -199,9 +199,9 @@
             <TextField fx:id="txtSoglia_InsVino" layoutX="167.0" layoutY="194.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
             <TextField fx:id="txtQuantita_InsVino" layoutX="167.0" layoutY="226.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
             <TextArea fx:id="txtDescrizione_InsVino" layoutX="41.0" layoutY="287.0" prefHeight="136.0" prefWidth="321.0" styleClass="text-area" stylesheets="@../../../Design/Design.css" wrapText="true" />
-            <Button fx:id="btnAddImg_InsVino" layoutX="393.0" layoutY="297.0" mnemonicParsing="false" onAction="#OnBtnCaricaImg_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Carica file" />
+            <Button fx:id="btnAddImg_InsVino" layoutX="393.0" layoutY="325.0" mnemonicParsing="false" onAction="#OnBtnCaricaImg_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Carica file" />
             <Button fx:id="btnInserisci_InsVino" layoutX="393.0" layoutY="367.0" mnemonicParsing="false" onAction="#OnBtnInserisciVino_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Inserisci" />
-            <Label fx:id="lblNomeFile_InsVino" alignment="CENTER" layoutX="395.0" layoutY="338.0" prefHeight="17.0" prefWidth="235.0">
+            <Label fx:id="lblNomeFile_InsVino" alignment="CENTER" layoutX="393.0" layoutY="295.0" prefHeight="17.0" prefWidth="235.0">
                <font>
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
@@ -209,15 +209,15 @@
             <ImageView fx:id="imgBottglia_InsVino" fitHeight="200.0" fitWidth="91.0" layoutX="465.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane_Ricerca" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css">
+      <AnchorPane fx:id="AnchorPane_Ricerca" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css" visible="false">
          <children>
             <TextField fx:id="txtRicerca_Ricerca" layoutX="102.0" layoutY="28.0" prefHeight="29.0" prefWidth="321.0" promptText="Inserire il nome del vino da cercare" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <Button fx:id="btnRicerca_Ricerca" layoutX="471.0" layoutY="28.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Cerca" />
+            <Button fx:id="btnRicerca_Ricerca" layoutX="471.0" layoutY="28.0" mnemonicParsing="false" onAction="#OnBtnRicercaViniProduttore_Click" prefHeight="29.0" prefWidth="81.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Cerca" />
             <TableView fx:id="TV_Ricerca" layoutX="14.0" layoutY="97.0" prefHeight="338.0" prefWidth="665.0" styleClass="table-row-cell" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
                <columns>
+                  <TableColumn fx:id="ColonnaID" editable="false" prefWidth="110.0" text="ID" />
                   <TableColumn fx:id="ColonnaNome" editable="false" prefWidth="110.0" text="Nome" />
-                  <TableColumn fx:id="ColonnaProvenienza" editable="false" prefWidth="110.0" text="Provenienza" />
-                  <TableColumn fx:id="ColonnaAnno" editable="false" prefWidth="110.0" text="Anno" />
+                  <TableColumn fx:id="ColonnaProvenienza" editable="false" prefWidth="125.0" text="Provenienza" />
                   <TableColumn fx:id="ColonnaQuantita" editable="false" prefWidth="110.0" text="Quantita" />
                   <TableColumn fx:id="ColonnaPrezzo" editable="false" prefWidth="110.0" text="Prezzo" />
                   <TableColumn fx:id="ColonnaBtnModifica" prefWidth="110.0" text="Modifica" />
@@ -350,27 +350,28 @@
                   <Font name="Gill Sans MT Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="291.0" layoutY="17.0" text="Inserisci vino" textAlignment="CENTER">
+            <Label layoutX="284.0" layoutY="14.0" text="Modifica vino" textAlignment="CENTER">
                <font>
                   <Font name="Gill Sans MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNome_InsVino1" layoutX="167.0" layoutY="52.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <TextField fx:id="txtProvenienza_InsVino1" layoutX="167.0" layoutY="80.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <TextField fx:id="txtAnno_InsVino1" layoutX="167.0" layoutY="108.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <TextField fx:id="txtVitigno_InsVino1" layoutX="167.0" layoutY="138.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <TextField fx:id="txtPrezzo_InsVino1" layoutX="167.0" layoutY="167.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <TextField fx:id="txtSoglia_InsVino1" layoutX="167.0" layoutY="194.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <TextField fx:id="txtQuantita_InsVino1" layoutX="167.0" layoutY="226.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
-            <TextArea fx:id="txtDescrizione_InsVino1" layoutX="41.0" layoutY="287.0" prefHeight="136.0" prefWidth="321.0" styleClass="text-area" stylesheets="@../../../Design/Design.css" wrapText="true" />
-            <Button fx:id="btnAddImg_InsVino1" layoutX="393.0" layoutY="297.0" mnemonicParsing="false" onAction="#OnBtnCaricaImg_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Carica file" />
-            <Button fx:id="btnInserisci_InsVino1" layoutX="393.0" layoutY="367.0" mnemonicParsing="false" onAction="#OnBtnInserisciVino_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Inserisci" />
-            <Label fx:id="lblNomeFile_InsVino1" alignment="CENTER" layoutX="395.0" layoutY="338.0" prefHeight="17.0" prefWidth="235.0">
+            <TextField fx:id="txtNome_Modifica" layoutX="167.0" layoutY="52.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <TextField fx:id="txtProvenienza_Modifica" layoutX="167.0" layoutY="80.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <TextField fx:id="txtAnno_Modifica" layoutX="167.0" layoutY="108.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <TextField fx:id="txtVitigno_Modifica" layoutX="167.0" layoutY="138.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <TextField fx:id="txtPrezzo_Modifica" layoutX="167.0" layoutY="167.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <TextField fx:id="txtSoglia_Modifica" layoutX="167.0" layoutY="194.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <TextField fx:id="txtQuantita_Modifica" layoutX="167.0" layoutY="226.0" prefHeight="27.0" prefWidth="196.0" styleClass="textfield" stylesheets="@../../../Design/Design.css" />
+            <TextArea fx:id="txtDescrizione_Modifica" layoutX="41.0" layoutY="287.0" prefHeight="136.0" prefWidth="321.0" styleClass="text-area" stylesheets="@../../../Design/Design.css" wrapText="true" />
+            <Button fx:id="btnAddImg_Modifica" layoutX="393.0" layoutY="297.0" mnemonicParsing="false" onAction="#OnBtnModificaImg_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Carica file" />
+            <Button fx:id="btnModifica_Modifica" layoutX="393.0" layoutY="367.0" mnemonicParsing="false" onAction="#OnBtnModificaVino_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Modifica dati" />
+            <Label fx:id="lblNomeFile_Modifica" alignment="CENTER" layoutX="393.0" layoutY="273.0" prefHeight="17.0" prefWidth="235.0">
                <font>
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="imgBottglia_InsVino1" fitHeight="200.0" fitWidth="91.0" layoutX="465.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgBottglia_Modifica" fitHeight="200.0" fitWidth="91.0" layoutX="465.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnDeleteVino_Modifica" layoutX="393.0" layoutY="332.0" mnemonicParsing="false" onAction="#OnBtnDeleteVino_Click" prefHeight="29.0" prefWidth="235.0" styleClass="btn" stylesheets="@../../../Design/Design.css" text="Elimina vino" />
          </children>
       </AnchorPane>
    </children>

@@ -6,13 +6,41 @@ import utilities.Removable;
 import java.io.Serializable;
 public class DettagliOrdine implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
-    private int ID, quantita, CODOrdine, CODVino;
+    private int ID, quantita, CODOrdine, CODVino, CODCliente;
 
     public DettagliOrdine(int ID, int quantita, int CODOrdine, int CODVino) {
         this.ID = ID;
         this.quantita = quantita;
         this.CODOrdine = CODOrdine;
         this.CODVino = CODVino;
+    }
+
+    public DettagliOrdine(int CODOrdine) {
+        this.CODOrdine = CODOrdine;
+    }
+
+    public DettagliOrdine(int quantita, int CODVino, int ID) {
+        this.quantita = quantita;
+        this.CODVino = CODVino;
+        this.ID = ID;
+    }
+
+    public DettagliOrdine(double quantita_vino, int CODVino_vino, int CODCliente_vino) {
+        this.quantita = (int) quantita_vino;
+        this.CODVino = CODVino_vino;
+        this.CODCliente = CODCliente_vino;
+    }
+    public DettagliOrdine(int CODVino, int CODCliente) {
+        this.CODVino = CODVino;
+        this.CODCliente = CODCliente;
+    }
+
+    public int getCODCliente() {
+        return CODCliente;
+    }
+
+    public void setCODCliente(int CODCliente) {
+        this.CODCliente = CODCliente;
     }
 
     public int getID() {
@@ -50,7 +78,7 @@ public class DettagliOrdine implements Serializable, Removable, Insertable {
     //ritorna gli attributi dei dettagli di un ordine
     @Override
     public String[] getAttributes() {
-        return new String[]{"ID", "Quantita", "CODVino", "CODOrdine"};
+        return new String[]{"ID", "Quantita", "CODVino", "CODOrdine", "CODCliente"};
     }
 
     //Ottiene il nome della tabella
@@ -62,7 +90,7 @@ public class DettagliOrdine implements Serializable, Removable, Insertable {
     //ritorna il valore dei dettagli di un ordine
     @Override
     public String[] getValues() {
-        return new String[]{"'" + this.ID + "'", "'" + this.quantita + "'", "'" + this.CODOrdine + "'", "'" + this.CODVino + "'"};
+        return new String[]{"'" + this.ID + "'", "'" + this.quantita + "'", "'" + this.CODOrdine + "'", "'" + this.CODVino + "'", "'" + this.CODCliente + "'"};
     }
 
     //Ottiene la chiave unica della tabella
@@ -78,6 +106,6 @@ public class DettagliOrdine implements Serializable, Removable, Insertable {
     }
 
     public String toString() {
-        return "Dettagli ordine.\nQuantita: " + this.quantita + ", codice ordine: " + this.CODOrdine + ", codice vino: " + this.CODVino;
+        return "Dettagli ordine.\nQuantita: " + this.quantita + ", codice ordine: " + this.CODOrdine + ", codice vino: " + this.CODVino + ", codice cliente: " + this.CODCliente;
     }
 }

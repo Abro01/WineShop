@@ -12,7 +12,7 @@ public class ServerConfiguration {
     private final int serverPort = 8520;
     private final String dbUser = "root";
     private final String dbPassword = "";
-    private final String dbName = "wineshop";
+    private final String dbName = "wine_shop";
     private final int dbPort = 3306;
 
     public ServerConfiguration(String path) {
