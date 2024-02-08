@@ -4,6 +4,7 @@ import utilities.Insertable;
 import utilities.Removable;
 
 import java.io.Serializable;
+
 public class DettagliOrdine implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
     private int ID, quantita, CODOrdine, CODVino, CODCliente;

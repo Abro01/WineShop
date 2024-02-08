@@ -299,6 +299,7 @@ public class HomeClienteController {
         this.UtenteLoggato = utente;
     }
 
+    //home cliente
     @FXML
     void OnBtnHomeCliente_Click(ActionEvent event) {
         AnchorPane_Home.setVisible(true);
@@ -516,6 +517,7 @@ public class HomeClienteController {
         }
     }
 
+    //ricerca i vini acquistabili
     @FXML
     void OnBtnRicercaViniCliente_Click(ActionEvent event) {
         TV_Ricerca.refresh();
@@ -569,6 +571,7 @@ public class HomeClienteController {
                     return Bindings.createObjectBinding(proprieta_prezzo_vino::get, proprieta_prezzo_vino);
                 });
 
+                //button add cart
                 ColonnaBtnCarrello_Vino.setCellFactory(param -> new TableCell<>() {
                     final Button btnInfo_vino = new Button("Add Cart");
 
@@ -655,6 +658,7 @@ public class HomeClienteController {
                     }
                 });
 
+                //button recensione
                 ColonnaRecensione_Vino.setCellFactory(param -> new TableCell<>() {
                     final Button btnInfo_vino = new Button("Recensisci");
 
@@ -714,6 +718,7 @@ public class HomeClienteController {
         }
     }
 
+    //aggiunge i vini al carrello
     @FXML
     void OnBtnAggiungiCarrelloVino_Click(ActionEvent event) {
         String quantita_vino = this.txtQuantita_Vino.getText();
@@ -723,7 +728,7 @@ public class HomeClienteController {
             Errore_Campi_Vuoti();
             return;
         } else {
-            if (quantita_vino.matches("[a-zA-Z\\s]+")) {
+            if (quantita_vino.matches("[a-zA-Z\\s]+")) {            //controlla se la quantita inserita è composta da numeri o lettere
                 System.out.println("Errore quantita vino");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Quantita vino");
@@ -735,15 +740,15 @@ public class HomeClienteController {
             } else {
                 double quantita_vino_int = Double.parseDouble(quantita_vino);
 
-                if(quantita_vino_int > 0)
+                if(quantita_vino_int > 0)       //controllo se la quantità è maggiore di 0
                 {
-                    if((quantita_vino_aggiornata - quantita_vino_int) >= soglia_vino)
+                    if((quantita_vino_aggiornata - quantita_vino_int) >= soglia_vino)       //controllo se eventualmente la quantita rimanente sarebbe > della soglia
                     {
                         quantita_vino_aggiornata = quantita_vino_aggiornata - quantita_vino_int;
                         try {
                             Response response = this.requestController.makeRequest(Costanti.Verifica_Offerte_Vino, new Offerta(Double.parseDouble(String.valueOf(id_vino))));
 
-                            if(response.getStatusCode() == Costanti.Successo)
+                            if(response.getStatusCode() == Costanti.Successo)                   //nel caso in cui sia applicata un'offerta a un vino, ne calcola il prezzo scontato
                             {
                                 offerta_popup = (ArrayList<Offerta>) response.getPayload();
 
@@ -824,6 +829,7 @@ public class HomeClienteController {
         }
     }
 
+    //mostra i vini inseriti nel carrello
     @FXML
     void OnBtnCarrelloCliente_Click(ActionEvent event) {
         TV_Carrello.refresh();
@@ -893,6 +899,7 @@ public class HomeClienteController {
         }
     }
 
+    //effettua l'acquisto dell'ordine
     @FXML
     void OnBtnAcquistaCarrello_Click(ActionEvent event) {
         String indirizzo_ordine = this.txtIndirizzo_Carrello.getText();
@@ -904,18 +911,18 @@ public class HomeClienteController {
             return;
         } else {
             try {
-                Response r = this.requestController.makeRequest(Costanti.Add_Ordine, new Ordine(UtenteLoggato.getId(), totale, MP_ordine, indirizzo_ordine));
+                Response r = this.requestController.makeRequest(Costanti.Add_Ordine, new Ordine(UtenteLoggato.getId(), totale, MP_ordine, indirizzo_ordine));       //richista di aggiunta ordine
 
                 if(r.getStatusCode() == Costanti.Successo)
                 {
-                    Response rs = this.requestController.makeRequest(Costanti.Mostra_Ordini_Effettuati, new Ordine(Double.parseDouble(String.valueOf(UtenteLoggato.getId())), indirizzo_ordine));
+                    Response rs = this.requestController.makeRequest(Costanti.Mostra_Ordini_Effettuati, new Ordine(Double.parseDouble(String.valueOf(UtenteLoggato.getId())), indirizzo_ordine));       //richiesta di restituire gli ordini in modo tale da estrarre l'id
 
                     if(rs.getStatusCode() == Costanti.Successo)
                     {
                         codice_ordine = (ArrayList<Ordine>) rs.getPayload();
                         id_dettagli_carrello = codice_ordine.get(0).getID();
 
-                        Response response = this.requestController.makeRequest(Costanti.Update_Dettagli_ordine, new DettagliOrdine(id_dettagli_carrello));
+                        Response response = this.requestController.makeRequest(Costanti.Update_Dettagli_ordine, new DettagliOrdine(id_dettagli_carrello));          //richiesta di aggiornamento dei dettigli dell'ordine, in modo da associare il CODOrdine della tabella dettagli_ordini con l'ID dell'ordine corrispondente
 
                         if(response.getStatusCode() == Costanti.Successo)
                         {
@@ -2005,6 +2012,7 @@ public class HomeClienteController {
         }
     }
 
+    //visualizza degli del proprio ordine
     @FXML
     void OnBtnVisualizzaDettagliOrdine_Click(ActionEvent event) {
         TV_DettagliOrdine.refresh();
@@ -2046,7 +2054,7 @@ public class HomeClienteController {
                 });
 
                 Vino_DettagliOrdine.setCellValueFactory(cellData -> {
-                    int Vino_DettagliOrdine = cellData.getValue().getID();
+                    int Vino_DettagliOrdine = cellData.getValue().getCODVino();
                     IntegerProperty proprieta_vino_dettagli_ordine = new SimpleIntegerProperty(Vino_DettagliOrdine);
                     return Bindings.createObjectBinding(proprieta_vino_dettagli_ordine::get, proprieta_vino_dettagli_ordine);
                 });
@@ -2086,11 +2094,11 @@ public class HomeClienteController {
         AnchorPane_Email.setVisible(false);
 
         try {
-            Response r = this.requestController.makeRequest(Costanti.Mostra_Impiegati, new EmptyPayload());
+            Response r = this.requestController.makeRequest(Costanti.Mostra_Impiegati, new EmptyPayload());     //svolge richiesta per mostrare gli impiegati
 
             if(r.getStatusCode() == Costanti.Successo)
             {
-                utente = (ArrayList<Utente>) r.getPayload();
+                utente = (ArrayList<Utente>) r.getPayload();            //ArrayList di tipo utente
                 ObservableList<Utente> utenti = FXCollections.observableArrayList(utente);
 
                 ColonnaIDImpiegati_Assistenza.setCellValueFactory(cellData -> {
@@ -2124,7 +2132,7 @@ public class HomeClienteController {
                             setGraphic(null);
                             setText(null);
                         } else {
-                            btnContatta.getStyleClass().add("btn");
+                            btnContatta.getStyleClass().add("btn");     //definisce lo stile del bottone
                             btnContatta.setOnAction(event -> {
                                 UtenteSelezionato = TV_Assistenza.getSelectionModel().getSelectedItem();
 
@@ -2175,6 +2183,7 @@ public class HomeClienteController {
         }
     }
 
+    //invio mail e aggiunta assistenza nel db
     @FXML
     void OnBtnInviaEmail_Click(ActionEvent event) {
         String oggetto = this.txtOggetto_Email.getText();
@@ -2202,6 +2211,7 @@ public class HomeClienteController {
         txtEmail.clear();
     }
 
+    //dati profilo utente loggato
     @FXML
     void OnBtnProfiloCliente_Click(ActionEvent event) {
         AnchorPane_Home.setVisible(false);
@@ -2229,6 +2239,7 @@ public class HomeClienteController {
         lblIndirizzo_Profilo.setText(UtenteLoggato.getIndirizzo());
     }
 
+    //funzione logout
     @FXML
     public void OnBtnLogoutCliente_Click(ActionEvent event) throws Exception {
         System.out.println("Effettuando il Logout");
@@ -2340,14 +2351,14 @@ public class HomeClienteController {
     }
 
     public void initialize() {
-        ObservableList<String> opzioni_stato_ordine = FXCollections.observableArrayList("Preparazione", "Spedito", "Consegnato");
-        CBSceltaStato_Ricerca.setItems(opzioni_stato_ordine);
+        ObservableList<String> opzioni_stato_ordine = FXCollections.observableArrayList("Inviato", "Preparazione", "Spedito", "Consegnato");        //ObservableList per definire i vari stati di un ordine
+        CBSceltaStato_Ricerca.setItems(opzioni_stato_ordine);           //impostare nella ComboBox i dati presenti nell'ObservableList precedente
 
-        ObservableList<String> opzioni_voto = FXCollections.observableArrayList("1", "2", "3", "4", "5");
-        CBVotoVino_Recensione.setItems(opzioni_voto);
+        ObservableList<String> opzioni_voto = FXCollections.observableArrayList("1", "2", "3", "4", "5");           //ObservableList per definire i vari voti da dare a un vino
+        CBVotoVino_Recensione.setItems(opzioni_voto);           //impostare nella ComboBox i dati presenti nell'ObservableList precedente
         CBVotoVino_DatiRecensioni.setItems(opzioni_voto);
 
-        ObservableList<String> opzioni_MP = FXCollections.observableArrayList("Bonifico bancario", "Carta di credito");
-        CBSceltaMP_Carrello.setItems(opzioni_MP);
+        ObservableList<String> opzioni_MP = FXCollections.observableArrayList("Bonifico bancario", "Carta di credito");         //ObservableList per definire i vari metodi di pagamento
+        CBSceltaMP_Carrello.setItems(opzioni_MP);               //impostare nella ComboBox i dati presenti nell'ObservableList precedente
     }
 }

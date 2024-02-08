@@ -610,7 +610,8 @@ public class SQLTranslator {
             {
                 Insertable dettaglio_ordine_modificato = (Insertable) model;
                 query += "UPDATE dettagli_ordini " +
-                         "SET CODOrdine = " + ((DettagliOrdine) model).getCODOrdine() + ";";
+                         "SET CODOrdine = " + ((DettagliOrdine) model).getCODOrdine() + " " +
+                         "WHERE CODOrdine IS null;";
             }
             case Costanti.Mostra_Ordini_Effettuati ->
             {

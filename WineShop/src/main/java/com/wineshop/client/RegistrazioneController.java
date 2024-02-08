@@ -109,6 +109,7 @@ public class RegistrazioneController implements Initializable {
         Reg_ConfPass.clear();
     }
 
+    //Button login nel caso si voglia tornare al form di login
     @FXML
     void OnReg_BtnLoginClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
@@ -124,6 +125,7 @@ public class RegistrazioneController implements Initializable {
 
     @FXML
     void OnReg_BtnRegClick(ActionEvent event) throws Exception {
+        //i valori delle textView vengono inserite in variabili String
         String nome = this.Reg_Nome.getText();
         String cognome = this.Reg_Cog.getText();
         String indirizzo = this.Reg_Ind.getText();
@@ -135,6 +137,7 @@ public class RegistrazioneController implements Initializable {
         String password = this.Reg_Password.getText();
         String cof_password = this.Reg_ConfPass.getText();
 
+        //vari controlli
         if(username.isEmpty() || nome.isEmpty() || cognome.isEmpty() || indirizzo.isEmpty() || telefono.isEmpty() || cf.isEmpty() || email.isEmpty() || tipo.isEmpty() || password.isEmpty() || cof_password.isEmpty())
         {
             String s = "Il campo non può essere vuoto";
@@ -164,9 +167,9 @@ public class RegistrazioneController implements Initializable {
 
         try {
             Utente u = new Utente(nome, cognome, cf, email, telefono, indirizzo, password, tipo, username);
-            Response r = this.requestController.makeRequest(Costanti.Registrazione, u);
+            Response r = this.requestController.makeRequest(Costanti.Registrazione, u);     //richiesta registrazione
 
-            if(r.getStatusCode() == Costanti.Successo)
+            if(r.getStatusCode() == Costanti.Successo)              //se la risposta è positiva entra
             {
                 System.out.println("Registrazione avvenuta con successo");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -175,7 +178,7 @@ public class RegistrazioneController implements Initializable {
                 alert.setContentText("Registrazione avvenuta con successo");
                 alert.showAndWait();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));       //carica il form di login
                 Parent LogGui = loader.load();
                 Object controller = loader.getController();
                 Scene scene = new Scene(LogGui, 346, 600);
@@ -186,9 +189,9 @@ public class RegistrazioneController implements Initializable {
                 stage.show();
             } else {
                 System.out.println("Registrazione fallita");
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);         //pop-up alert registrazione non andata a buon fine
                 alert.setTitle("Registrazione fallita");
-                alert.setHeaderText("Si è verificato un'errore.");
+                alert.setHeaderText("Si è verificato un'errore");
                 alert.setContentText("La registrazione non è andata a buon fine");
                 alert.showAndWait();
             }
@@ -199,6 +202,7 @@ public class RegistrazioneController implements Initializable {
         }
     }
 
+    //button mostra password
     @FXML
     void OnReg_MostraClick(ActionEvent event) {
         if (Reg_Mostra.isSelected()) {
@@ -223,8 +227,8 @@ public class RegistrazioneController implements Initializable {
     //posizione utilizzata per risolvere percorsi relativi per l'oggetto radice.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> options = FXCollections.observableArrayList("Amministratore", "Cliente", "Produttore");
-        Reg_SceltaTipo.setItems(options);
+        ObservableList<String> options = FXCollections.observableArrayList("Amministratore", "Cliente", "Produttore");          //ObservableList per definire i vari utenti che si possono registrare
+        Reg_SceltaTipo.setItems(options);               //impostare nella ComboBox i dati presenti nell'ObservableList precedente
     }
 
 }

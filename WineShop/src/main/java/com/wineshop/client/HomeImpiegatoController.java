@@ -1546,11 +1546,11 @@ public class HomeImpiegatoController {
     }
 
     public void initialize() {
-        ObservableList<String> opzioni_ricerca = FXCollections.observableArrayList("Vini", "Clienti");
-        CBSceltaDati_Ricerca.setItems(opzioni_ricerca);
+        ObservableList<String> opzioni_ricerca = FXCollections.observableArrayList("Vini", "Clienti");      //ObservableList per definire i dati da ricercare
+        CBSceltaDati_Ricerca.setItems(opzioni_ricerca);     //impostare nella ComboBox i dati presenti nell'ObservableList precedente
 
-        ObservableList<String> opzioni_stato_ordine = FXCollections.observableArrayList("Spedito", "Consegnato", "Preparazione");
-        CBSceltaStato_Ordine.setItems(opzioni_stato_ordine);
-        CBSceltaStato_Ricerca.setItems(opzioni_stato_ordine);
+        ObservableList<String> opzioni_stato_ordine = FXCollections.observableArrayList("Spedito", "Consegnato", "Preparazione");       //ObservableList per definire i vari stati dell'ordine
+        CBSceltaStato_Ordine.setItems(opzioni_stato_ordine);        //impostare nella ComboBox i dati presenti nell'ObservableList precedente
+        CBSceltaStato_Ricerca.setItems(opzioni_stato_ordine);       //impostare nella ComboBox i dati presenti nell'ObservableList precedente
     }
 }

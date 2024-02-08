@@ -62,10 +62,6 @@ public class ClientHandler implements Runnable {
 
                     List<Map<String, String>> queryResult = this.dbManager.executeSQLStatement(query);       //esegue la query (sembra giusto)
 
-                    /*for (Map<String, String> mappa : queryResult) {
-                        // Stampa tutte le chiavi e i valori della mappa
-                        System.out.println(mappa);
-                    }*/
                     response = this.translator.sqlToResponse(queryResult);              //traduce il risultato della query in un oggetto di tipo response
 
                 } catch (RequestToSQLException rtse)

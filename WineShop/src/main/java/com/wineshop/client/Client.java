@@ -37,7 +37,7 @@ public class Client extends Application {
                 try {
                     System.out.print("\n1 - Cercando di connettersi al server...");
                     socket = new Socket(ip, port);
-                } catch (Exception e) {
+                } catch (Exception e) {                 //gestione nel caso in cui non si riesca a stabilire la connessione tra client e server
                     ButtonType btn = new ButtonType("Riprova");
                     Alert alert = new Alert(AlertType.ERROR, "Controlla la connessione su (" + ip + ":" + port + ") e riprova.\n" +
                             "Se il problema persiste probabilmente e' perche' il server e' spento!\nUtilizza un indirizzo IP e una porta personalizzati quando si chiama il programma con '--ip=yourip --port=yourport'", btn, ButtonType.CANCEL);
@@ -60,17 +60,17 @@ public class Client extends Application {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));       //carica il form di Login
 
             Parent root = loader.load();
             LoginController controller = loader.getController();
             RequestController requestController = new RequestController(out, in);
             controller.setRequestController(requestController);
-            Scene scene = new Scene(root, 346, 600);
+            Scene scene = new Scene(root, 346, 600);                                        //creazione scena
 
             String logoPath = "C:/Users/andre/OneDrive/Documenti/GitHub/WineShop/WineShop/src/main/resources/Design/Loghi/Logo_Calice.png";
 
-            stage.getIcons().add(new Image(logoPath));
+            stage.getIcons().add(new Image(logoPath));          //impostare l'immagine selezionata come icona
 
             final Socket fSock = socket;
 

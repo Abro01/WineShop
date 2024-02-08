@@ -49,6 +49,7 @@ public class AggiornaController {
         this.UtenteLoggato = utente;
     }
 
+    //button che permette di tornare al form di Login
     @FXML
     void OnCambioPass_BtnIndietroClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
@@ -62,6 +63,7 @@ public class AggiornaController {
         stage.show();
     }
 
+    //button confronto password
     @FXML
     void OnCambioPass_MostraClick(ActionEvent event) {
         if (CambioPass_Mostra.isSelected()) {
@@ -100,6 +102,8 @@ public class AggiornaController {
         alert.setContentText("Tutti i campi devono essere compilati! " + s);
         alert.showAndWait();
     }
+
+    //button cambio password
     @FXML
     void OnCambioPass_Click(ActionEvent event) throws Exception {
         String username = this.CambioPass_Username.getText();

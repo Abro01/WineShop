@@ -160,27 +160,28 @@ public class HomeProduttoreController {
 
     @FXML
     void OnBtnCaricaImg_Click(ActionEvent event) {
-        img = new FileChooser();
+        img = new FileChooser();    //oggetto FileChooser
         img.setTitle("Seleziona immagine");
 
-        filtro = new FileChooser.ExtensionFilter("Immagini", "*.png", "*.jpg");
+        filtro = new FileChooser.ExtensionFilter("Immagini", "*.png", "*.jpg");         //permette di selezionare le immagini di formato *.png, *.jpg
         img.getExtensionFilters().add(filtro);
 
-        FileSelezionato = img.showOpenDialog(new Stage());
+        FileSelezionato = img.showOpenDialog(new Stage());          //apre la finestra per selezionar eil file
 
         if(FileSelezionato != null)
         {
-            System.out.println("File selezionato: " + FileSelezionato.getAbsolutePath());
+            System.out.println("File selezionato: " + FileSelezionato.getAbsolutePath());       //stampa il path del file selezionato
             lblNomeFile_InsVino.setText(FileSelezionato.getAbsolutePath());
 
-            immagine = FileSelezionato.getAbsolutePath().replace("\\", "/");
+            immagine = FileSelezionato.getAbsolutePath().replace("\\", "/");        //path copiato in una variabile stringa, cambiando gli slash per poi inserirlo nel db
             System.out.println("File per db: " + immagine);
 
-            bottiglia = new Image(FileSelezionato.getAbsolutePath());
-            imgBottglia_InsVino.setImage(bottiglia);
+            bottiglia = new Image(FileSelezionato.getAbsolutePath());       //oggeto Image impostando il file selezionato
+            imgBottglia_InsVino.setImage(bottiglia);                        //imposta nella ImageView l'immagine bottiglia
         }
     }
 
+    //gestione vini profuttore
     @FXML
     void OnBtnGestioneViniProduttore_Click(ActionEvent event) {
         AnchorPane_Home.setVisible(false);
@@ -296,6 +297,7 @@ public class HomeProduttoreController {
         AnchorPane_ModificaVino.setVisible(false);
     }
 
+    //inserimento vino
     @FXML
     void OnBtnInserisciVino_Click(ActionEvent event) {
         id_vino = 0;
@@ -316,11 +318,21 @@ public class HomeProduttoreController {
             return;
         }
 
+        if ((soglia_stringa.matches("[a-zA-Z\\s]+")) || (quantita_stringa.matches("[a-zA-Z\\s]+")) || (prezzo_stringa.matches("[a-zA-Z\\s]+")) || (anno_stringa.matches("[a-zA-Z\\s]+")))
+        {
+            txtSoglia_InsVino.clear();
+            txtQuantita_InsVino.clear();
+            txtPrezzo_InsVino.clear();
+            txtAnno_InsVino.clear();
+            Errore_Numeri();
+        }
+
         int anno = Integer.parseInt(this.txtAnno_InsVino.getText());
         double prezzo = Double.parseDouble(this.txtPrezzo_InsVino.getText());
         int soglia = Integer.parseInt(this.txtSoglia_InsVino.getText());
         int quantita = Integer.parseInt(this.txtQuantita_InsVino.getText());
 
+        //controllo se l'anno è compreso tra 1900 e 2024
         if(anno < 1900 || anno > 2024)
         {
             Errore_Anno();
@@ -337,6 +349,7 @@ public class HomeProduttoreController {
             return;
         }
 
+        //controllo prezzo, soglia, quantita per verificare che non siano <= di zero
         if((prezzo <= 0) || (soglia <= 0) || (quantita <= 0))
         {
             Errore_Interi();
@@ -355,11 +368,11 @@ public class HomeProduttoreController {
 
         try
         {
-            Vino VinoNuovo = new Vino(nome, provenienza, descrizione, vitigno, immagine, prezzo, id_vino, soglia, quantita, anno, CODProduttore);
+            Vino VinoNuovo = new Vino(nome, provenienza, descrizione, vitigno, immagine, prezzo, id_vino, soglia, quantita, anno, CODProduttore);       //realizzazione oggetto Vino
             //System.out.println(immagine);
-            Response r = this.requestController.makeRequest(Costanti.Add_Vino, VinoNuovo);
+            Response r = this.requestController.makeRequest(Costanti.Add_Vino, VinoNuovo);      //richiesta aggiunta vino
 
-            if(r.getStatusCode() == Costanti.Successo)
+            if(r.getStatusCode() == Costanti.Successo)          //se la risposta è positiva entra
             {
                 System.out.println("Vino aggiunto con successo");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -441,6 +454,7 @@ public class HomeProduttoreController {
         lblIndirizzo_Profilo.setText(UtenteLoggato.getIndirizzo());
     }
 
+    //ricerca vini
     @FXML
     void OnBtnRicercaViniProduttore_Click(ActionEvent event)   {
         TV_Ricerca.refresh();
@@ -537,28 +551,36 @@ public class HomeProduttoreController {
         }
         txtRicerca_Ricerca.clear();
     }
+
+    //modifica immagine vino
     @FXML
     void OnBtnModificaImg_Click(ActionEvent event) {
         img = new FileChooser();
         img.setTitle("Seleziona immagine");
 
-        filtro = new FileChooser.ExtensionFilter("Immagini", "*.png", "*.jpg");
-        img.getExtensionFilters().add(filtro);
+        filtro = new FileChooser.ExtensionFilter("Immagini", "*.png", "*.jpg");     //da la possibilità di selezionare foto di formato *.png o *.jpg
+        img.getExtensionFilters().add(filtro);      //aggiunge il filtro realizzato sopra ai tipi di tadi da selezionare
 
-        FileSelezionato = img.showOpenDialog(new Stage());
+        FileSelezionato = img.showOpenDialog(new Stage());      //apre la pagina di selezione file
 
         if(FileSelezionato != null)
         {
             System.out.println("File selezionato: " + FileSelezionato.getAbsolutePath());
             lblNomeFile_Modifica.setText(FileSelezionato.getAbsolutePath());
 
-            immagine = FileSelezionato.getAbsolutePath().replace("\\", "/");
+            immagine = FileSelezionato.getAbsolutePath().replace("\\", "/");        //memorizza il file cambiando gli slash in modo da poterlo successivamente memorizzarlo nel db
             System.out.println("File per db: " + immagine);
 
-            bottiglia = new Image(FileSelezionato.getAbsolutePath());
-            imgBottglia_Modifica.setImage(bottiglia);
+            bottiglia = new Image(FileSelezionato.getAbsolutePath());       //memorizza nella variabile image il path del file
+            imgBottglia_Modifica.setImage(bottiglia);                       //imposta l'immagine nella imageView
         }
     }
+
+    /*
+        Modifica vini, in questo caso ho dovuto reallizzare diverse query per poter modificare i dati in modo che non andasse in errore.
+        Soprattutto nei casi come come gli int o i double
+        Quini uno per ogni caso e poi uno per tutti
+     */
     @FXML
     void OnBtnModificaVino_Click(ActionEvent event) {
         //System.out.println(immagine);
@@ -576,6 +598,7 @@ public class HomeProduttoreController {
 
         int CODProduttore = UtenteLoggato.getId();
 
+        //controllo per se gli interi sono stati modificati o meno
         if ((anno_nuovo_stringa.isEmpty()) && (prezzo_nuovo_stringa.isEmpty()) && (soglia_nuovo_stringa.isEmpty()) && (quantita_nuovo_stringa.isEmpty())) {
             try {
                 Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, id_vino, CODProduttore);
@@ -604,181 +627,222 @@ public class HomeProduttoreController {
                 throw new RuntimeException(e);
             }
         } else if (prezzo_nuovo_stringa.isEmpty()) {
-            int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
-            int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
-            int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
-
-            if(anno_nuovo < 1900 || anno_nuovo > 2024)
+            if ((anno_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (soglia_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (quantita_nuovo_stringa.matches("[a-zA-Z\\s]+")))
             {
-                Errore_Anno();
-                return;
-            }
+                txtAnno_Modifica.clear();
+                txtSoglia_Modifica.clear();
+                txtQuantita_Modifica.clear();
+                Errore_Numeri();
+            } else {
+                int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
+                int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
+                int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
 
-            try {
-                Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, id_vino, soglia_nuovo, quantita_nuovo, anno_nuovo, CODProduttore);
-                r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Prezzo, vino_modificato);
-
-                if(r.getStatusCode() == Costanti.Successo)
+                if(anno_nuovo < 1900 || anno_nuovo > 2024)
                 {
-                    System.out.println("Vino modificato con successo");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Vino modificato");
-                    alert.setHeaderText("Vino modificato con successo");
-                    alert.setContentText("Vino modificato con successo");
-                    alert.showAndWait();
-                } else {
-                    System.out.println("Il vino non è stato modificato");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Il vino non è stato modificato");
-                    alert.setHeaderText("Si è verificato un'errore.");
-                    alert.setContentText("La modifica del vino non è andata a buon fine");
-                    alert.showAndWait();
+                    Errore_Anno();
+                    return;
                 }
-            } catch (Exception e)
-            {
-                System.out.println(e);
-                throw new RuntimeException(e);
+
+                try {
+                    Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, id_vino, soglia_nuovo, quantita_nuovo, anno_nuovo, CODProduttore);
+                    r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Prezzo, vino_modificato);
+
+                    if(r.getStatusCode() == Costanti.Successo)
+                    {
+                        System.out.println("Vino modificato con successo");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Vino modificato");
+                        alert.setHeaderText("Vino modificato con successo");
+                        alert.setContentText("Vino modificato con successo");
+                        alert.showAndWait();
+                    } else {
+                        System.out.println("Il vino non è stato modificato");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Il vino non è stato modificato");
+                        alert.setHeaderText("Si è verificato un'errore.");
+                        alert.setContentText("La modifica del vino non è andata a buon fine");
+                        alert.showAndWait();
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println(e);
+                    throw new RuntimeException(e);
+                }
             }
         } else if (quantita_nuovo_stringa.isEmpty()) {
-            int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
-            double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
-            int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
-
-            if(anno_nuovo < 1900 || anno_nuovo > 2024)
+            if ((anno_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (soglia_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (prezzo_nuovo_stringa.matches("[a-zA-Z\\s]+")))
             {
-                Errore_Anno();
-                return;
-            }
+                txtAnno_Modifica.clear();
+                txtSoglia_Modifica.clear();
+                txtPrezzo_Modifica.clear();
+                Errore_Numeri();
+            } else {
+                int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
+                double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
+                int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
 
-            try {
-                Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, soglia_nuovo, anno_nuovo, CODProduttore);
-                r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Quantita, vino_modificato);
-
-                if(r.getStatusCode() == Costanti.Successo)
+                if(anno_nuovo < 1900 || anno_nuovo > 2024)
                 {
-                    System.out.println("Vino modificato con successo");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Vino modificato");
-                    alert.setHeaderText("Vino modificato con successo");
-                    alert.setContentText("Vino modificato con successo");
-                    alert.showAndWait();
-                } else {
-                    System.out.println("Il vino non è stato modificato");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Il vino non è stato modificato");
-                    alert.setHeaderText("Si è verificato un'errore.");
-                    alert.setContentText("La modifica del vino non è andata a buon fine");
-                    alert.showAndWait();
+                    Errore_Anno();
+                    return;
                 }
-            } catch (Exception e)
-            {
-                System.out.println(e);
-                throw new RuntimeException(e);
+
+                try {
+                    Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, soglia_nuovo, anno_nuovo, CODProduttore);
+                    r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Quantita, vino_modificato);
+
+                    if(r.getStatusCode() == Costanti.Successo)
+                    {
+                        System.out.println("Vino modificato con successo");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Vino modificato");
+                        alert.setHeaderText("Vino modificato con successo");
+                        alert.setContentText("Vino modificato con successo");
+                        alert.showAndWait();
+                    } else {
+                        System.out.println("Il vino non è stato modificato");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Il vino non è stato modificato");
+                        alert.setHeaderText("Si è verificato un'errore.");
+                        alert.setContentText("La modifica del vino non è andata a buon fine");
+                        alert.showAndWait();
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println(e);
+                    throw new RuntimeException(e);
+                }
             }
         } else if (soglia_nuovo_stringa.isEmpty()) {
-            int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
-            double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
-            int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
-
-            if(anno_nuovo < 1900 || anno_nuovo > 2024)
+            if ((anno_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (quantita_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (prezzo_nuovo_stringa.matches("[a-zA-Z\\s]+")))
             {
-                Errore_Anno();
-                return;
-            }
+                txtAnno_Modifica.clear();
+                txtQuantita_Modifica.clear();
+                txtPrezzo_Modifica.clear();
+                Errore_Numeri();
+            } else {
+                int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
+                double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
+                int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
 
-            try {
-                Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, quantita_nuovo, anno_nuovo, CODProduttore);
-                r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Soglia, vino_modificato);
-
-                if(r.getStatusCode() == Costanti.Successo)
+                if(anno_nuovo < 1900 || anno_nuovo > 2024)
                 {
-                    System.out.println("Vino modificato con successo");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Vino modificato");
-                    alert.setHeaderText("Vino modificato con successo");
-                    alert.setContentText("Vino modificato con successo");
-                    alert.showAndWait();
-                } else {
-                    System.out.println("Il vino non è stato modificato");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Il vino non è stato modificato");
-                    alert.setHeaderText("Si è verificato un'errore.");
-                    alert.setContentText("La modifica del vino non è andata a buon fine");
-                    alert.showAndWait();
+                    Errore_Anno();
+                    return;
                 }
-            } catch (Exception e)
-            {
-                System.out.println(e);
-                throw new RuntimeException(e);
+
+                try {
+                    Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, quantita_nuovo, anno_nuovo, CODProduttore);
+                    r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Soglia, vino_modificato);
+
+                    if(r.getStatusCode() == Costanti.Successo)
+                    {
+                        System.out.println("Vino modificato con successo");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Vino modificato");
+                        alert.setHeaderText("Vino modificato con successo");
+                        alert.setContentText("Vino modificato con successo");
+                        alert.showAndWait();
+                    } else {
+                        System.out.println("Il vino non è stato modificato");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Il vino non è stato modificato");
+                        alert.setHeaderText("Si è verificato un'errore.");
+                        alert.setContentText("La modifica del vino non è andata a buon fine");
+                        alert.showAndWait();
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println(e);
+                    throw new RuntimeException(e);
+                }
             }
         } else if((anno_nuovo_stringa.isEmpty()))
         {
-            double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
-            int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
-            int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
-
-
-            try {
-                Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, soglia_nuovo, quantita_nuovo, CODProduttore);
-                r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Anno, vino_modificato);
-
-                if(r.getStatusCode() == Costanti.Successo)
-                {
-                    System.out.println("Vino modificato con successo");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Vino modificato");
-                    alert.setHeaderText("Vino modificato con successo");
-                    alert.setContentText("Vino modificato con successo");
-                    alert.showAndWait();
-                } else {
-                    System.out.println("Il vino non è stato modificato");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Il vino non è stato modificato");
-                    alert.setHeaderText("Si è verificato un'errore.");
-                    alert.setContentText("La modifica del vino non è andata a buon fine");
-                    alert.showAndWait();
-                }
-            } catch (Exception e)
+            if ((soglia_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (quantita_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (prezzo_nuovo_stringa.matches("[a-zA-Z\\s]+")))
             {
-                System.out.println(e);
-                throw new RuntimeException(e);
+                txtSoglia_Modifica.clear();
+                txtQuantita_Modifica.clear();
+                txtPrezzo_Modifica.clear();
+                Errore_Numeri();
+            } else {
+                double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
+                int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
+                int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
+
+
+                try {
+                    Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, soglia_nuovo, quantita_nuovo, CODProduttore);
+                    r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini_Anno, vino_modificato);
+
+                    if(r.getStatusCode() == Costanti.Successo)
+                    {
+                        System.out.println("Vino modificato con successo");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Vino modificato");
+                        alert.setHeaderText("Vino modificato con successo");
+                        alert.setContentText("Vino modificato con successo");
+                        alert.showAndWait();
+                    } else {
+                        System.out.println("Il vino non è stato modificato");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Il vino non è stato modificato");
+                        alert.setHeaderText("Si è verificato un'errore.");
+                        alert.setContentText("La modifica del vino non è andata a buon fine");
+                        alert.showAndWait();
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println(e);
+                    throw new RuntimeException(e);
+                }
             }
         } else {
-            int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
-            double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
-            int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
-            int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
-
-            if(anno_nuovo < 1900 || anno_nuovo > 2024)
+            if ((soglia_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (quantita_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (prezzo_nuovo_stringa.matches("[a-zA-Z\\s]+")) || (anno_nuovo_stringa.matches("[a-zA-Z\\s]+")))
             {
-                Errore_Anno();
-                return;
-            }
+                txtSoglia_Modifica.clear();
+                txtQuantita_Modifica.clear();
+                txtPrezzo_Modifica.clear();
+                txtAnno_Modifica.clear();
+                Errore_Numeri();
+            } else {
+                int anno_nuovo = Integer.parseInt(anno_nuovo_stringa);
+                double prezzo_nuovo = Double.parseDouble(prezzo_nuovo_stringa);
+                int soglia_nuovo = Integer.parseInt(soglia_nuovo_stringa);
+                int quantita_nuovo = Integer.parseInt(quantita_nuovo_stringa);
 
-            try {
-                Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, soglia_nuovo, quantita_nuovo, anno_nuovo, CODProduttore);
-                r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini, vino_modificato);
-
-                if(r.getStatusCode() == Costanti.Successo)
+                if(anno_nuovo < 1900 || anno_nuovo > 2024)
                 {
-                    System.out.println("Vino modificato con successo");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Vino modificato");
-                    alert.setHeaderText("Vino modificato con successo");
-                    alert.setContentText("Vino modificato con successo");
-                    alert.showAndWait();
-                } else {
-                    System.out.println("Il vino non è stato modificato");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Il vino non è stato modificato");
-                    alert.setHeaderText("Si è verificato un'errore.");
-                    alert.setContentText("La modifica del vino non è andata a buon fine");
-                    alert.showAndWait();
+                    Errore_Anno();
+                    return;
                 }
-            } catch (Exception e)
-            {
-                System.out.println(e);
-                throw new RuntimeException(e);
+
+                try {
+                    Vino vino_modificato = new Vino(nome_nuovo, provenienza_nuovo, descrizione_nuovo, vitigno_nuovo, immagine, prezzo_nuovo, id_vino, soglia_nuovo, quantita_nuovo, anno_nuovo, CODProduttore);
+                    r = this.requestController.makeRequest(Costanti.Modifica_Dati_Vini, vino_modificato);
+
+                    if(r.getStatusCode() == Costanti.Successo)
+                    {
+                        System.out.println("Vino modificato con successo");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Vino modificato");
+                        alert.setHeaderText("Vino modificato con successo");
+                        alert.setContentText("Vino modificato con successo");
+                        alert.showAndWait();
+                    } else {
+                        System.out.println("Il vino non è stato modificato");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Il vino non è stato modificato");
+                        alert.setHeaderText("Si è verificato un'errore.");
+                        alert.setContentText("La modifica del vino non è andata a buon fine");
+                        alert.showAndWait();
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println(e);
+                    throw new RuntimeException(e);
+                }
             }
         }
         txtNome_Modifica.clear();
@@ -859,13 +923,24 @@ public class HomeProduttoreController {
         imgBottglia_InsVino.setImage(null);
     }
 
-    private  void Errore_Interi()
+    private void Errore_Interi()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore valori");
         alert.setHeaderText("Si è verificato un'errore.");
         alert.setContentText("Il valore di prezzo, soglia e quantita non può essere minore o uguale a 0");
         alert.showAndWait();
+    }
+
+    private void Errore_Numeri()
+    {
+        System.out.println("Errore numeri");
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore numeri");
+        alert.setHeaderText("Si è verificato un'errore");
+        alert.setContentText("Il dati come prezzo, soglia, quantita e anno possono essere solo un numeri.\nPrego reiserire.");
+        alert.showAndWait();
+        return;
     }
     public void initialize() {
     }

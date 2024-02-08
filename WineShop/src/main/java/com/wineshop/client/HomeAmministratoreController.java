@@ -270,13 +270,17 @@ public class HomeAmministratoreController {
     private int id_vino, id_impiegato, id_cliente, id_offerta, id_ordine;
     private Image immagine;
 
+    //imposta il controller
     public void setRequestController(RequestController controller) {
         this.requestController = controller;
     }
 
+    //memorizza l'utente loggato
     public void setLoggedUser(Utente utente) {
         this.UtenteLoggato = utente;
     }
+
+    //caricamento AnchorPaneHome
     @FXML
     void OnBtnHomeAmministratore_Click(ActionEvent event) {
         AnchorPane_Home.setVisible(true);
@@ -292,6 +296,7 @@ public class HomeAmministratoreController {
         AnchorPane_DettagliOrdine.setVisible(false);
     }
 
+    //logout utente
     @FXML
     void OnBtnLogoutAmministratore_Click(ActionEvent event) throws Exception {
         System.out.println("Effettuando il Logout");
@@ -318,6 +323,8 @@ public class HomeAmministratoreController {
 
         }
     }
+
+    //caricamento AnchorPane Add Impiegati
     @FXML
     void OnBtnAddImpiegatiAmministratore_Click(ActionEvent event) {
         AnchorPane_Home.setVisible(false);
@@ -333,6 +340,7 @@ public class HomeAmministratoreController {
         AnchorPane_DettagliOrdine.setVisible(false);
     }
 
+    //inserire un impiegato
     @FXML
     void OnBtnAddImpiegati_Click(ActionEvent event) {
         String nome = this.txtNome_AddImpiegati.getText();
@@ -410,6 +418,8 @@ public class HomeAmministratoreController {
         txtConfPassword_AddImpiegati.clear();
         txtEmail_AddImpiegati.clear();
     }
+
+    //aggiunta report
     @FXML
     void OnBtnAddReport_Click(ActionEvent event) {
         LocalDate data_selezionata = Data_Report.getValue();
@@ -419,10 +429,10 @@ public class HomeAmministratoreController {
         int CODAmministratore = UtenteLoggato.getId();
 
         try {
-            Report report = new Report(CODAmministratore, descrizione, DataReport);
-            Response r = this.requestController.makeRequest(Costanti.Add_Report, report);
+            Report report = new Report(CODAmministratore, descrizione, DataReport);         //definizione oggetto report
+            Response r = this.requestController.makeRequest(Costanti.Add_Report, report);   //svolge la richiesta
 
-            if(r.getStatusCode() == Costanti.Successo)
+            if(r.getStatusCode() == Costanti.Successo)          //se la risposta ha avuto esito positivo entra
             {
                 System.out.println("Report aggiunto con successo");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -467,9 +477,10 @@ public class HomeAmministratoreController {
 
             if(r.getStatusCode() == Costanti.Successo)
             {
-                ordine = (ArrayList<Ordine>) r.getPayload();
+                ordine = (ArrayList<Ordine>) r.getPayload();            //definisce un array listi di tipo ordine
                 ObservableList<Ordine> ordini = FXCollections.observableArrayList(ordine);
 
+                //imposta i dati nelle varie colonne
                 ID_Ordini.setCellValueFactory(cellData -> {
                     int ID_ordine = cellData.getValue().getID();
                     IntegerProperty proprieta_id_ordine = new SimpleIntegerProperty(ID_ordine);
@@ -500,6 +511,7 @@ public class HomeAmministratoreController {
                     return Bindings.createObjectBinding(proprieta_mp_ordine::get, proprieta_mp_ordine);
                 });
 
+                //colonna composta da bottoni
                 Gestione_Ordini.setCellFactory(param -> new TableCell<>() {
                     final Button btnGestione = new Button("Gestisci");
 
@@ -547,7 +559,7 @@ public class HomeAmministratoreController {
                         }
                     }
                 });
-                TV_Ordini.setItems(ordini);
+                TV_Ordini.setItems(ordini);     //inserisce nella TableView i vari ordini
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("No ordini alert");
@@ -562,6 +574,7 @@ public class HomeAmministratoreController {
         }
     }
 
+    //ricerca ordini
     @FXML
     void OnBtnCercaOrdini_Click(ActionEvent event) {
         String ordine_cercato = txtRicerca_Ordini.getText();
@@ -571,9 +584,10 @@ public class HomeAmministratoreController {
 
             if(r.getStatusCode() == Costanti.Successo)
             {
-                ordine = (ArrayList<Ordine>) r.getPayload();
+                ordine = (ArrayList<Ordine>) r.getPayload();            //definisce un array listi di tipo ordine
                 ObservableList<Ordine> ordini = FXCollections.observableArrayList(ordine);
 
+                //imposta i dati nelle varie colonne
                 ID_Ordini.setCellValueFactory(cellData -> {
                     int ID_ordine = cellData.getValue().getID();
                     IntegerProperty proprieta_id_ordine = new SimpleIntegerProperty(ID_ordine);
@@ -651,7 +665,7 @@ public class HomeAmministratoreController {
                         }
                     }
                 });
-                TV_Ordini.setItems(ordini);
+                TV_Ordini.setItems(ordini);     //inserisce i dati nella TableView
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("No ordini alert");
@@ -667,6 +681,7 @@ public class HomeAmministratoreController {
         txtRicerca_Ordini.clear();
     }
 
+    //visualizza dettagli ordine
     @FXML
     void OnBtnVisualizzaDettagliOrdine_Click(ActionEvent event) {
         AnchorPane_Home.setVisible(false);
@@ -686,9 +701,10 @@ public class HomeAmministratoreController {
 
             if(r.getStatusCode() == Costanti.Successo)
             {
-                dettagli_ordine = (ArrayList<DettagliOrdine>) r.getPayload();
+                dettagli_ordine = (ArrayList<DettagliOrdine>) r.getPayload();       //definisce un Array list di tipo Dettagli Ordine
                 ObservableList<DettagliOrdine> dettagli_ordini = FXCollections.observableArrayList(dettagli_ordine);
 
+                //inserisce i dati nelle colonne
                 ID_DettagliOrdine.setCellValueFactory(cellData -> {
                     int ID_DettagliOrdine = cellData.getValue().getID();
                     IntegerProperty proprieta_id_dettagli_ordine = new SimpleIntegerProperty(ID_DettagliOrdine);
@@ -706,7 +722,7 @@ public class HomeAmministratoreController {
                     IntegerProperty proprieta_vino_dettagli_ordine = new SimpleIntegerProperty(Vino_DettagliOrdine);
                     return Bindings.createObjectBinding(proprieta_vino_dettagli_ordine::get, proprieta_vino_dettagli_ordine);
                 });
-                TV_DettagliOrdine.setItems(dettagli_ordini);
+                TV_DettagliOrdine.setItems(dettagli_ordini);        //inserisce i dati nella TableView
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("No dettagli ordini alert");
@@ -721,6 +737,7 @@ public class HomeAmministratoreController {
         }
     }
 
+    //visualizza i dati del profilo loggato
     @FXML
     void OnBtnProfiloAmministratore_Click(ActionEvent event) {
         AnchorPane_Home.setVisible(false);
@@ -776,7 +793,7 @@ public class HomeAmministratoreController {
         TV_RicercaOfferte.setVisible(false);
         TV_RicercaClienti.setVisible(false);
         CBSceltaDati_Ricerca.setValue("Seleziona la tipologia di dato da cercare");
-        //CBSceltaDati_Ricerca.setPromptText("Scelgli la tipologia di dato da cercare");
+        CBSceltaDati_Ricerca.setPromptText("Scelgli la tipologia di dato da cercare");
 
         AnchorPane_Home.setVisible(false);
         AnchorPane_Profilo.setVisible(false);
@@ -790,11 +807,12 @@ public class HomeAmministratoreController {
         AnchorPane_DatiOrdine.setVisible(false);
         AnchorPane_DettagliOrdine.setVisible(false);
 
+        //seleziona tipo di dato da ricercare tramite la ComboBox
         CBSceltaDati_Ricerca.setOnAction(event1 -> {
             tipo_dato = this.CBSceltaDati_Ricerca.getValue();
             System.out.println("Dato selezionato: " + tipo_dato);
 
-            Response r;
+            Response r;     //definizione variabile di tipo response per poterna riutillizzare in tutti i casi
 
             if(tipo_dato.equals("Vini"))
             {
@@ -812,9 +830,10 @@ public class HomeAmministratoreController {
 
                     if(r.getStatusCode() == Costanti.Successo)
                     {
-                        vino = (ArrayList<Vino>) r.getPayload();
+                        vino = (ArrayList<Vino>) r.getPayload();            //definizione array list di tipo Vino
                         ObservableList<Vino> vini = FXCollections.observableArrayList(vino);
 
+                        //inserisce i dati nelle colonne
                         ColonnaID_Vino.setCellValueFactory(cellData ->{
                             int ID_vino = cellData.getValue().getID();
                             IntegerProperty proprieta_id_vino = new SimpleIntegerProperty(ID_vino);
@@ -899,7 +918,7 @@ public class HomeAmministratoreController {
                                 }
                             }
                         });
-                        TV_RicercaVini.setItems(vini);
+                        TV_RicercaVini.setItems(vini);      //inserisce i dati nella TableView
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("No vini alert");
@@ -912,7 +931,7 @@ public class HomeAmministratoreController {
                     System.out.println(e);
                     throw new RuntimeException(e);
                 }
-            } else if (tipo_dato.equals("Impiegati"))
+            } else if (tipo_dato.equals("Impiegati"))       //stessa cosa impiegati
             {
                 txtRicerca_Ricerca.setVisible(true);
                 txtRicercaInt_Ricerca.setVisible(false);
@@ -1024,7 +1043,7 @@ public class HomeAmministratoreController {
                     System.out.println(e);
                     throw new RuntimeException(e);
                 }
-            } else if (tipo_dato.equals("Clienti"))
+            } else if (tipo_dato.equals("Clienti"))         //stessa cosa clienti
             {
                 txtRicerca_Ricerca.setVisible(true);
                 txtRicercaInt_Ricerca.setVisible(false);
@@ -1138,7 +1157,7 @@ public class HomeAmministratoreController {
                     System.out.println(e);
                     throw new RuntimeException(e);
                 }
-            } else if (tipo_dato.equals("Offerte"))
+            } else if (tipo_dato.equals("Offerte"))             //stessa cosa offerte
             {
                 txtRicerca_Ricerca.setVisible(false);
                 txtRicercaInt_Ricerca.setVisible(true);
@@ -1243,6 +1262,8 @@ public class HomeAmministratoreController {
             }
         });
     }
+
+    //bottone ricerca dati
     @FXML
     void OnBtnRicerca_Click(ActionEvent event) {
         String dato_cercato;
@@ -1735,6 +1756,7 @@ public class HomeAmministratoreController {
         }
     }
 
+    //button che elimina un'offerta
     @FXML
     void OnBtnEliminaOfferta_Click(ActionEvent event) {
         try {
@@ -1743,7 +1765,7 @@ public class HomeAmministratoreController {
             if (r.getStatusCode() == Costanti.Successo)
             {
                 System.out.println("Offerta eliminata con successo");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);       //pop-up nel caso sia andato a buon fine
                 alert.setTitle("Offerta eliminata");
                 alert.setHeaderText("Offerta eliminata con successo");
                 alert.setContentText("Offerta eliminata con successo");
@@ -1763,7 +1785,7 @@ public class HomeAmministratoreController {
                 TV_RicercaOfferte.setVisible(false);
             } else {
                 System.out.println("Errore");
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);                 //alert errore nel caso non sia andato a buon fine
                 alert.setTitle("Ricerca eliminazione offerta");
                 alert.setHeaderText("Impossibile eliminare l'offerta.");
                 alert.setContentText("Impossibile eliminare l'offerta.");
