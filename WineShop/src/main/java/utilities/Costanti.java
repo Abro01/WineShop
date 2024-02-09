@@ -53,6 +53,7 @@ public class Costanti {
     public static final int Update_Dettagli_ordine = 48;        //Costante Aggiorna Dettagli Ordine
     public static final int Mostra_Ordini_Effettuati = 49;      //Costante Mostra Ordini Effettuati
     public static final int Add_Assistenza = 50;                //Costante Add Assistenza
+    public static final int Visualizza_Assistenze = 51;                //Costante Visualizza Assistenze
     public static final int Successo = 200;
     public static final int Fallimento = 201;
     public static final int Bad_Request = 400;

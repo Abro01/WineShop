@@ -626,6 +626,12 @@ public class SQLTranslator {
                 query += "INSERT INTO assistenze(Proposta_Acquisto, CODImpiegato, CODCliente) " +
                          "VALUES ('" + ((Assistenza) model).getProposta_Acquisto() + "'," + ((Assistenza) model).getCODImpiegato() + "," + ((Assistenza) model).getCODCliente() +");";
             }
+            case Costanti.Visualizza_Assistenze ->
+            {
+                query += "SELECT a.* " +
+                         "FROM assistenze a , utenti u " +
+                         "WHERE u.ID = a.CODCliente;";
+            }
             default -> throw new RequestToSQLException();
         }
         return query;
@@ -838,6 +844,24 @@ public class SQLTranslator {
                     response = new Response(Costanti.No_Righe, new EmptyPayload());
                 } else {
                     response = new Response(Costanti.Successo, ordini);
+                }
+                break;
+            }
+            case Costanti.Visualizza_Assistenze:
+            {
+                ArrayList<Assistenza> assistenze = new ArrayList<>();
+
+                for(Map<String, String> res : queryResult)
+                {
+                    Assistenza assistenza = new Assistenza(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("CODImpiegato")), Integer.parseInt(res.get("CODCliente")), res.get("Proposta_Acquisto"));
+                    System.out.println(assistenza);
+                    assistenze.add(assistenza);
+                }
+                if (assistenze.isEmpty())
+                {
+                    response = new Response(Costanti.No_Righe, new EmptyPayload());
+                } else {
+                    response = new Response(Costanti.Successo, assistenze);
                 }
                 break;
             }

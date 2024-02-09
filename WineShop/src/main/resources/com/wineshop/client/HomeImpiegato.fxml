@@ -86,6 +86,21 @@
                   <Font name="Gill Sans MT" size="14.0" />
                </font>
             </Button>
+            <Button fx:id="btnAssistenze_Impiegato" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" onAction="#OnBtnAssistenzeImpiegato_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Assistenze" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Design/Loghi/Assistenza.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Gill Sans MT" size="14.0" />
+               </font>
+            </Button>
             <Button fx:id="btnProfilo_Impiegato" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#OnBtnProfiloImpiegato_Click" prefHeight="45.0" prefWidth="170.0" styleClass="btn-home-tendina" stylesheets="@../../../Design/Design.css" text="Profilo" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -662,6 +677,46 @@
                   <URL value="@../../../Design/Design.css" />
                </stylesheets>
             </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_VisualizzaAssistenze" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css" visible="false">
+         <children>
+            <Label layoutX="295.0" layoutY="23.0" style="-fx-text-fill: black;" text="Assistenze" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="TV_VisualizzaAssistenze" layoutX="3.0" layoutY="114.0" prefHeight="356.0" prefWidth="676.0" styleClass="table-row-cell" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
+               <columns>
+                  <TableColumn fx:id="ColonnaID_VisualizzaAssistenze" editable="false" prefWidth="110.0" text="ID" />
+                  <TableColumn fx:id="ColonnaProposta_VisualizzaAssistenze" editable="false" prefWidth="345.0" text="Proposta Acquisto" />
+                  <TableColumn fx:id="ColonnaCliente_VisualizzaAssistenze" editable="false" prefWidth="110.0" text="Cliente" />
+                  <TableColumn fx:id="ColonnaVisualizza_VisualizzaAssistenze" prefWidth="110.0" text="Visualizza" />
+               </columns>
+               <stylesheets>
+                  <URL value="@../../../Design/Design2.css" />
+                  <URL value="@../../../Design/Design.css" />
+               </stylesheets>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane_Assistenza" layoutX="170.0" layoutY="65.0" prefHeight="435.0" prefWidth="680.0" style="-fx-background-color: white;" stylesheets="@../../../Design/Design.css" visible="false">
+         <children>
+            <Label layoutX="86.0" layoutY="75.0" prefHeight="29.0" prefWidth="109.0" style="-fx-text-fill: black;" text="Richiesta:">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="291.0" layoutY="14.0" style="-fx-text-fill: black;" text="Dati ordine" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblRichiesta_Assistenza" alignment="TOP_LEFT" layoutX="86.0" layoutY="118.0" prefHeight="200.0" prefWidth="509.0" style="-fx-text-fill: black;" text="Richiesta" wrapText="true">
+               <font>
+                  <Font name="Gill Sans MT" size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

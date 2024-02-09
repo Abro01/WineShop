@@ -947,6 +947,9 @@ public class HomeClienteController {
                 throw new RuntimeException(e);
             }
         }
+        ObservableList<DettagliOrdine> dati = FXCollections.observableArrayList();
+        // Svuota la TableView impostando un nuovo elenco vuoto
+        TV_Carrello.setItems(dati);
     }
 
     @FXML
@@ -2315,7 +2318,7 @@ public class HomeClienteController {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(UtenteLoggato.getEmail(), "08052001");
+                return new PasswordAuthentication(UtenteLoggato.getEmail(), "gpnr bkhd oxsz jmtr");
             }
         });
 

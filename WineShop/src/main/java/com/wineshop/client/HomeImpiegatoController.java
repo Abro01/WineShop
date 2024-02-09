@@ -31,6 +31,10 @@ public class HomeImpiegatoController {
     @FXML
     private AnchorPane AnchorPane_DatiOrdine;
     @FXML
+    private AnchorPane AnchorPane_Assistenza;
+    @FXML
+    private AnchorPane AnchorPane_VisualizzaAssistenze;
+    @FXML
     private AnchorPane AnchorPane_DatiUtente;
     @FXML
     private AnchorPane AnchorPane_DatiVino;
@@ -119,6 +123,16 @@ public class HomeImpiegatoController {
     @FXML
     private TableColumn<DettagliOrdine, Integer> Vino_DettagliOrdine;
     @FXML
+    private TableColumn<Assistenza, Integer> ColonnaCliente_VisualizzaAssistenze;
+    @FXML
+    private TableColumn<Assistenza, Integer> ColonnaID_VisualizzaAssistenze;
+    @FXML
+    private TableColumn<Assistenza, String> ColonnaProposta_VisualizzaAssistenze;
+    @FXML
+    private TableColumn<Assistenza, Void> ColonnaVisualizza_VisualizzaAssistenze;
+    @FXML
+    private TableView<Assistenza> TV_VisualizzaAssistenze;
+    @FXML
     private Button btnApplicaOfferta_Vino;
     @FXML
     private Button btnEliminaOfferta;
@@ -158,6 +172,8 @@ public class HomeImpiegatoController {
     private Label lblCF_Utente;
     @FXML
     private Label lblCognome_Profilo;
+    @FXML
+    private Label lblRichiesta_Assistenza;
     @FXML
     private Label lblCognome_Utente;
     @FXML
@@ -228,11 +244,13 @@ public class HomeImpiegatoController {
     private ArrayList<Offerta> offerta;
     private ArrayList<Ordine> ordine;
     private ArrayList<DettagliOrdine> dettagli_ordine;
+    private ArrayList<Assistenza> assistenza;
     private Vino VinoSelezionato;
     private Utente ClienteSelezionato;
     private Offerta OffertaSelezionata;
     private Ordine OrdineSelezionato;
-    private int id_vino = 0, id_cliente = 0, id_offerta = 0, id_ordine = 0, sconto_int_offerta = 0, id_vino_offerta = 0, id_nuova_offerta = 0;
+    private Assistenza AssistenzaSelezionata;
+    private int id_vino = 0, id_cliente = 0, id_offerta = 0, id_ordine = 0, sconto_int_offerta = 0, id_vino_offerta = 0, id_nuova_offerta = 0, id_assistenza = 0;
     private Image immagine;
 
     @FXML
@@ -248,6 +266,8 @@ public class HomeImpiegatoController {
         AnchorPane_DettagliOrdine.setVisible(false);
         AnchorPane_Ricerca.setVisible(false);
         AnchorPane_Offerte.setVisible(false);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(false);
     }
 
     @FXML
@@ -289,6 +309,8 @@ public class HomeImpiegatoController {
         AnchorPane_DettagliOrdine.setVisible(false);
         AnchorPane_Ricerca.setVisible(false);
         AnchorPane_Offerte.setVisible(false);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
         lblNome_Profilo.setText(UtenteLoggato.getNome());
         lblCognome_Profilo.setText(UtenteLoggato.getCognome());
@@ -324,6 +346,8 @@ public class HomeImpiegatoController {
         AnchorPane_DettagliOrdine.setVisible(false);
         AnchorPane_Ricerca.setVisible(true);
         AnchorPane_Offerte.setVisible(false);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
         CBSceltaDati_Ricerca.setOnAction(event1 -> {
             tipo_dato = this.CBSceltaDati_Ricerca.getValue();
@@ -406,6 +430,8 @@ public class HomeImpiegatoController {
                                             AnchorPane_DettagliOrdine.setVisible(false);
                                             AnchorPane_Ricerca.setVisible(false);
                                             AnchorPane_Offerte.setVisible(false);
+                                            AnchorPane_Assistenza.setVisible(false);
+                                            AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                             id_vino = ColonnaID_Vino.getCellData(VinoSelezionato);
                                             System.out.println("ID: " + id_vino);
@@ -422,6 +448,21 @@ public class HomeImpiegatoController {
                                             immagine = new Image(VinoSelezionato.getImmagine());
                                             //System.out.println(VinoSelezionato.getImmagine());
                                             imgBottglia_Vino.setImage(immagine);
+
+                                            try {
+                                                Response rs = requestController.makeRequest(Costanti.Verifica_Offerte_Vino, new Offerta(Double.parseDouble(String.valueOf(id_vino))));          //controlla se sono presenti offerte per quel vino
+
+                                                if(rs.getStatusCode() == Costanti.Successo)
+                                                {
+                                                    btnApplicaOfferta_Vino.setVisible(false);           //se si bottone non visibile
+                                                } else {
+                                                    btnApplicaOfferta_Vino.setVisible(true);            //se no bottone visibile
+                                                }
+                                            } catch (Exception e) {
+                                                System.out.println(e);
+                                                throw new RuntimeException(e);
+                                            }
+
                                         }
                                     });
                                     setGraphic(btnInfo_vino);
@@ -517,6 +558,8 @@ public class HomeImpiegatoController {
                                             AnchorPane_DettagliOrdine.setVisible(false);
                                             AnchorPane_Ricerca.setVisible(false);
                                             AnchorPane_Offerte.setVisible(false);
+                                            AnchorPane_Assistenza.setVisible(false);
+                                            AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                             id_cliente = ColonnaID_Cliente.getCellData(ClienteSelezionato);
                                             System.out.println("ID: " + id_cliente);
@@ -529,8 +572,6 @@ public class HomeImpiegatoController {
                                             lblIndirizzo_Utente.setText(ClienteSelezionato.getIndirizzo());
                                             lblUsername_Utente.setText(ClienteSelezionato.getUsername());
                                             lblCF_Utente.setText(ClienteSelezionato.getCf());
-
-
                                         }
                                     });
                                     setGraphic(btnGestione_Cliente);
@@ -631,6 +672,8 @@ public class HomeImpiegatoController {
                                         AnchorPane_DettagliOrdine.setVisible(false);
                                         AnchorPane_Ricerca.setVisible(false);
                                         AnchorPane_Offerte.setVisible(false);
+                                        AnchorPane_Assistenza.setVisible(false);
+                                        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                         id_vino = ColonnaID_Vino.getCellData(VinoSelezionato);
                                         System.out.println("ID: " + id_vino);
@@ -647,6 +690,20 @@ public class HomeImpiegatoController {
                                         immagine = new Image(VinoSelezionato.getImmagine());
                                         //System.out.println(VinoSelezionato.getImmagine());
                                         imgBottglia_Vino.setImage(immagine);
+
+                                        try {
+                                            Response rs = requestController.makeRequest(Costanti.Verifica_Offerte_Vino, new Offerta(Double.parseDouble(String.valueOf(id_vino))));      //controllo se sono preseni offerte per questo vino
+
+                                            if(rs.getStatusCode() == Costanti.Successo)
+                                            {
+                                                btnApplicaOfferta_Vino.setVisible(false);           //se si bottone non visibile
+                                            } else {
+                                                btnApplicaOfferta_Vino.setVisible(true);            //se no bottone visibile
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println(e);
+                                            throw new RuntimeException(e);
+                                        }
                                     }
                                 });
                                 setGraphic(btnInfo_vino);
@@ -742,6 +799,8 @@ public class HomeImpiegatoController {
                                         AnchorPane_DettagliOrdine.setVisible(false);
                                         AnchorPane_Ricerca.setVisible(false);
                                         AnchorPane_Offerte.setVisible(false);
+                                        AnchorPane_Assistenza.setVisible(false);
+                                        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                         id_cliente = ColonnaID_Cliente.getCellData(ClienteSelezionato);
                                         System.out.println("ID: " + id_cliente);
@@ -791,6 +850,8 @@ public class HomeImpiegatoController {
         AnchorPane_DettagliOrdine.setVisible(false);
         AnchorPane_Ricerca.setVisible(false);
         AnchorPane_Offerte.setVisible(false);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(false);
     }
 
     @FXML
@@ -806,6 +867,8 @@ public class HomeImpiegatoController {
         AnchorPane_DettagliOrdine.setVisible(false);
         AnchorPane_Ricerca.setVisible(false);
         AnchorPane_Offerte.setVisible(true);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
         try {
             Response r = this.requestController.makeRequest(Costanti.Mostra_Offerte, new EmptyPayload());
@@ -870,13 +933,14 @@ public class HomeImpiegatoController {
                                     AnchorPane_DettagliOrdine.setVisible(false);
                                     AnchorPane_Ricerca.setVisible(false);
                                     AnchorPane_Offerte.setVisible(false);
+                                    AnchorPane_Assistenza.setVisible(false);
+                                    AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                     id_offerta = ColonnaID_Offerta.getCellData(OffertaSelezionata);
                                     System.out.println("ID: " + id_offerta);
 
                                     id_vino_offerta = ColonnaVino_Offerta.getCellData(OffertaSelezionata);
                                     System.out.println("ID vino: " + id_vino_offerta);
-
                                 }
                             });
                             setGraphic(btnGestione_Offerta);
@@ -982,6 +1046,8 @@ public class HomeImpiegatoController {
                                         AnchorPane_DettagliOrdine.setVisible(false);
                                         AnchorPane_Ricerca.setVisible(false);
                                         AnchorPane_Offerte.setVisible(false);
+                                        AnchorPane_Assistenza.setVisible(false);
+                                        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                         id_offerta = ColonnaID_Offerta.getCellData(OffertaSelezionata);
                                         System.out.println("ID: " + id_offerta);
@@ -1000,7 +1066,7 @@ public class HomeImpiegatoController {
                     System.out.println("L'offerta non è presente nel DB");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Ricerca offerta");
-                    alert.setHeaderText("Si è verificato un'errore.");
+                    alert.setHeaderText("Si è verificato un'errore");
                     alert.setContentText("L'offerta non è presente nel DB");
                     alert.showAndWait();
                 }
@@ -1055,7 +1121,7 @@ public class HomeImpiegatoController {
                         System.out.println("L'offerta non è stato inserita");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("L'offerta non è stato inserita");
-                        alert.setHeaderText("Si è verificato un'errore.");
+                        alert.setHeaderText("Si è verificato un'errore");
                         alert.setContentText("L'aggiunta dell'offerta non è andata a buon fine");
                         alert.showAndWait();
                     }
@@ -1067,7 +1133,6 @@ public class HomeImpiegatoController {
                 Errore_Sconto();
                 return;
             }
-
             txtDescrizione_InserisciOfferta.clear();
             txtSconto_InserisciOfferta.clear();
         }
@@ -1098,13 +1163,15 @@ public class HomeImpiegatoController {
                 AnchorPane_DettagliOrdine.setVisible(false);
                 AnchorPane_Ricerca.setVisible(false);
                 AnchorPane_Offerte.setVisible(false);
+                AnchorPane_Assistenza.setVisible(false);
+                AnchorPane_VisualizzaAssistenze.setVisible(false);
                 TV_RicercaOfferte.refresh();
             } else {
                 System.out.println("Errore");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Ricerca eliminazione offerta");
-                alert.setHeaderText("Impossibile eliminare l'offerta.");
-                alert.setContentText("Impossibile eliminare l'offerta.");
+                alert.setHeaderText("Impossibile eliminare l'offerta");
+                alert.setContentText("Impossibile eliminare l'offerta");
                 alert.showAndWait();
             }
         } catch (Exception e)
@@ -1150,7 +1217,7 @@ public class HomeImpiegatoController {
                         System.out.println("L'offerta non è stato modificato");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("L'offerta non è stato modificato");
-                        alert.setHeaderText("Si è verificato un'errore.");
+                        alert.setHeaderText("Si è verificato un'errore");
                         alert.setContentText("La modifica dell'offerta non è andata a buon fine");
                         alert.showAndWait();
                     }
@@ -1183,7 +1250,7 @@ public class HomeImpiegatoController {
                             System.out.println("L'offerta non è stato modificato");
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setTitle("L'offerta non è stato modificato");
-                            alert.setHeaderText("Si è verificato un'errore.");
+                            alert.setHeaderText("Si è verificato un'errore");
                             alert.setContentText("La modifica dell'offerta non è andata a buon fine");
                             alert.showAndWait();
                         }
@@ -1200,6 +1267,7 @@ public class HomeImpiegatoController {
     }
     @FXML
     void OnBtnOrdiniImpiegato_Click(ActionEvent event) {
+        TV_Ordini.refresh();
         CBSceltaStato_Ricerca.setPromptText("Selezionare stato ordine");
         CBSceltaStato_Ricerca.setValue("Selezionare stato ordine");
 
@@ -1214,6 +1282,8 @@ public class HomeImpiegatoController {
         AnchorPane_DettagliOrdine.setVisible(false);
         AnchorPane_Ricerca.setVisible(false);
         AnchorPane_Offerte.setVisible(false);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
         try {
             Response r = this.requestController.makeRequest(Costanti.Mostra_Ordini, new EmptyPayload());
@@ -1283,6 +1353,8 @@ public class HomeImpiegatoController {
                                     AnchorPane_DettagliOrdine.setVisible(false);
                                     AnchorPane_Ricerca.setVisible(false);
                                     AnchorPane_Offerte.setVisible(false);
+                                    AnchorPane_Assistenza.setVisible(false);
+                                    AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                     if(Stato_Ordini.getCellData(OrdineSelezionato).equals("Consegnato"))
                                     {
@@ -1325,6 +1397,7 @@ public class HomeImpiegatoController {
     }
     @FXML
     void OnBtnCercaOrdini_Click(ActionEvent event) {
+        TV_Ordini.refresh();
         String ordine_cercato = this.CBSceltaStato_Ricerca.getSelectionModel().getSelectedItem().toString();
 
         try {
@@ -1395,14 +1468,18 @@ public class HomeImpiegatoController {
                                     AnchorPane_DettagliOrdine.setVisible(false);
                                     AnchorPane_Ricerca.setVisible(false);
                                     AnchorPane_Offerte.setVisible(false);
+                                    AnchorPane_Assistenza.setVisible(false);
+                                    AnchorPane_VisualizzaAssistenze.setVisible(false);
 
                                     if(Stato_Ordini.getCellData(OrdineSelezionato).equals("Consegnato"))
                                     {
                                         lblStatoModificato_Ordine.setVisible(false);
                                         CBSceltaStato_Ordine.setVisible(false);
+                                        btnModificaStatoOrdine.setVisible(false);
                                     } else {
                                         lblStatoModificato_Ordine.setVisible(true);
                                         CBSceltaStato_Ordine.setVisible(true);
+                                        btnModificaStatoOrdine.setVisible(true);
                                     }
 
                                     id_ordine = ID_Ordini.getCellData(OrdineSelezionato);
@@ -1464,9 +1541,11 @@ public class HomeImpiegatoController {
             System.out.println(e);
             throw new RuntimeException(e);
         }
+        TV_Ordini.refresh();
     }
     @FXML
     void OnBtnVisualizzaDettagliOrdine_Click(ActionEvent event) {
+        TV_DettagliOrdine.refresh();
         AnchorPane_Home.setVisible(false);
         AnchorPane_Profilo.setVisible(false);
         AnchorPane_Ordini.setVisible(false);
@@ -1478,6 +1557,8 @@ public class HomeImpiegatoController {
         AnchorPane_DettagliOrdine.setVisible(true);
         AnchorPane_Ricerca.setVisible(false);
         AnchorPane_Offerte.setVisible(false);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(false);
 
         try {
             Response r = this.requestController.makeRequest(Costanti.Mostra_Dettagli_Ordine, new DettagliOrdine(id_ordine));
@@ -1500,7 +1581,7 @@ public class HomeImpiegatoController {
                 });
 
                 Vino_DettagliOrdine.setCellValueFactory(cellData -> {
-                    int Vino_DettagliOrdine = cellData.getValue().getID();
+                    int Vino_DettagliOrdine = cellData.getValue().getCODVino();
                     IntegerProperty proprieta_vino_dettagli_ordine = new SimpleIntegerProperty(Vino_DettagliOrdine);
                     return Bindings.createObjectBinding(proprieta_vino_dettagli_ordine::get, proprieta_vino_dettagli_ordine);
                 });
@@ -1508,8 +1589,110 @@ public class HomeImpiegatoController {
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("No dettagli ordini alert");
-                alert.setHeaderText("Non sono presenti dettagli ordini per quest'ordine.");
-                alert.setContentText("Non sono presenti dettagli ordini per quest'ordine.");
+                alert.setHeaderText("Non sono presenti dettagli ordini per quest'ordine");
+                alert.setContentText("Non sono presenti dettagli ordini per quest'ordine");
+                alert.showAndWait();
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void OnBtnAssistenzeImpiegato_Click(ActionEvent event) {
+        TV_VisualizzaAssistenze.refresh();
+        AnchorPane_Home.setVisible(false);
+        AnchorPane_Profilo.setVisible(false);
+        AnchorPane_Ordini.setVisible(false);
+        AnchorPane_DatiVino.setVisible(false);
+        AnchorPane_DatiUtente.setVisible(false);
+        AnchorPane_ModificaOfferta.setVisible(false);
+        AnchorPane_InserisciOfferta.setVisible(false);
+        AnchorPane_DatiOrdine.setVisible(false);
+        AnchorPane_DettagliOrdine.setVisible(true);
+        AnchorPane_Ricerca.setVisible(false);
+        AnchorPane_Offerte.setVisible(false);
+        AnchorPane_Assistenza.setVisible(false);
+        AnchorPane_VisualizzaAssistenze.setVisible(true);
+
+        try {
+            Response r = this.requestController.makeRequest(Costanti.Visualizza_Assistenze, new EmptyPayload());
+
+            if(r.getStatusCode() == Costanti.Successo)
+            {
+                assistenza = (ArrayList<Assistenza>) r.getPayload();
+                ObservableList<Assistenza> assistenze = FXCollections.observableArrayList(assistenza);
+
+                ColonnaID_VisualizzaAssistenze.setCellValueFactory(cellData -> {
+                    int ID_assistenza = cellData.getValue().getID();
+                    IntegerProperty proprieta_id_assistenza = new SimpleIntegerProperty(ID_assistenza);
+                    return Bindings.createObjectBinding(proprieta_id_assistenza::get, proprieta_id_assistenza);
+                });
+
+                ColonnaProposta_VisualizzaAssistenze.setCellValueFactory(cellData -> {
+                    String proposta_assistenza = cellData.getValue().getProposta_Acquisto();
+                    StringProperty proprieta_proposta_assistenza = new SimpleStringProperty(proposta_assistenza);
+                    return Bindings.createObjectBinding(proprieta_proposta_assistenza::get, proprieta_proposta_assistenza);
+                });
+
+                ColonnaCliente_VisualizzaAssistenze.setCellValueFactory(cellData -> {
+                    int id_cliente = cellData.getValue().getCODCliente();
+                    IntegerProperty proprieta_id_cliente = new SimpleIntegerProperty(id_cliente);
+                    return Bindings.createObjectBinding(proprieta_id_cliente::get, proprieta_id_cliente);
+                });
+
+                ColonnaVisualizza_VisualizzaAssistenze.setCellFactory(param -> new TableCell<>() {
+                    final Button btnVisualizza = new Button("Visualizza");
+
+                    {setAlignment(Pos.CENTER);}
+                    @Override
+                    protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (empty)
+                        {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btnVisualizza.getStyleClass().add("btn");
+                            btnVisualizza.setOnAction(event -> {
+                                AssistenzaSelezionata = TV_VisualizzaAssistenze.getSelectionModel().getSelectedItem();
+
+                                if(AssistenzaSelezionata != null)
+                                {
+                                    AnchorPane_Home.setVisible(false);
+                                    AnchorPane_Profilo.setVisible(false);
+                                    AnchorPane_Ordini.setVisible(false);
+                                    AnchorPane_DatiVino.setVisible(false);
+                                    AnchorPane_DatiUtente.setVisible(false);
+                                    AnchorPane_ModificaOfferta.setVisible(false);
+                                    AnchorPane_InserisciOfferta.setVisible(false);
+                                    AnchorPane_DatiOrdine.setVisible(true);
+                                    AnchorPane_DettagliOrdine.setVisible(false);
+                                    AnchorPane_Ricerca.setVisible(false);
+                                    AnchorPane_Offerte.setVisible(false);
+                                    AnchorPane_Assistenza.setVisible(true);
+                                    AnchorPane_VisualizzaAssistenze.setVisible(false);
+
+                                    id_assistenza = ColonnaID_VisualizzaAssistenze.getCellData(AssistenzaSelezionata);
+                                    System.out.println("ID: " + id_ordine);
+
+                                    lblRichiesta_Assistenza.setText(AssistenzaSelezionata.getProposta_Acquisto());
+                                }
+                            });
+                            setGraphic(btnVisualizza);
+                            setText(null);
+                        }
+                    }
+                });
+                TV_VisualizzaAssistenze.setItems(assistenze);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("No assistenze alert");
+                alert.setHeaderText("Non sono presenti assistenze");
+                alert.setContentText("Non sono presenti assistenze");
                 alert.showAndWait();
             }
         } catch (Exception e)

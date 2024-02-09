@@ -718,7 +718,7 @@ public class HomeAmministratoreController {
                 });
 
                 Vino_DettagliOrdine.setCellValueFactory(cellData -> {
-                    int Vino_DettagliOrdine = cellData.getValue().getID();
+                    int Vino_DettagliOrdine = cellData.getValue().getCODVino();
                     IntegerProperty proprieta_vino_dettagli_ordine = new SimpleIntegerProperty(Vino_DettagliOrdine);
                     return Bindings.createObjectBinding(proprieta_vino_dettagli_ordine::get, proprieta_vino_dettagli_ordine);
                 });
