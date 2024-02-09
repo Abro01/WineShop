@@ -92,7 +92,7 @@ public class HomeClienteController {
     @FXML
     private TableColumn<Offerta, Integer> ColonnaSconto_Offerta;
     @FXML
-    private TableColumn<Offerta, Integer> ColonnaVino_Offerta;
+    private TableColumn<Offerta, String> ColonnaVino_Offerta;
     @FXML
     private TableColumn<DettagliOrdine, Integer> IDVino_Carrello;
     @FXML
@@ -124,17 +124,17 @@ public class HomeClienteController {
     @FXML
     private TableColumn<Ordine, Double> Totale_Ordini;
     @FXML
-    private TableColumn<DettagliOrdine, Integer> Vino_Carrello;
+    private TableColumn<DettagliOrdine, String> Vino_Carrello;
     @FXML
     private TableColumn<DettagliOrdine, Integer> Ordine_Carrello;
     @FXML
-    private TableColumn<DettagliOrdine, Integer> Vino_DettagliOrdine;
+    private TableColumn<DettagliOrdine, String> Vino_DettagliOrdine;
     @FXML
     private TableColumn<Preferito, Void> ColonnaElimina_Preferiti;
     @FXML
     private TableColumn<Preferito, Integer> ColonnaID_Preferiti;
     @FXML
-    private TableColumn<Preferito, Integer> ColonnaVino_Preferiti;
+    private TableColumn<Preferito, String> ColonnaVino_Preferiti;
     @FXML
     private TableView<Preferito> TV_Preferiti;
     @FXML
@@ -459,7 +459,7 @@ public class HomeClienteController {
                 });
 
                 ColonnaRecensione_Vino.setCellFactory(param -> new TableCell<>() {
-                    final Button btnInfo_vino = new Button("Recensisci");
+                    final Button btnInfo_vino = new Button("Recensione");
 
                     {
                         setAlignment(Pos.CENTER);
@@ -660,7 +660,7 @@ public class HomeClienteController {
 
                 //button recensione
                 ColonnaRecensione_Vino.setCellFactory(param -> new TableCell<>() {
-                    final Button btnInfo_vino = new Button("Recensisci");
+                    final Button btnInfo_vino = new Button("Recensione");
 
                     {
                         setAlignment(Pos.CENTER);
@@ -867,8 +867,8 @@ public class HomeClienteController {
                 });
 
                 Vino_Carrello.setCellValueFactory(cellData ->{
-                    int vino_carrello = cellData.getValue().getCODVino();
-                    IntegerProperty proprieta_vino_carrello = new SimpleIntegerProperty(vino_carrello);
+                    String vino_carrello = cellData.getValue().getNome_vino();
+                    StringProperty proprieta_vino_carrello = new SimpleStringProperty(vino_carrello);
                     return Bindings.createObjectBinding(proprieta_vino_carrello::get, proprieta_vino_carrello);
                 });
 
@@ -887,9 +887,9 @@ public class HomeClienteController {
                 TV_Carrello.setItems(dettagli_carrello);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("No Offerte alert");
-                alert.setHeaderText("Non sono presenti offerte.");
-                alert.setContentText("Non sono presenti offerte.");
+                alert.setTitle("No vini alert");
+                alert.setHeaderText("Non sono presenti vini nel carrello");
+                alert.setContentText("Non sono presenti vini nel carrello");
                 alert.showAndWait();
             }
         } catch (Exception e)
@@ -999,8 +999,8 @@ public class HomeClienteController {
                 });
 
                 ColonnaVino_Offerta.setCellValueFactory(cellData ->{
-                    int vino_offerta = cellData.getValue().getCODVino();
-                    IntegerProperty proprieta_vino_offerta = new SimpleIntegerProperty(vino_offerta);
+                    String vino_offerta = cellData.getValue().getNome();
+                    StringProperty proprieta_vino_offerta = new SimpleStringProperty(vino_offerta);
                     return Bindings.createObjectBinding(proprieta_vino_offerta::get, proprieta_vino_offerta);
                 });
 
@@ -1043,12 +1043,12 @@ public class HomeClienteController {
                                     id_offerta = ColonnaID_Offerta.getCellData(OffertaSelezionata);
                                     System.out.println("ID: " + id_offerta);
 
-                                    id_vino_offerta = ColonnaVino_Offerta.getCellData(OffertaSelezionata);
+                                    id_vino_offerta = OffertaSelezionata.getCODVino();
                                     System.out.println("ID vino: " + id_vino_offerta);
 
                                     lblID_DatiOfferta.setText(String.valueOf(OffertaSelezionata.getID()));
                                     lblSconto_DatiOfferta.setText(String.valueOf(OffertaSelezionata.getSconto()));
-                                    lblVino_DatiOfferta.setText(String.valueOf(OffertaSelezionata.getCODVino()));
+                                    lblVino_DatiOfferta.setText(OffertaSelezionata.getNome());
                                     lblDescrizione_DatiOfferta.setText(OffertaSelezionata.getDescrizione());
                                 }
                             });
@@ -1120,8 +1120,8 @@ public class HomeClienteController {
                     });
 
                     ColonnaVino_Offerta.setCellValueFactory(cellData ->{
-                        int vino_offerta = cellData.getValue().getCODVino();
-                        IntegerProperty proprieta_vino_offerta = new SimpleIntegerProperty(vino_offerta);
+                        String vino_offerta = cellData.getValue().getNome();
+                        StringProperty proprieta_vino_offerta = new SimpleStringProperty(vino_offerta);
                         return Bindings.createObjectBinding(proprieta_vino_offerta::get, proprieta_vino_offerta);
                     });
 
@@ -1164,12 +1164,12 @@ public class HomeClienteController {
                                         id_offerta = ColonnaID_Offerta.getCellData(OffertaSelezionata);
                                         System.out.println("ID: " + id_offerta);
 
-                                        id_vino_offerta = ColonnaVino_Offerta.getCellData(OffertaSelezionata);
+                                        id_vino_offerta = OffertaSelezionata.getCODVino();
                                         System.out.println("ID vino: " + id_vino_offerta);
 
                                         lblID_DatiOfferta.setText(String.valueOf(OffertaSelezionata.getID()));
                                         lblSconto_DatiOfferta.setText(String.valueOf(OffertaSelezionata.getSconto()));
-                                        lblVino_DatiOfferta.setText(String.valueOf(OffertaSelezionata.getCODVino()));
+                                        lblVino_DatiOfferta.setText(OffertaSelezionata.getNome());
                                         lblDescrizione_DatiOfferta.setText(OffertaSelezionata.getDescrizione());
                                     }
                                 });
@@ -1467,8 +1467,8 @@ public class HomeClienteController {
                 });
 
                 ColonnaVino_Preferiti.setCellValueFactory(cellData -> {
-                    int vino_preferito = cellData.getValue().getCODVino();
-                    IntegerProperty proprieta_vino_preferito = new SimpleIntegerProperty(vino_preferito);
+                    String vino_preferito = cellData.getValue().getNome();
+                    StringProperty proprieta_vino_preferito = new SimpleStringProperty(vino_preferito);
                     return Bindings.createObjectBinding(proprieta_vino_preferito::get, proprieta_vino_preferito);
                 });
 
@@ -1511,7 +1511,7 @@ public class HomeClienteController {
                                     System.out.println("ID: " + id_preferito);
 
                                     try {
-                                        Response rs = requestController.makeRequest(Costanti.Elimina_Preferiti, new Preferito(id_preferito, ColonnaVino_Preferiti.getCellData(PreferitoSelezionato), UtenteLoggato.getId()));
+                                        Response rs = requestController.makeRequest(Costanti.Elimina_Preferiti, new Preferito(id_preferito, PreferitoSelezionato.getCODVino(), UtenteLoggato.getId()));
 
                                         if(rs.getStatusCode() == Costanti.Successo)
                                         {
@@ -1587,8 +1587,8 @@ public class HomeClienteController {
                     });
 
                     ColonnaVino_Preferiti.setCellValueFactory(cellData -> {
-                        int vino_preferito = cellData.getValue().getCODVino();
-                        IntegerProperty proprieta_vino_preferito = new SimpleIntegerProperty(vino_preferito);
+                        String vino_preferito = cellData.getValue().getNome();
+                        StringProperty proprieta_vino_preferito = new SimpleStringProperty(vino_preferito);
                         return Bindings.createObjectBinding(proprieta_vino_preferito::get, proprieta_vino_preferito);
                     });
 
@@ -1631,7 +1631,7 @@ public class HomeClienteController {
                                         System.out.println("ID: " + id_preferito);
 
                                         try {
-                                            Response rs = requestController.makeRequest(Costanti.Elimina_Preferiti, new Preferito(id_preferito, ColonnaVino_Preferiti.getCellData(PreferitoSelezionato), UtenteLoggato.getId()));
+                                            Response rs = requestController.makeRequest(Costanti.Elimina_Preferiti, new Preferito(id_preferito, PreferitoSelezionato.getCODVino(), UtenteLoggato.getId()));
 
                                             if(rs.getStatusCode() == Costanti.Successo)
                                             {
@@ -2057,8 +2057,8 @@ public class HomeClienteController {
                 });
 
                 Vino_DettagliOrdine.setCellValueFactory(cellData -> {
-                    int Vino_DettagliOrdine = cellData.getValue().getCODVino();
-                    IntegerProperty proprieta_vino_dettagli_ordine = new SimpleIntegerProperty(Vino_DettagliOrdine);
+                    String Vino_DettagliOrdine = cellData.getValue().getNome_vino();
+                    StringProperty proprieta_vino_dettagli_ordine = new SimpleStringProperty(Vino_DettagliOrdine);
                     return Bindings.createObjectBinding(proprieta_vino_dettagli_ordine::get, proprieta_vino_dettagli_ordine);
                 });
                 TV_DettagliOrdine.setItems(dettagli_ordini);

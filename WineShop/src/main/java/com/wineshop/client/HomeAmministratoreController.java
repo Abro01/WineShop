@@ -101,7 +101,7 @@ public class HomeAmministratoreController {
     @FXML
     private TableColumn<Utente, String> ColonnaUsername_Impiegati = new TableColumn<>();
     @FXML
-    private TableColumn<Offerta, Integer> ColonnaVino_Offerta = new TableColumn<>();
+    private TableColumn<Offerta, String> ColonnaVino_Offerta = new TableColumn<>();
     @FXML
     private TableColumn<Vino, String> ColonnaVitigno_Vino = new TableColumn<>();
     @FXML
@@ -121,7 +121,7 @@ public class HomeAmministratoreController {
     @FXML
     private TableColumn<DettagliOrdine, Integer> Quantita_DettagliOrdine = new TableColumn<>();
     @FXML
-    private TableColumn<DettagliOrdine, Integer> Vino_DettagliOrdine = new TableColumn<>();
+    private TableColumn<DettagliOrdine, String> Vino_DettagliOrdine = new TableColumn<>();
     @FXML
     private TableView<Ordine> TV_Ordini = new TableView<>();
     @FXML
@@ -718,8 +718,8 @@ public class HomeAmministratoreController {
                 });
 
                 Vino_DettagliOrdine.setCellValueFactory(cellData -> {
-                    int Vino_DettagliOrdine = cellData.getValue().getCODVino();
-                    IntegerProperty proprieta_vino_dettagli_ordine = new SimpleIntegerProperty(Vino_DettagliOrdine);
+                    String Vino_DettagliOrdine = cellData.getValue().getNome_vino();
+                    StringProperty proprieta_vino_dettagli_ordine = new SimpleStringProperty(Vino_DettagliOrdine);
                     return Bindings.createObjectBinding(proprieta_vino_dettagli_ordine::get, proprieta_vino_dettagli_ordine);
                 });
                 TV_DettagliOrdine.setItems(dettagli_ordini);        //inserisce i dati nella TableView
@@ -1195,8 +1195,8 @@ public class HomeAmministratoreController {
                         });
 
                         ColonnaVino_Offerta.setCellValueFactory(cellData ->{
-                            int vino_offerta = cellData.getValue().getCODVino();
-                            IntegerProperty proprieta_vino_offerta = new SimpleIntegerProperty(vino_offerta);
+                            String vino_offerta = cellData.getValue().getNome();
+                            StringProperty proprieta_vino_offerta = new SimpleStringProperty(vino_offerta);
                             return Bindings.createObjectBinding(proprieta_vino_offerta::get, proprieta_vino_offerta);
                         });
 
@@ -1645,8 +1645,8 @@ public class HomeAmministratoreController {
                         });
 
                         ColonnaVino_Offerta.setCellValueFactory(cellData ->{
-                            int vino_offerta = cellData.getValue().getCODVino();
-                            IntegerProperty proprieta_vino_offerta = new SimpleIntegerProperty(vino_offerta);
+                            String vino_offerta = cellData.getValue().getNome();
+                            StringProperty proprieta_vino_offerta = new SimpleStringProperty(vino_offerta);
                             return Bindings.createObjectBinding(proprieta_vino_offerta::get, proprieta_vino_offerta);
                         });
 

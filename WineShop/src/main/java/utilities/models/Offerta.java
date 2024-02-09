@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Offerta implements Insertable, Serializable, Removable {
     private static final long serialVersionUID = 1L;
     private int ID, CODVino, Sconto;
-    private String Descrizione;
+    private String Descrizione, Nome;
 
     public Offerta(int ID, int CODVino, int sconto, String descrizione) {
         this.ID = ID;
@@ -34,6 +34,13 @@ public class Offerta implements Insertable, Serializable, Removable {
         this.Descrizione = descrizione;
     }
 
+    public Offerta(int ID, int CODVino, int sconto, String descrizione, String nome) {
+        this.ID = ID;
+        this.CODVino = CODVino;
+        this.Sconto = sconto;
+        this.Descrizione = descrizione;
+        this.Nome = nome;
+    }
 
     public int getID() {
         return ID;
@@ -65,6 +72,14 @@ public class Offerta implements Insertable, Serializable, Removable {
 
     public void setDescrizione(String descrizione) {
         this.Descrizione = descrizione;
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String nome) {
+        this.Nome = nome;
     }
 
     @Override

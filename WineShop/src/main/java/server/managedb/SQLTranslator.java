@@ -439,9 +439,10 @@ public class SQLTranslator {
             }
             case Costanti.Mostra_Dettagli_Ordine ->
             {
-                query += "SELECT * " +
-                         "FROM dettagli_ordini " +
-                         "WHERE CODOrdine = " + ((DettagliOrdine) model).getCODOrdine() + ";";
+                query += "SELECT d.*, v.Nome " +
+                         "FROM dettagli_ordini d, vini v " +
+                         "WHERE v.ID = d.CODVino " +
+                         "AND CODOrdine = " + ((DettagliOrdine) model).getCODOrdine() + ";";
             }
             case Costanti.Add_Offerta ->
             {
@@ -530,9 +531,10 @@ public class SQLTranslator {
             }
             case Costanti.Mostra_Preferiti ->
             {
-                query += "SELECT * " +
-                         "FROM preferiti " +
-                         "WHERE CODCliente = " + ((Preferito) model).getCODCliente() + ";";
+                query += "SELECT p.*, v.Nome " +
+                         "FROM preferiti p, vini v " +
+                         "WHERE v.ID = p.CODVino " +
+                         "AND CODCliente = " + ((Preferito) model).getCODCliente() + ";";
             }
             case Costanti.Ricerca_Preferiti ->
             {
@@ -582,10 +584,11 @@ public class SQLTranslator {
             }
             case Costanti.Mostra_Vini_Carrello ->
             {
-                query += "SELECT * " +
-                         "FROM dettagli_ordini " +
-                         "WHERE CODCliente = " + ((DettagliOrdine) model).getCODCliente() + " " +
-                         "AND CODOrdine IS null;";
+                query += "SELECT d.*, v.Nome " +
+                         "FROM dettagli_ordini d, vini v " +
+                         "WHERE v.ID = d.CODVino " +
+                         "AND d.CODCliente = " + ((DettagliOrdine) model).getCODCliente() + " " +
+                         "AND d.CODOrdine IS null;";
             }
             case Costanti.Update_Quantita_Vino ->
             {
@@ -709,7 +712,7 @@ public class SQLTranslator {
 
                 for(Map<String, String> res : queryResult)
                 {
-                    Offerta offerta = new Offerta(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("CODVino")), Integer.parseInt(res.get("Sconto")), res.get("Descrizione"));
+                    Offerta offerta = new Offerta(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("CODVino")), Integer.parseInt(res.get("Sconto")), res.get("Descrizione"), res.get("Nome"));
                     System.out.println(offerta);
                     Offerte.add(offerta);
                 }
@@ -745,7 +748,7 @@ public class SQLTranslator {
 
                 for(Map<String, String> res : queryResult)
                 {
-                    DettagliOrdine Dettagli_Ordine = new DettagliOrdine(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("Quantita")), Integer.parseInt(res.get("CODOrdine")), Integer.parseInt(res.get("CODVino")));
+                    DettagliOrdine Dettagli_Ordine = new DettagliOrdine(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("Quantita")), Integer.parseInt(res.get("CODOrdine")), Integer.parseInt(res.get("CODVino")), res.get("Nome"));
                     System.out.println(Dettagli_Ordine);
                     DettagliOrdini.add(Dettagli_Ordine);
                 }
@@ -763,7 +766,7 @@ public class SQLTranslator {
 
                 for(Map<String, String> res : queryResult)
                 {
-                    Preferito preferito = new Preferito(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("CODVino")), Integer.parseInt(res.get("CODCliente")));
+                    Preferito preferito = new Preferito(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("CODVino")), Integer.parseInt(res.get("CODCliente")), res.get("Nome"));
                     System.out.println(preferito);
                     Preferiti.add(preferito);
                 }
@@ -799,7 +802,7 @@ public class SQLTranslator {
 
                 for(Map<String, String> res : queryResult)
                 {
-                    DettagliOrdine dettaglio_ordine = new DettagliOrdine(Integer.parseInt(res.get("Quantita")), Integer.parseInt(res.get("CODVino")), Integer.parseInt(res.get("ID")));
+                    DettagliOrdine dettaglio_ordine = new DettagliOrdine(Integer.parseInt(res.get("ID")), Integer.parseInt(res.get("Quantita")), Integer.parseInt(res.get("CODVino")), res.get("Nome"));
                     System.out.println(dettaglio_ordine);
                     DettagliOrdini.add(dettaglio_ordine);
                 }

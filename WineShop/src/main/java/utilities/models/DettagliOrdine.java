@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class DettagliOrdine implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
     private int ID, quantita, CODOrdine, CODVino, CODCliente;
+    private String Nome;
 
     public DettagliOrdine(int ID, int quantita, int CODOrdine, int CODVino) {
         this.ID = ID;
@@ -34,6 +35,21 @@ public class DettagliOrdine implements Serializable, Removable, Insertable {
     public DettagliOrdine(int CODVino, int CODCliente) {
         this.CODVino = CODVino;
         this.CODCliente = CODCliente;
+    }
+
+    public DettagliOrdine(int ID, int quantita, int CODOrdine, int CODVino, String nome) {
+        this.ID = ID;
+        this.quantita = quantita;
+        this.CODOrdine = CODOrdine;
+        this.CODVino = CODVino;
+        this.Nome = nome;
+    }
+
+    public DettagliOrdine(int ID, int quantita, int CODVino, String nome) {
+        this.ID = ID;
+        this.quantita = quantita;
+        this.CODVino = CODVino;
+        this.Nome = nome;
     }
 
     public int getCODCliente() {
@@ -74,6 +90,14 @@ public class DettagliOrdine implements Serializable, Removable, Insertable {
 
     public void setCODVino(int CODVino) {
         this.CODVino = CODVino;
+    }
+
+    public String getNome_vino() {
+        return Nome;
+    }
+
+    public void setNome_vino(String Nome) {
+        this.Nome = Nome;
     }
 
     //ritorna gli attributi dei dettagli di un ordine

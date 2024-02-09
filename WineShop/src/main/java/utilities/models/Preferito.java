@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class Preferito implements Serializable, Removable, Insertable {
     private static final long serialVersionUID = 1L;
     private int ID, CODVino, CODCliente;
+    private String Nome;
 
     public Preferito(int ID, int CODVino, int CODCliente) {
         this.ID = ID;
@@ -21,6 +22,13 @@ public class Preferito implements Serializable, Removable, Insertable {
 
     public Preferito(int CODCliente) {
         this.CODCliente = CODCliente;
+    }
+
+    public Preferito(int ID, int CODVino, int CODCliente, String nome) {
+        this.ID = ID;
+        this.CODVino = CODVino;
+        this.CODCliente = CODCliente;
+        this.Nome = nome;
     }
 
     public int getID() {
@@ -45,6 +53,14 @@ public class Preferito implements Serializable, Removable, Insertable {
 
     public void setCODCliente(int CODCliente) {
         this.CODCliente = CODCliente;
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String nome) {
+        this.Nome = nome;
     }
 
     //ritorna gli attributi dei preferiti
