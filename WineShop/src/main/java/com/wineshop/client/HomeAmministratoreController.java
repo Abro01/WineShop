@@ -1237,7 +1237,7 @@ public class HomeAmministratoreController {
 
                                             lblID_Offerta.setText(String.valueOf(OffertaSelezionata.getID()));
                                             lblSconto_Offerta.setText(String.valueOf(OffertaSelezionata.getSconto()));
-                                            lblVino_Offerta.setText(String.valueOf(OffertaSelezionata.getCODVino()));
+                                            lblVino_Offerta.setText(OffertaSelezionata.getNome());
                                             lblDescrizione_Offerta.setText(OffertaSelezionata.getDescrizione());
                                         }
                                     });
@@ -1687,7 +1687,7 @@ public class HomeAmministratoreController {
 
                                             lblID_Offerta.setText(String.valueOf(OffertaSelezionata.getID()));
                                             lblSconto_Offerta.setText(String.valueOf(OffertaSelezionata.getSconto()));
-                                            lblVino_Offerta.setText(String.valueOf(OffertaSelezionata.getCODVino()));
+                                            lblVino_Offerta.setText(OffertaSelezionata.getNome());
                                             lblDescrizione_Offerta.setText(OffertaSelezionata.getDescrizione());
                                         }
                                     });

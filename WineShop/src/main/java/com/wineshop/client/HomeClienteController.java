@@ -2318,7 +2318,7 @@ public class HomeClienteController {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(UtenteLoggato.getEmail(), "gpnr bkhd oxsz jmtr");
+                return new PasswordAuthentication(UtenteLoggato.getEmail(), "nfaz paft vymv qwsf");
             }
         });
 

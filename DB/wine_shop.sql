@@ -1,86 +1,89 @@
+
+
 CREATE DATABASE wine_shop;
+
 CREATE TABLE utenti(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    CF varchar(17),
-    Nome varchar(10),
-    Cognome varchar(10),
-    Username varchar(10) UNIQUE,
-    Password varchar(50),
-    Email varchar(30),
-    Telefono varchar(10),
-    Indirizzo varchar(50),
-    Tipo varchar(20),
-    Online tinyint(1),
-    LastLogin datetime
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	CF varchar(17),
+	Nome varchar(10),
+	Cognome varchar(10),
+	Username varchar(10) UNIQUE,
+	Password varchar(50),
+	Email varchar(30),
+	Telefono varchar(10),
+	Indirizzo varchar(50),
+	Tipo varchar(20),
+	Online tinyint(1),
+	LastLogin datetime
 );
 
 CREATE TABLE vini(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    Nome varchar(100),
-    Provenienza varchar(50),
-    Anno int,
-    Descrizione varchar(1000),
-    Vitigno varchar(50),
-    Prezzo double,
-    Soglia int,
-    Quantita int,
-    Immagine varchar(1000),
-    CODProduttore int,
-    FOREIGN KEY(CODProduttore) REFERENCES utenti(ID)
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	Nome varchar(100),
+	Provenienza varchar(50),
+	Anno int,
+	Descrizione varchar(1000),
+	Vitigno varchar(50),
+	Prezzo double,
+	Soglia int,
+	Quantita int,
+	Immagine varchar(1000),
+	CODProduttore int,
+	FOREIGN KEY(CODProduttore) REFERENCES utenti(ID)
 );
 
 CREATE TABLE report(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    Descrizione varchar(500),
-    Data varchar(15),
-    CODAmministratore int,
-    FOREIGN KEY(CODAmministratore) REFERENCES utenti(ID)
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	Descrizione varchar(500),
+	Data varchar(15),
+	CODAmministratore int,
+	FOREIGN KEY(CODAmministratore) REFERENCES utenti(ID)
 );
 
 CREATE TABLE recensioni(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    Voto varchar(1),
-    Commento varchar(1000),
-    CODVino int,
-    CODCliente int,
-    FOREIGN KEY(CODVino) REFERENCES vini(ID),
-    FOREIGN KEY(CODCliente) REFERENCES utenti(ID)
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	Voto varchar(1),
+	Commento varchar(1000),
+	CODVino int,
+	CODCliente int,
+	FOREIGN KEY(CODVino) REFERENCES vini(ID),
+	FOREIGN KEY(CODCliente) REFERENCES utenti(ID)
 );
 
 CREATE TABLE preferiti(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    CODVino int,
-    CODCliente int,
-    FOREIGN KEY(CODVino) REFERENCES vini(ID),
-    FOREIGN KEY(CODCliente) REFERENCES utenti(ID)
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	CODVino int,
+	CODCliente int,
+	FOREIGN KEY(CODVino) REFERENCES vini(ID),
+	FOREIGN KEY(CODCliente) REFERENCES utenti(ID)
 );
 
 CREATE TABLE ordini(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    Totale double,
-    Indirizzo varchar(50),
-    Metodo_Pagamento varchar(20),
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	Totale double,
+	Indirizzo varchar(50),
+	Metodo_Pagamento varchar(20),
 	Stato varchar(20),
-    CODCliente int,
-    FOREIGN KEY(CODCliente) REFERENCES utenti(ID)
+	CODCliente int,
+	FOREIGN KEY(CODCliente) REFERENCES utenti(ID)
 );
 
 CREATE TABLE offerte(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    Descrizione varchar(255),
-    Sconto int,
-    CODVino int,
-    FOREIGN KEY(CODVino) REFERENCES vini(ID)
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	Descrizione varchar(255),
+	Sconto int,
+	CODVino int,
+	FOREIGN KEY(CODVino) REFERENCES vini(ID)
 );
 
 CREATE TABLE dettagli_ordini(
-    ID int AUTO_INCREMENT NOT null PRIMARY KEY,
-    Quantita int,
-    CODVino int,
-    CODOrdine int,
+	ID int AUTO_INCREMENT NOT null PRIMARY KEY,
+	Quantita int,
+	CODVino int,
+	CODOrdine int,
 	CODCliente int,
-    FOREIGN KEY(CODOrdine) REFERENCES ordini(ID),
-    FOREIGN KEY(CODVino) REFERENCES vini(ID), 
+	FOREIGN KEY(CODOrdine) REFERENCES ordini(ID),
+	FOREIGN KEY(CODVino) REFERENCES vini(ID), 
 	FOREIGN KEY(CODCliente) REFERENCES utenti(ID)
 );
 
@@ -137,6 +140,26 @@ VALUES('Valpolicella', 'Provincia di Verona', 2006, 'Caratteristico, ciliegia, d
 
 INSERT INTO vini(Nome, Provenienza, Anno, Descrizione, Vitigno, Prezzo, Soglia, Quantita, Immagine, CODProduttore)
 VALUES('Nero d Avola', 'Eloro, Siracusa', 2020, 'Il vino nero d Avola si distingue per precise caratteristiche: innanzitutto per il colore, che è rosso rubino con riflessi granati. Al palato, invece, se ne percepisce un aroma fruttato (sa di amarena, prugne) e speziato.', 'Nero d Avola', 25, 10, 100, 'C:/Users/andre/OneDrive/Documenti/GitHub/WineShop/WineShop/src/main/resources/Design/Loghi/Vini/nero_davola.jpg', 4);
+
+
+
+INSERT INTO vini(CF, Nome, Cognome, Username, Password, Email, Telefono, Indirizzo, Tipo)
+VALUES('BRTNDR01E08G337B', 'Andrea', 'Abretti', 'andre', MD5('1111'), 'andreawineshop@gmail.com', '3471589620', 'Via A. Venturini, 16', 'Cliente');
+
+INSERT INTO vini(CF, Nome, Cognome, Username, Password, Email, Telefono, Indirizzo, Tipo)
+VALUES('MRLFNC86T08G273T', 'Francesco', 'Merlin', 'fra21', MD5('123'), 'francesco@vino.com', '3405810697', 'Via Pozzuoli, 9', 'Produttore');
+
+INSERT INTO vini(CF, Nome, Cognome, Username, Password, Email, Telefono, Indirizzo, Tipo)
+VALUES('GLLRND73S17G388E', 'Armando', 'Gilli', 'admin', MD5('admin'), 'armando@gmail.it', '3459820167', 'Via dei Martiri, 9', 'Amministratore');
+
+INSERT INTO vini(CF, Nome, Cognome, Username, Password, Email, Telefono, Indirizzo, Tipo)
+VALUES('GLLRND73S17G388E', 'Paola', 'Berlini', 'paola', MD5('1234'), 'paolaberlini74@gmail.com', '3401578426', 'Via nazionale, 2', 'Impiegato');
+
+
+
+
+
+
 
 
 
