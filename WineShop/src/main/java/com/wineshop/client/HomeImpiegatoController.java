@@ -252,6 +252,7 @@ public class HomeImpiegatoController {
     private Assistenza AssistenzaSelezionata;
     private int id_vino = 0, id_cliente = 0, id_offerta = 0, id_ordine = 0, sconto_int_offerta = 0, id_vino_offerta = 0, id_nuova_offerta = 0, id_assistenza = 0;
     private Image immagine;
+    private double totale_approssimato = 0;
 
     @FXML
     void OnBtnHomeImpiegato_Click(ActionEvent event) {
@@ -1370,8 +1371,10 @@ public class HomeImpiegatoController {
                                     id_ordine = ID_Ordini.getCellData(OrdineSelezionato);
                                     System.out.println("ID: " + id_ordine);
 
+                                    totale_approssimato = Math.round(OrdineSelezionato.getTotale() * 100) / 100;
+
                                     lblID_Ordine.setText(String.valueOf(OrdineSelezionato.getID()));
-                                    lblTotale_Ordine.setText(String.valueOf(OrdineSelezionato.getTotale()));
+                                    lblTotale_Ordine.setText(String.format("%.2f", totale_approssimato));
                                     lblIndirizzo_Ordine.setText(OrdineSelezionato.getIndirizzo());
                                     lblMP_Ordine.setText(OrdineSelezionato.getMetodo_Pagamento());
                                     lblID_Ordine.setText(String.valueOf(OrdineSelezionato.getCODCliente()));
@@ -1487,8 +1490,10 @@ public class HomeImpiegatoController {
                                     id_ordine = ID_Ordini.getCellData(OrdineSelezionato);
                                     System.out.println("ID: " + id_ordine);
 
+                                    totale_approssimato = Math.round(OrdineSelezionato.getTotale() * 100) / 100;
+
                                     lblID_Ordine.setText(String.valueOf(OrdineSelezionato.getID()));
-                                    lblTotale_Ordine.setText(String.valueOf(OrdineSelezionato.getTotale()));
+                                    lblTotale_Ordine.setText(String.format("%.2f", totale_approssimato));
                                     lblIndirizzo_Ordine.setText(OrdineSelezionato.getIndirizzo());
                                     lblMP_Ordine.setText(OrdineSelezionato.getMetodo_Pagamento());
                                     lblID_Ordine.setText(String.valueOf(OrdineSelezionato.getCODCliente()));

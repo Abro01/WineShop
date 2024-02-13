@@ -850,7 +850,9 @@ public class HomeClienteController {
         AnchorPane_Assistenza.setVisible(false);
         AnchorPane_Email.setVisible(false);
 
-        lblTotale_Carrello.setText(String.valueOf(totale));
+        double totale_approssimato = Math.round(totale * 100) / 100;
+
+        lblTotale_Carrello.setText(String.format("%.2f", totale_approssimato));
 
         try {
             Response r = this.requestController.makeRequest(Costanti.Mostra_Vini_Carrello, new DettagliOrdine(id_vino, UtenteLoggato.getId()));
